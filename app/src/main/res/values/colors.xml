@@ -3,6 +3,7 @@
     <!-- Theme colors -->
     <color name="primary">#3498db</color>
     <color name="primary_dark">#2980b9</color>
+    <color name="primary_light">#85c1e9</color>
     <color name="accent">#e74c3c</color>
     <color name="accent_dark">#c0392b</color>
 
@@ -13,14 +14,21 @@
     <!-- UI colors -->
     <color name="background">#f4f6f9</color>
     <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#E0E0E0</color>
     <color name="app_background">#f4f6f9</color>
+    <color name="input_background">#FFFFFF</color>
+    <color name="border_light">#E0E0E0</color>
+
+    <!-- Semantic colors -->
+    <color name="success">#27ae60</color>
+    <color name="error">#c0392b</color>
 
     <!-- Text colors -->
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
     <color name="text_on_primary">#FFFFFF</color>
 
-    <!-- For compatibility -->
+    <!-- For compatibility with previous files -->
     <color name="primary_client">#3498db</color>
     <color name="primary_vendor">#e74c3c</color>
 </resources>
