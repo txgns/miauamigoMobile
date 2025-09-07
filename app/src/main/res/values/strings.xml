@@ -22,6 +22,11 @@
     <string name="search_hint">Buscar produtos...</string>
     <string name="categories">Categorias</string>
     <string name="featured_products">Produtos em Destaque</string>
+
+    <!-- Navigation Titles -->
+    <string name="title_home">Início</string>
+    <string name="title_dashboard">Painel</string>
+    <string name="title_notifications">Notificações</string>
     
     <!-- Product -->
     <string name="add_to_cart">Adicionar ao Carrinho</string>
@@ -70,4 +75,3 @@
     <string name="order_placed_success">Pedido realizado com sucesso!</string>
     <string name="network_error">Erro de conexão. Verifique sua internet.</string>
 </resources>
-
