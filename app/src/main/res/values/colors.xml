@@ -22,6 +22,8 @@
     <!-- Semantic colors -->
     <color name="success">#27ae60</color>
     <color name="error">#c0392b</color>
+    <color name="warning">#f1c40f</color>
+    <color name="info">#3498db</color>
 
     <!-- Text colors -->
     <color name="text_primary">#212121</color>
