@@ -5,16 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,88 +20,51 @@ import java.lang.String;
 
 public final class ActivityRegisterBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final ConstraintLayout rootView;
+
+  @NonNull
+  public final Button buttonBack;
 
   @NonNull
   public final Button buttonRegister;
 
   @NonNull
-  public final TextInputEditText editTextConfirmPassword;
+  public final EditText editTextEmail;
 
   @NonNull
-  public final TextInputEditText editTextEmail;
+  public final EditText editTextPassword;
 
   @NonNull
-  public final TextInputEditText editTextName;
+  public final EditText editTextPhone;
 
   @NonNull
-  public final TextInputEditText editTextPassword;
+  public final ImageView imageViewCamera;
 
   @NonNull
-  public final TextInputEditText editTextPhone;
+  public final TextView textViewRegisterTitle;
 
   @NonNull
-  public final ImageView logo;
+  public final View viewBackgroundShape;
 
-  @NonNull
-  public final ProgressBar progressBar;
-
-  @NonNull
-  public final TextView subtitle;
-
-  @NonNull
-  public final TextInputLayout textInputLayoutConfirmPassword;
-
-  @NonNull
-  public final TextInputLayout textInputLayoutEmail;
-
-  @NonNull
-  public final TextInputLayout textInputLayoutName;
-
-  @NonNull
-  public final TextInputLayout textInputLayoutPassword;
-
-  @NonNull
-  public final TextInputLayout textInputLayoutPhone;
-
-  @NonNull
-  public final TextView textViewLogin;
-
-  @NonNull
-  public final TextView title;
-
-  private ActivityRegisterBinding(@NonNull ScrollView rootView, @NonNull Button buttonRegister,
-      @NonNull TextInputEditText editTextConfirmPassword, @NonNull TextInputEditText editTextEmail,
-      @NonNull TextInputEditText editTextName, @NonNull TextInputEditText editTextPassword,
-      @NonNull TextInputEditText editTextPhone, @NonNull ImageView logo,
-      @NonNull ProgressBar progressBar, @NonNull TextView subtitle,
-      @NonNull TextInputLayout textInputLayoutConfirmPassword,
-      @NonNull TextInputLayout textInputLayoutEmail, @NonNull TextInputLayout textInputLayoutName,
-      @NonNull TextInputLayout textInputLayoutPassword,
-      @NonNull TextInputLayout textInputLayoutPhone, @NonNull TextView textViewLogin,
-      @NonNull TextView title) {
+  private ActivityRegisterBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonBack,
+      @NonNull Button buttonRegister, @NonNull EditText editTextEmail,
+      @NonNull EditText editTextPassword, @NonNull EditText editTextPhone,
+      @NonNull ImageView imageViewCamera, @NonNull TextView textViewRegisterTitle,
+      @NonNull View viewBackgroundShape) {
     this.rootView = rootView;
+    this.buttonBack = buttonBack;
     this.buttonRegister = buttonRegister;
-    this.editTextConfirmPassword = editTextConfirmPassword;
     this.editTextEmail = editTextEmail;
-    this.editTextName = editTextName;
     this.editTextPassword = editTextPassword;
     this.editTextPhone = editTextPhone;
-    this.logo = logo;
-    this.progressBar = progressBar;
-    this.subtitle = subtitle;
-    this.textInputLayoutConfirmPassword = textInputLayoutConfirmPassword;
-    this.textInputLayoutEmail = textInputLayoutEmail;
-    this.textInputLayoutName = textInputLayoutName;
-    this.textInputLayoutPassword = textInputLayoutPassword;
-    this.textInputLayoutPhone = textInputLayoutPhone;
-    this.textViewLogin = textViewLogin;
-    this.title = title;
+    this.imageViewCamera = imageViewCamera;
+    this.textViewRegisterTitle = textViewRegisterTitle;
+    this.viewBackgroundShape = viewBackgroundShape;
   }
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -128,106 +89,57 @@ public final class ActivityRegisterBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonBack;
+      Button buttonBack = ViewBindings.findChildViewById(rootView, id);
+      if (buttonBack == null) {
+        break missingId;
+      }
+
       id = R.id.buttonRegister;
       Button buttonRegister = ViewBindings.findChildViewById(rootView, id);
       if (buttonRegister == null) {
         break missingId;
       }
 
-      id = R.id.editTextConfirmPassword;
-      TextInputEditText editTextConfirmPassword = ViewBindings.findChildViewById(rootView, id);
-      if (editTextConfirmPassword == null) {
-        break missingId;
-      }
-
       id = R.id.editTextEmail;
-      TextInputEditText editTextEmail = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextEmail = ViewBindings.findChildViewById(rootView, id);
       if (editTextEmail == null) {
         break missingId;
       }
 
-      id = R.id.editTextName;
-      TextInputEditText editTextName = ViewBindings.findChildViewById(rootView, id);
-      if (editTextName == null) {
-        break missingId;
-      }
-
       id = R.id.editTextPassword;
-      TextInputEditText editTextPassword = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextPassword = ViewBindings.findChildViewById(rootView, id);
       if (editTextPassword == null) {
         break missingId;
       }
 
       id = R.id.editTextPhone;
-      TextInputEditText editTextPhone = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextPhone = ViewBindings.findChildViewById(rootView, id);
       if (editTextPhone == null) {
         break missingId;
       }
 
-      id = R.id.logo;
-      ImageView logo = ViewBindings.findChildViewById(rootView, id);
-      if (logo == null) {
+      id = R.id.imageViewCamera;
+      ImageView imageViewCamera = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewCamera == null) {
         break missingId;
       }
 
-      id = R.id.progressBar;
-      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
-      if (progressBar == null) {
+      id = R.id.textViewRegisterTitle;
+      TextView textViewRegisterTitle = ViewBindings.findChildViewById(rootView, id);
+      if (textViewRegisterTitle == null) {
         break missingId;
       }
 
-      id = R.id.subtitle;
-      TextView subtitle = ViewBindings.findChildViewById(rootView, id);
-      if (subtitle == null) {
+      id = R.id.viewBackgroundShape;
+      View viewBackgroundShape = ViewBindings.findChildViewById(rootView, id);
+      if (viewBackgroundShape == null) {
         break missingId;
       }
 
-      id = R.id.textInputLayoutConfirmPassword;
-      TextInputLayout textInputLayoutConfirmPassword = ViewBindings.findChildViewById(rootView, id);
-      if (textInputLayoutConfirmPassword == null) {
-        break missingId;
-      }
-
-      id = R.id.textInputLayoutEmail;
-      TextInputLayout textInputLayoutEmail = ViewBindings.findChildViewById(rootView, id);
-      if (textInputLayoutEmail == null) {
-        break missingId;
-      }
-
-      id = R.id.textInputLayoutName;
-      TextInputLayout textInputLayoutName = ViewBindings.findChildViewById(rootView, id);
-      if (textInputLayoutName == null) {
-        break missingId;
-      }
-
-      id = R.id.textInputLayoutPassword;
-      TextInputLayout textInputLayoutPassword = ViewBindings.findChildViewById(rootView, id);
-      if (textInputLayoutPassword == null) {
-        break missingId;
-      }
-
-      id = R.id.textInputLayoutPhone;
-      TextInputLayout textInputLayoutPhone = ViewBindings.findChildViewById(rootView, id);
-      if (textInputLayoutPhone == null) {
-        break missingId;
-      }
-
-      id = R.id.textViewLogin;
-      TextView textViewLogin = ViewBindings.findChildViewById(rootView, id);
-      if (textViewLogin == null) {
-        break missingId;
-      }
-
-      id = R.id.title;
-      TextView title = ViewBindings.findChildViewById(rootView, id);
-      if (title == null) {
-        break missingId;
-      }
-
-      return new ActivityRegisterBinding((ScrollView) rootView, buttonRegister,
-          editTextConfirmPassword, editTextEmail, editTextName, editTextPassword, editTextPhone,
-          logo, progressBar, subtitle, textInputLayoutConfirmPassword, textInputLayoutEmail,
-          textInputLayoutName, textInputLayoutPassword, textInputLayoutPhone, textViewLogin, title);
+      return new ActivityRegisterBinding((ConstraintLayout) rootView, buttonBack, buttonRegister,
+          editTextEmail, editTextPassword, editTextPhone, imageViewCamera, textViewRegisterTitle,
+          viewBackgroundShape);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

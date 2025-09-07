@@ -4,16 +4,17 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,16 +22,25 @@ import java.lang.String;
 
 public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final AppBarLayout appBarLayout;
 
   @NonNull
-  public final BottomNavigationView bottomNavigationView;
+  public final EditText editTextSearch;
 
   @NonNull
-  public final FrameLayout fragmentContainer;
+  public final ImageView imageViewLogo;
+
+  @NonNull
+  public final ImageView imageViewProfile;
+
+  @NonNull
+  public final RecyclerView recyclerViewPets;
+
+  @NonNull
+  public final TextView textViewFindYourPet;
 
   @NonNull
   public final TextView textViewWelcome;
@@ -38,21 +48,25 @@ public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  private ActivityHomeBinding(@NonNull ConstraintLayout rootView,
-      @NonNull AppBarLayout appBarLayout, @NonNull BottomNavigationView bottomNavigationView,
-      @NonNull FrameLayout fragmentContainer, @NonNull TextView textViewWelcome,
-      @NonNull MaterialToolbar toolbar) {
+  private ActivityHomeBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull AppBarLayout appBarLayout, @NonNull EditText editTextSearch,
+      @NonNull ImageView imageViewLogo, @NonNull ImageView imageViewProfile,
+      @NonNull RecyclerView recyclerViewPets, @NonNull TextView textViewFindYourPet,
+      @NonNull TextView textViewWelcome, @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
     this.appBarLayout = appBarLayout;
-    this.bottomNavigationView = bottomNavigationView;
-    this.fragmentContainer = fragmentContainer;
+    this.editTextSearch = editTextSearch;
+    this.imageViewLogo = imageViewLogo;
+    this.imageViewProfile = imageViewProfile;
+    this.recyclerViewPets = recyclerViewPets;
+    this.textViewFindYourPet = textViewFindYourPet;
     this.textViewWelcome = textViewWelcome;
     this.toolbar = toolbar;
   }
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -83,15 +97,33 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.bottomNavigationView;
-      BottomNavigationView bottomNavigationView = ViewBindings.findChildViewById(rootView, id);
-      if (bottomNavigationView == null) {
+      id = R.id.editTextSearch;
+      EditText editTextSearch = ViewBindings.findChildViewById(rootView, id);
+      if (editTextSearch == null) {
         break missingId;
       }
 
-      id = R.id.fragmentContainer;
-      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
-      if (fragmentContainer == null) {
+      id = R.id.imageViewLogo;
+      ImageView imageViewLogo = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewLogo == null) {
+        break missingId;
+      }
+
+      id = R.id.imageViewProfile;
+      ImageView imageViewProfile = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewProfile == null) {
+        break missingId;
+      }
+
+      id = R.id.recyclerViewPets;
+      RecyclerView recyclerViewPets = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewPets == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewFindYourPet;
+      TextView textViewFindYourPet = ViewBindings.findChildViewById(rootView, id);
+      if (textViewFindYourPet == null) {
         break missingId;
       }
 
@@ -107,8 +139,9 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityHomeBinding((ConstraintLayout) rootView, appBarLayout,
-          bottomNavigationView, fragmentContainer, textViewWelcome, toolbar);
+      return new ActivityHomeBinding((CoordinatorLayout) rootView, appBarLayout, editTextSearch,
+          imageViewLogo, imageViewProfile, recyclerViewPets, textViewFindYourPet, textViewWelcome,
+          toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

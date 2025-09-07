@@ -4,8 +4,8 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,24 +22,34 @@ public final class ActivityMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final TextView appName;
+  public final Button buttonClient;
 
   @NonNull
-  public final ProgressBar loading;
+  public final Button buttonVendor;
 
   @NonNull
-  public final ImageView logo;
+  public final ImageView imageViewLogo;
 
   @NonNull
-  public final TextView tagline;
+  public final TextView textViewLogin;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull TextView appName,
-      @NonNull ProgressBar loading, @NonNull ImageView logo, @NonNull TextView tagline) {
+  @NonNull
+  public final TextView textViewSubtitle;
+
+  @NonNull
+  public final TextView textViewWelcome;
+
+  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonClient,
+      @NonNull Button buttonVendor, @NonNull ImageView imageViewLogo,
+      @NonNull TextView textViewLogin, @NonNull TextView textViewSubtitle,
+      @NonNull TextView textViewWelcome) {
     this.rootView = rootView;
-    this.appName = appName;
-    this.loading = loading;
-    this.logo = logo;
-    this.tagline = tagline;
+    this.buttonClient = buttonClient;
+    this.buttonVendor = buttonVendor;
+    this.imageViewLogo = imageViewLogo;
+    this.textViewLogin = textViewLogin;
+    this.textViewSubtitle = textViewSubtitle;
+    this.textViewWelcome = textViewWelcome;
   }
 
   @Override
@@ -69,31 +79,44 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.app_name;
-      TextView appName = ViewBindings.findChildViewById(rootView, id);
-      if (appName == null) {
+      id = R.id.buttonClient;
+      Button buttonClient = ViewBindings.findChildViewById(rootView, id);
+      if (buttonClient == null) {
         break missingId;
       }
 
-      id = R.id.loading;
-      ProgressBar loading = ViewBindings.findChildViewById(rootView, id);
-      if (loading == null) {
+      id = R.id.buttonVendor;
+      Button buttonVendor = ViewBindings.findChildViewById(rootView, id);
+      if (buttonVendor == null) {
         break missingId;
       }
 
-      id = R.id.logo;
-      ImageView logo = ViewBindings.findChildViewById(rootView, id);
-      if (logo == null) {
+      id = R.id.imageViewLogo;
+      ImageView imageViewLogo = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewLogo == null) {
         break missingId;
       }
 
-      id = R.id.tagline;
-      TextView tagline = ViewBindings.findChildViewById(rootView, id);
-      if (tagline == null) {
+      id = R.id.textViewLogin;
+      TextView textViewLogin = ViewBindings.findChildViewById(rootView, id);
+      if (textViewLogin == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, appName, loading, logo, tagline);
+      id = R.id.textViewSubtitle;
+      TextView textViewSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (textViewSubtitle == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewWelcome;
+      TextView textViewWelcome = ViewBindings.findChildViewById(rootView, id);
+      if (textViewWelcome == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ConstraintLayout) rootView, buttonClient, buttonVendor,
+          imageViewLogo, textViewLogin, textViewSubtitle, textViewWelcome);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.miaumigo.app-mergeDebugResources-56:/values-land/values-land.xml",
+            "outputFile": "com.miaumigo.app-mergeDebugResources-62:/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\db2db54773a49836c13c97b8c14bfbff\\transformed\\appcompat-1.6.1\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\569648c211af5ada6bfbb81940b7aada\\transformed\\appcompat-1.6.1\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\475e5f82da979017c1180b54a054c679\\transformed\\material-1.10.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\25327a965b5c2073bfeb5145747d3b9c\\transformed\\material-1.10.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,26,35,40",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

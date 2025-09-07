@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.miaumigo.app-mergeDebugResources-56:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "outputFile": "com.miaumigo.app-mergeDebugResources-62:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\475e5f82da979017c1180b54a054c679\\transformed\\material-1.10.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\25327a965b5c2073bfeb5145747d3b9c\\transformed\\material-1.10.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
