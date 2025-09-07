@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores da Marca (Novo Design) -->
-    <color name="client_primary">#FFC107</color> <!-- Amarelo Cliente -->
-    <color name="vendor_primary">#2196F3</color> <!-- Azul Vendedor -->
-    <color name="auth_primary">#A5815F</color> <!-- Marrom Autenticação -->
-    <color name="auth_accent_pink">#E91E63</color>
+    <color name="primary">#FFC107</color>
+    <color name="primary_dark">#FFA000</color>
+    <color name="accent">#4CAF50</color>
+    <color name="accent_dark">#388E3C</color>
 
-    <!-- Cores de Fundo -->
-    <color name="app_background">#FFFFFF</color>
-    <color name="input_background">#F5F5F5</color>
-    <color name="light_background">#FAFAFA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
-    <!-- Cores de Texto -->
+    <color name="app_background">#F5F5F5</color>
+    <color name="background">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
-    <color name="text_hint">#BDBDBD</color>
-    <color name="text_on_primary">#FFFFFF</color>
 
-    <!-- Cores Antigas (para referência, serão removidas) -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="input_field_background">#EEEEEE</color>
 </resources>
