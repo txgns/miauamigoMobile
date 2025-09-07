@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">MiauMigo</string>
+    
+    <!-- Login/Register -->
+    <string name="login">Entrar</string>
+    <string name="register">Cadastrar</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="confirm_password">Confirmar Senha</string>
+    <string name="name">Nome</string>
+    <string name="phone">Telefone</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="no_account">Não tem uma conta? Cadastre-se</string>
+    <string name="has_account">Já tem uma conta? Entre</string>
+    
+    <!-- Home -->
+    <string name="home">Início</string>
+    <string name="products">Produtos</string>
+    <string name="cart">Carrinho</string>
+    <string name="orders">Pedidos</string>
+    <string name="profile">Perfil</string>
+    <string name="search_hint">Buscar produtos...</string>
+    <string name="categories">Categorias</string>
+    <string name="featured_products">Produtos em Destaque</string>
+    
+    <!-- Product -->
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
+    <string name="price">Preço</string>
+    <string name="description">Descrição</string>
+    <string name="quantity">Quantidade</string>
+    <string name="in_stock">Em estoque</string>
+    <string name="out_of_stock">Fora de estoque</string>
+    
+    <!-- Cart -->
+    <string name="cart_empty">Seu carrinho está vazio</string>
+    <string name="total">Total</string>
+    <string name="checkout">Finalizar Compra</string>
+    <string name="remove_item">Remover item</string>
+    <string name="update_quantity">Atualizar quantidade</string>
+    
+    <!-- Orders -->
+    <string name="order_history">Histórico de Pedidos</string>
+    <string name="order_number">Pedido #</string>
+    <string name="order_date">Data do pedido</string>
+    <string name="order_status">Status</string>
+    <string name="order_total">Total</string>
+    <string name="pending">Pendente</string>
+    <string name="processing">Processando</string>
+    <string name="shipped">Enviado</string>
+    <string name="delivered">Entregue</string>
+    <string name="cancelled">Cancelado</string>
+    
+    <!-- General -->
+    <string name="loading">Carregando...</string>
+    <string name="error">Erro</string>
+    <string name="success">Sucesso</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="logout">Sair</string>
+    
+    <!-- Messages -->
+    <string name="login_success">Login realizado com sucesso!</string>
+    <string name="register_success">Cadastro realizado com sucesso!</string>
+    <string name="login_error">Erro ao fazer login. Verifique suas credenciais.</string>
+    <string name="register_error">Erro ao cadastrar. Tente novamente.</string>
+    <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
+    <string name="order_placed_success">Pedido realizado com sucesso!</string>
+    <string name="network_error">Erro de conexão. Verifique sua internet.</string>
+</resources>
+
