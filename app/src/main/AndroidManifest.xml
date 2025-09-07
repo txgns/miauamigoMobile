@@ -19,7 +19,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.MiauMigo">
+            android:theme="@style/Theme.MiauMigo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,15 +28,18 @@
 
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
         <activity
             android:name=".ProductDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
     </application>
 
