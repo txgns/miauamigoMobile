@@ -37,19 +37,19 @@ public class HomeActivity extends AppCompatActivity {
                 String title = getString(R.string.app_name);
 
                 int itemId = item.getItemId();
-                if (itemId == R.id.nav_home) {
+                if (itemId == R.id.navigation_home) {
                     selectedFragment = new HomeFragment();
                     title = getString(R.string.title_home);
-                } else if (itemId == R.id.nav_products) {
+                } else if (itemId == R.id.navigation_products) {
                     selectedFragment = new ProductsFragment();
                     title = getString(R.string.products);
-                } else if (itemId == R.id.nav_cart) {
+                } else if (itemId == R.id.navigation_cart) {
                     selectedFragment = new CartFragment();
                     title = getString(R.string.cart);
-                } else if (itemId == R.id.nav_orders) {
+                } else if (itemId == R.id.navigation_orders) {
                     selectedFragment = new OrdersFragment();
                     title = getString(R.string.orders);
-                } else if (itemId == R.id.nav_profile) {
+                } else if (itemId == R.id.navigation_profile) {
                     selectedFragment = new ProfileFragment();
                     title = getString(R.string.profile);
                 }
@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set default fragment
         if (savedInstanceState == null) {
-            bottomNavigation.setSelectedItemId(R.id.nav_home);
+            bottomNavigation.setSelectedItemId(R.id.navigation_home);
         }
     }
 }
