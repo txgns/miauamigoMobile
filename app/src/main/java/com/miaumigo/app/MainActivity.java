@@ -2,48 +2,59 @@ package com.miaumigo.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.miaumigo.app.services.FirebaseAuthService;
-
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuthService authService;
-    private static final int SPLASH_DELAY = 2000; // 2 seconds
+    private Button buttonClient, buttonVendor;
+    private TextView textViewLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        authService = new FirebaseAuthService(this);
-
-        // Show splash screen for 2 seconds then redirect
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                checkUserAuthentication();
-            }
-        }, SPLASH_DELAY);
+        initializeViews();
+        setupClickListeners();
     }
 
-    private void checkUserAuthentication() {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        
-        if (currentUser != null) {
-            // User is logged in, go to Home
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-        } else {
-            // User is not logged in, go to Login
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
-        
-        finish(); // Close splash screen
+    private void initializeViews() {
+        buttonClient = findViewById(R.id.buttonClient);
+        buttonVendor = findViewById(R.id.buttonVendor);
+        textViewLogin = findViewById(R.id.textViewLogin);
+    }
+
+    private void setupClickListeners() {
+        buttonClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Passar um extra para a RegisterActivity saber que é um cliente
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                intent.putExtra("USER_TYPE", "client");
+                startActivity(intent);
+            }
+        });
+
+        buttonVendor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Passar um extra para a RegisterActivity saber que é um vendedor
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                intent.putExtra("USER_TYPE", "vendor");
+                startActivity(intent);
+            }
+        });
+
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
-

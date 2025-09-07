@@ -6,21 +6,23 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.miaumigo.app.services.FirebaseAuthService;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editTextName, editTextEmail, editTextPhone, editTextPassword, editTextConfirmPassword;
-    private Button buttonRegister;
-    private TextView textViewLogin;
-    private ProgressBar progressBar;
+    private EditText editTextEmail, editTextPhone, editTextPassword;
+    private Button buttonRegister, buttonBack;
+    private View viewBackgroundShape;
+    private TextView textViewRegisterTitle;
     private FirebaseAuthService authService;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,111 +30,78 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         authService = new FirebaseAuthService(this);
+        userType = getIntent().getStringExtra("USER_TYPE");
+
         initializeViews();
+        setupStyling();
         setupClickListeners();
     }
 
     private void initializeViews() {
-        editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextPassword = findViewById(R.id.editTextPassword);
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         buttonRegister = findViewById(R.id.buttonRegister);
-        textViewLogin = findViewById(R.id.textViewLogin);
-        progressBar = findViewById(R.id.progressBar);
+        buttonBack = findViewById(R.id.buttonBack);
+        viewBackgroundShape = findViewById(R.id.viewBackgroundShape);
+        textViewRegisterTitle = findViewById(R.id.textViewRegisterTitle);
+    }
+
+    private void setupStyling() {
+        if ("client".equals(userType)) {
+            buttonRegister.setBackground(ContextCompat.getDrawable(this, R.drawable.button_client_background));
+            viewBackgroundShape.setBackground(ContextCompat.getDrawable(this, R.drawable.client_background_shape));
+            textViewRegisterTitle.setText("Criar Conta Cliente");
+        } else { // vendor
+            buttonRegister.setBackground(ContextCompat.getDrawable(this, R.drawable.button_vendor_background));
+            viewBackgroundShape.setBackground(ContextCompat.getDrawable(this, R.drawable.vendor_background_shape));
+            textViewRegisterTitle.setText("Criar Conta Vendedor");
+        }
     }
 
     private void setupClickListeners() {
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser();
-            }
-        });
-
-        textViewLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        buttonRegister.setOnClickListener(v -> registerUser());
+        buttonBack.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            intent.putExtra("USER_TYPE", userType);
+            startActivity(intent);
+            finish();
         });
     }
 
     private void registerUser() {
-        String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-        // Validation
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Nome é obrigatório");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("E-mail é obrigatório");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(phone)) {
-            editTextPhone.setError("Telefone é obrigatório");
-            editTextPhone.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Senha é obrigatória");
-            editTextPassword.requestFocus();
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Senha deve ter pelo menos 6 caracteres");
+            editTextPassword.setError("A senha deve ter pelo menos 6 caracteres");
             editTextPassword.requestFocus();
             return;
         }
-
-        if (!password.equals(confirmPassword)) {
-            editTextConfirmPassword.setError("Senhas não coincidem");
-            editTextConfirmPassword.requestFocus();
-            return;
-        }
-
-        showLoading(true);
+        
+        // Passando uma string vazia para o nome, já que não está no novo layout
+        String name = ""; 
 
         authService.registerUser(email, password, name, phone, new FirebaseAuthService.AuthCallback() {
             @Override
             public void onSuccess() {
-                showLoading(false);
-                Toast.makeText(RegisterActivity.this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
 
             @Override
             public void onError(String error) {
-                showLoading(false);
                 Toast.makeText(RegisterActivity.this, error, Toast.LENGTH_LONG).show();
             }
         });
     }
-
-    private void showLoading(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        buttonRegister.setEnabled(!show);
-        editTextName.setEnabled(!show);
-        editTextEmail.setEnabled(!show);
-        editTextPhone.setEnabled(!show);
-        editTextPassword.setEnabled(!show);
-        editTextConfirmPassword.setEnabled(!show);
-    }
 }
-

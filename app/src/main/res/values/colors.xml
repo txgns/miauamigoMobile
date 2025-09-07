@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cores da Marca (Novo Design) -->
+    <color name="client_primary">#FFC107</color> <!-- Amarelo Cliente -->
+    <color name="vendor_primary">#2196F3</color> <!-- Azul Vendedor -->
+    <color name="auth_primary">#A5815F</color> <!-- Marrom Autenticação -->
+    <color name="auth_accent_pink">#E91E63</color>
+
+    <!-- Cores de Fundo -->
+    <color name="app_background">#FFFFFF</color>
+    <color name="input_background">#F5F5F5</color>
+    <color name="light_background">#FAFAFA</color>
+
+    <!-- Cores de Texto -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Cores Antigas (para referência, serão removidas) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,32 +25,4 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
-    <!-- MiauMigo Brand Colors -->
-    <color name="primary">#FF6B35</color>
-    <color name="primary_dark">#E55A2B</color>
-    <color name="primary_light">#FF8A5C</color>
-    <color name="accent">#FFD23F</color>
-    <color name="accent_dark">#E6B838</color>
-    
-    <!-- Background Colors -->
-    <color name="background">#FFF8F5</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#F5F5F5</color>
-    
-    <!-- Text Colors -->
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#BDBDBD</color>
-    
-    <!-- Status Colors -->
-    <color name="success">#4CAF50</color>
-    <color name="warning">#FF9800</color>
-    <color name="error">#F44336</color>
-    <color name="info">#2196F3</color>
-    
-    <!-- Border Colors -->
-    <color name="border_light">#E0E0E0</color>
-    <color name="border_medium">#BDBDBD</color>
 </resources>
-
