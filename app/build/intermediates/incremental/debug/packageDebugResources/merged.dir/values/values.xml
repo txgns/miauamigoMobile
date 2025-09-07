@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="accent">#4CAF50</color>
+    <color name="accent_dark">#388E3C</color>
+    <color name="app_background">#F5F5F5</color>
+    <color name="background">#F5F5F5</color>
+    <color name="black">#000000</color>
+    <color name="border_light">#E0E0E0</color>
+    <color name="client_primary">#2196F3</color>
+    <color name="error">#F44336</color>
+    <color name="input_background">#EEEEEE</color>
+    <color name="input_field_background">#EEEEEE</color>
+    <color name="primary">#FFC107</color>
+    <color name="primary_dark">#FFA000</color>
+    <color name="primary_light">#FFD54F</color>
+    <color name="success">#4CAF50</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#E0E0E0</color>
+    <color name="text_on_primary">#212121</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="vendor_primary">#FF9800</color>
+    <color name="white">#FFFFFF</color>
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
+    <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
+    <string name="app_name">MiauMigo</string>
+    <string name="cancel">Cancelar</string>
+    <string name="cancelled">Cancelado</string>
+    <string name="cart">Carrinho</string>
+    <string name="cart_empty">Seu carrinho está vazio</string>
+    <string name="categories">Categorias</string>
+    <string name="checkout">Finalizar Compra</string>
+    <string name="confirm_password">Confirmar Senha</string>
+    <string name="default_web_client_id" translatable="false">30273334005-hk1uh3qcie3l9ru2ppk81a441i0icgsj.apps.googleusercontent.com</string>
+    <string name="delete">Excluir</string>
+    <string name="delivered">Entregue</string>
+    <string name="description">Descrição</string>
+    <string name="edit">Editar</string>
+    <string name="email">E-mail</string>
+    <string name="error">Erro</string>
+    <string name="featured_products">Produtos em Destaque</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="gcm_defaultSenderId" translatable="false">30273334005</string>
+    <string name="google_api_key" translatable="false">AIzaSyBkvLlE1vat4rRHE2ZL0szxoclxuU1Vk8U</string>
+    <string name="google_app_id" translatable="false">1:30273334005:android:4b3682de95ccc2d01a73bc</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBkvLlE1vat4rRHE2ZL0szxoclxuU1Vk8U</string>
+    <string name="google_storage_bucket" translatable="false">miaumigo-686d4.firebasestorage.app</string>
+    <string name="has_account">Já tem uma conta? Entre</string>
+    <string name="home">Início</string>
+    <string name="in_stock">Em estoque</string>
+    <string name="loading">Carregando...</string>
+    <string name="login">Entrar</string>
+    <string name="login_error">Erro ao fazer login. Verifique suas credenciais.</string>
+    <string name="login_success">Login realizado com sucesso!</string>
+    <string name="logout">Sair</string>
+    <string name="name">Nome</string>
+    <string name="network_error">Erro de conexão. Verifique sua internet.</string>
+    <string name="no_account">Não tem uma conta? Cadastre-se</string>
+    <string name="ok">OK</string>
+    <string name="order_date">Data do pedido</string>
+    <string name="order_history">Histórico de Pedidos</string>
+    <string name="order_number">Pedido #</string>
+    <string name="order_placed_success">Pedido realizado com sucesso!</string>
+    <string name="order_status">Status</string>
+    <string name="order_total">Total</string>
+    <string name="orders">Pedidos</string>
+    <string name="out_of_stock">Fora de estoque</string>
+    <string name="password">Senha</string>
+    <string name="pending">Pendente</string>
+    <string name="phone">Telefone</string>
+    <string name="price">Preço</string>
+    <string name="processing">Processando</string>
+    <string name="products">Produtos</string>
+    <string name="profile">Perfil</string>
+    <string name="project_id" translatable="false">miaumigo-686d4</string>
+    <string name="quantity">Quantidade</string>
+    <string name="register">Cadastrar</string>
+    <string name="register_error">Erro ao cadastrar. Tente novamente.</string>
+    <string name="register_success">Cadastro realizado com sucesso!</string>
+    <string name="remove_item">Remover item</string>
+    <string name="save">Salvar</string>
+    <string name="search_hint">Buscar produtos...</string>
+    <string name="shipped">Enviado</string>
+    <string name="success">Sucesso</string>
+    <string name="total">Total</string>
+    <string name="update_quantity">Atualizar quantidade</string>
+    <style name="ButtonPrimary" parent="Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="ButtonSecondary" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_secondary_background</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="TextBody" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextCaption" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+    <style name="TextSubtitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="Theme.MiauMigo" parent="Theme.Material3.DayNight">
+        
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+    <style name="Theme.MiauMigo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.MiauMigo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.MiauMigo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+</resources>
