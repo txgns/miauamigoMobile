@@ -22,6 +22,7 @@
     <string name="search_hint">Buscar produtos...</string>
     <string name="categories">Categorias</string>
     <string name="featured_products">Produtos em Destaque</string>
+    <string name="no_products_found">Nenhum produto encontrado</string>
 
     <!-- Navigation Titles -->
     <string name="title_home">Início</string>
