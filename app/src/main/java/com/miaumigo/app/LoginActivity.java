@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess() {
                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("USER_TYPE", userType);
                 startActivity(intent);
                 finish();
             }
