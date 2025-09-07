@@ -39,9 +39,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
+        recyclerViewPets.setLayoutManager(new LinearLayoutManager(this));
+        // This is the fix: Disable nested scrolling
+        recyclerViewPets.setNestedScrollingEnabled(false);
         petList = new ArrayList<>();
         petAdapter = new PetAdapter(petList);
-        recyclerViewPets.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPets.setAdapter(petAdapter);
     }
 
