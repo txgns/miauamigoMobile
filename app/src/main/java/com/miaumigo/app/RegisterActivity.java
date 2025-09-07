@@ -17,7 +17,7 @@ import com.miaumigo.app.services.FirebaseAuthService;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPhone, editTextPassword;
+    private EditText editTextName, editTextEmail, editTextPhone, editTextPassword;
     private Button buttonRegister, buttonBack;
     private View viewBackgroundShape;
     private TextView textViewRegisterTitle;
@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -70,11 +71,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
+        String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -84,9 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
             return;
         }
-        
-        // Passando uma string vazia para o nome, já que não está no novo layout
-        String name = ""; 
 
         authService.registerUser(email, password, name, phone, new FirebaseAuthService.AuthCallback() {
             @Override
