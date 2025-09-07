@@ -37,13 +37,16 @@ public class FirebaseAuthService {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            FirebaseUser firebaseUser = task.getResult().getUser();
                             if (firebaseUser != null) {
                                 User user = new User(firebaseUser.getUid(), name, email, phone);
                                 saveUserToDatabase(user, callback);
+                            } else {
+                                // This case is unlikely if the task is successful, but we handle it.
+                                callback.onError("Falha ao obter usuário após o registro.");
                             }
                         } else {
-                            callback.onError(task.getException() != null ? 
+                            callback.onError(task.getException() != null ?
                                 task.getException().getMessage() : "Erro ao criar conta");
                         }
                     }
@@ -58,7 +61,7 @@ public class FirebaseAuthService {
                         if (task.isSuccessful()) {
                             callback.onSuccess();
                         } else {
-                            callback.onError(task.getException() != null ? 
+                            callback.onError(task.getException() != null ?
                                 task.getException().getMessage() : "Erro ao fazer login");
                         }
                     }
@@ -99,11 +102,10 @@ public class FirebaseAuthService {
                         if (task.isSuccessful()) {
                             callback.onSuccess();
                         } else {
-                            callback.onError(task.getException() != null ? 
+                            callback.onError(task.getException() != null ?
                                 task.getException().getMessage() : "Erro ao enviar email de recuperação");
                         }
                     }
                 });
     }
 }
-
