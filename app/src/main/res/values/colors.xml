@@ -1,32 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FFC107</color>
-    <color name="primary_dark">#FFA000</color>
-    <color name="primary_light">#FFD54F</color>
-    <color name="accent">#4CAF50</color>
-    <color name="accent_dark">#388E3C</color>
-
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-
-    <color name="app_background">#F5F5F5</color>
-    <color name="background">#F5F5F5</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#E0E0E0</color>
-
-    <color name="text_primary">#212121</color>
+    <color name="primary_client">#3498db</color>
+    <color name="primary_vendor">#e74c3c</color>
+    <color name="app_background">#f4f6f9</color>
+    <color name="text_on_primary">#FFFFFF</color>
     <color name="text_secondary">#757575</color>
-    <color name="text_on_primary">#212121</color>
-
-    <color name="input_field_background">#EEEEEE</color>
-    <color name="input_background">#EEEEEE</color>
-
-    <color name="client_primary">#2196F3</color>
-    <color name="vendor_primary">#FF9800</color>
-
-    <color name="success">#4CAF50</color>
-    <color name="error">#F44336</color>
-    <color name="warning">#FFC107</color>
-    <color name="info">#2196F3</color>
-    <color name="border_light">#E0E0E0</color>
+    <color name="white">#FFFFFF</color>
 </resources>
