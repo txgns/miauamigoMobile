@@ -2,18 +2,23 @@ package com.miaumigo.app;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.miaumigo.app.fragments.CartFragment;
+import com.miaumigo.app.fragments.HomeFragment;
+import com.miaumigo.app.fragments.OrdersFragment;
+import com.miaumigo.app.fragments.ProductsFragment;
+import com.miaumigo.app.fragments.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TextView welcomeText;
     private BottomNavigationView bottomNavigation;
 
     @Override
@@ -23,30 +28,45 @@ public class HomeActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_home);
 
-        welcomeText = findViewById(R.id.welcome_text);
         bottomNavigation = findViewById(R.id.bottom_navigation);
-
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                String title = getString(R.string.app_name);
+
                 int itemId = item.getItemId();
                 if (itemId == R.id.navigation_home) {
-                    welcomeText.setText("Bem-vindo ao MiauMigo!");
-                    getSupportActionBar().setTitle(R.string.title_home);
-                    return true;
-                } else if (itemId == R.id.navigation_dashboard) {
-                    welcomeText.setText("Painel de Controle");
-                    getSupportActionBar().setTitle(R.string.title_dashboard);
-                    return true;
-                } else if (itemId == R.id.navigation_notifications) {
-                    welcomeText.setText("Notificações");
-                    getSupportActionBar().setTitle(R.string.title_notifications);
-                    return true;
+                    selectedFragment = new HomeFragment();
+                    title = getString(R.string.title_home);
+                } else if (itemId == R.id.navigation_products) {
+                    selectedFragment = new ProductsFragment();
+                    title = getString(R.string.products);
+                } else if (itemId == R.id.navigation_cart) {
+                    selectedFragment = new CartFragment();
+                    title = getString(R.string.cart);
+                } else if (itemId == R.id.navigation_orders) {
+                    selectedFragment = new OrdersFragment();
+                    title = getString(R.string.orders);
+                } else if (itemId == R.id.navigation_profile) {
+                    selectedFragment = new ProfileFragment();
+                    title = getString(R.string.profile);
                 }
-                return false;
+
+                if (selectedFragment != null) {
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, selectedFragment);
+                    transaction.commit();
+                    getSupportActionBar().setTitle(title);
+                }
+                return true;
             }
         });
+
+        // Set default fragment
+        if (savedInstanceState == null) {
+            bottomNavigation.setSelectedItemId(R.id.navigation_home);
+        }
     }
 }
