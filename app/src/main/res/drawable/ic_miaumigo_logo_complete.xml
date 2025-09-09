@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background circle with gradient effect -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M100,20 A80,80 0 1,1 100,180 A80,80 0 1,1 100,20 Z" />
+
+    <!-- Inner circle for gradient effect -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M100,30 A70,70 0 1,1 100,170 A70,70 0 1,1 100,30 Z" />
+
+    <!-- Paw prints scattered around -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,50 C60,45 65,40 70,40 C75,40 80,45 80,50 C80,55 75,60 70,60 C65,60 60,55 60,50 Z M65,45 C65,42 67,40 70,40 C73,40 75,42 75,45 C75,48 73,50 70,50 C67,50 65,48 65,45 Z" />
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M130,60 C130,55 135,50 140,50 C145,50 150,55 150,60 C150,65 145,70 140,70 C135,70 130,65 130,60 Z M135,55 C135,52 137,50 140,50 C143,50 145,52 145,55 C145,58 143,60 140,60 C137,60 135,58 135,55 Z" />
+
+    <!-- Bone shapes -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,80 C45,80 40,85 40,90 C40,95 45,100 50,100 C55,100 60,95 60,90 C60,85 55,80 50,80 Z M50,85 C52,85 55,87 55,90 C55,93 52,95 50,95 C48,95 45,93 45,90 C45,87 48,85 50,85 Z" />
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M140,80 C135,80 130,85 130,90 C130,95 135,100 140,100 C145,100 150,95 150,90 C150,85 145,80 140,80 Z M140,85 C142,85 145,87 145,90 C145,93 142,95 140,95 C138,95 135,93 135,90 C135,87 138,85 140,85 Z" />
+
+    <!-- Hearts -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M70,70 C68,68 65,68 63,70 C61,72 61,75 63,77 L70,84 L77,77 C79,75 79,72 77,70 C75,68 72,68 70,70 Z" />
+    
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M130,70 C128,68 125,68 123,70 C121,72 121,75 123,77 L130,84 L137,77 C139,75 139,72 137,70 C135,68 132,68 130,70 Z" />
+
+    <!-- Cat body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,120 C90,120 80,130 80,140 C80,150 90,160 100,160 C110,160 120,150 120,140 C120,130 110,120 100,120 Z" />
+
+    <!-- Cat head -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,100 C85,100 75,110 75,125 C75,140 85,150 100,150 C115,150 125,140 125,125 C125,110 115,100 100,100 Z" />
+
+    <!-- Cat ears -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M90,105 C85,100 80,105 85,110 C90,115 90,110 90,105 Z" />
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M110,105 C115,100 120,105 115,110 C110,115 110,110 110,105 Z" />
+
+    <!-- Orange patches on ears -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M90,105 C88,103 86,105 88,107 C90,109 90,107 90,105 Z" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M110,105 C112,103 114,105 112,107 C110,109 110,107 110,105 Z" />
+
+    <!-- Pink inner ears -->
+    <path
+        android:fillColor="#FFB6C1"
+        android:pathData="M90,107 C89,106 88,107 89,108 C90,109 90,108 90,107 Z" />
+    
+    <path
+        android:fillColor="#FFB6C1"
+        android:pathData="M110,107 C111,106 112,107 111,108 C110,109 110,108 110,107 Z" />
+
+    <!-- Cat eyes -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M95,120 C93,118 91,120 93,122 C95,124 95,122 95,120 Z" />
+    
+    <path
+        android:fillColor="#000000"
+        android:pathData="M105,120 C107,118 109,120 107,122 C105,124 105,122 105,120 Z" />
+
+    <!-- Cat mouth -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M100,130 C98,128 102,128 100,130 Z" />
+
+    <!-- Cat whiskers -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M85,125 L80,125" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M85,127 L80,127" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M85,129 L80,129" />
+    
+    <path
+        android:fillColor="#000000"
+        android:pathData="M115,125 L120,125" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M115,127 L120,127" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M115,129 L120,129" />
+
+    <!-- Cat collar -->
+    <path
+        android:fillColor="#0000FF"
+        android:pathData="M100,135 C90,135 85,140 90,145 C95,150 105,150 110,145 C115,140 110,135 100,135 Z" />
+
+    <!-- Cat tail -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M120,140 C125,135 130,140 125,145 C120,150 120,145 120,140 Z" />
+    
+    <!-- Tail stripes -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M122,142 C124,140 126,142 124,144 C122,146 122,144 122,142 Z" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M123,145 C125,143 127,145 125,147 C123,149 123,147 123,145 Z" />
+
+    <!-- Shadow under cat -->
+    <path
+        android:fillColor="#8B4513"
+        android:fillAlpha="0.3"
+        android:pathData="M100,160 C90,160 80,165 80,170 C80,175 90,180 100,180 C110,180 120,175 120,170 C120,165 110,160 100,160 Z" />
+
+</vector>

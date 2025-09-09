@@ -11,9 +11,22 @@
         android:id="@+id/imageViewLogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/ic_launcher_foreground" 
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_miaumigo_logo_simple" 
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="MIAUMIGO SHOP"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -21,12 +34,12 @@
         android:id="@+id/textViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Pronto para cuidar do seu pet? ♥"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAppName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
