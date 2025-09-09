@@ -19,7 +19,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
     private TextView textViewLoginSubtitle, textViewRegisterLink;
-    private View viewBackgroundShape;
     private FirebaseAuthService authService;
     private String userType;
 
@@ -40,30 +39,39 @@ public class LoginActivity extends AppCompatActivity {
             setupStyling();
             setupClickListeners();
         } catch (Exception e) {
+            // Log the error for debugging
+            e.printStackTrace();
             // If there's an error, show a simple message and finish
-            Toast.makeText(this, "Erro ao inicializar o app", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Erro ao inicializar o app: " + e.getMessage(), Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
     private void initializeViews() {
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        textViewLoginSubtitle = findViewById(R.id.textViewLoginSubtitle);
-        textViewRegisterLink = findViewById(R.id.textViewRegisterLink);
-        viewBackgroundShape = findViewById(R.id.viewBackgroundShape);
+        try {
+            editTextEmail = findViewById(R.id.editTextEmail);
+            editTextPassword = findViewById(R.id.editTextPassword);
+            buttonLogin = findViewById(R.id.buttonLogin);
+            textViewLoginSubtitle = findViewById(R.id.textViewLoginSubtitle);
+            textViewRegisterLink = findViewById(R.id.textViewRegisterLink);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao inicializar views: " + e.getMessage());
+        }
     }
 
     private void setupStyling() {
-        if ("client".equals(userType)) {
-            buttonLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.button_client_background));
-            viewBackgroundShape.setBackground(ContextCompat.getDrawable(this, R.drawable.client_background_shape));
-            textViewLoginSubtitle.setText("Como Cliente");
-        } else { // vendor
-            buttonLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.button_vendor_background));
-            viewBackgroundShape.setBackground(ContextCompat.getDrawable(this, R.drawable.vendor_background_shape));
-            textViewLoginSubtitle.setText("Como Vendedor");
+        try {
+            if ("client".equals(userType)) {
+                buttonLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.button_client_background));
+                textViewLoginSubtitle.setText("Como Cliente");
+            } else { // vendor
+                buttonLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.button_vendor_background));
+                textViewLoginSubtitle.setText("Como Vendedor");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao configurar estilo: " + e.getMessage());
         }
     }
 
