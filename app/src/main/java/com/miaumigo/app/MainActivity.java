@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         // Initialize Firebase
         FirebaseApp.initializeApp(this);
@@ -37,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
             finish(); // Finish MainActivity so the user can't go back to it
             return; // Return to prevent the rest of the onCreate from running
         }
-
-        setContentView(R.layout.activity_main);
 
         initializeViews();
         setupClickListeners();
