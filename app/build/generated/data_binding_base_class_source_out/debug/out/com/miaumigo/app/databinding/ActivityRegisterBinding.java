@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,13 +31,13 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final EditText editTextEmail;
 
   @NonNull
+  public final EditText editTextName;
+
+  @NonNull
   public final EditText editTextPassword;
 
   @NonNull
   public final EditText editTextPhone;
-
-  @NonNull
-  public final ImageView imageViewCamera;
 
   @NonNull
   public final TextView textViewRegisterTitle;
@@ -48,16 +47,16 @@ public final class ActivityRegisterBinding implements ViewBinding {
 
   private ActivityRegisterBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonBack,
       @NonNull Button buttonRegister, @NonNull EditText editTextEmail,
-      @NonNull EditText editTextPassword, @NonNull EditText editTextPhone,
-      @NonNull ImageView imageViewCamera, @NonNull TextView textViewRegisterTitle,
+      @NonNull EditText editTextName, @NonNull EditText editTextPassword,
+      @NonNull EditText editTextPhone, @NonNull TextView textViewRegisterTitle,
       @NonNull View viewBackgroundShape) {
     this.rootView = rootView;
     this.buttonBack = buttonBack;
     this.buttonRegister = buttonRegister;
     this.editTextEmail = editTextEmail;
+    this.editTextName = editTextName;
     this.editTextPassword = editTextPassword;
     this.editTextPhone = editTextPhone;
-    this.imageViewCamera = imageViewCamera;
     this.textViewRegisterTitle = textViewRegisterTitle;
     this.viewBackgroundShape = viewBackgroundShape;
   }
@@ -107,6 +106,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.editTextName;
+      EditText editTextName = ViewBindings.findChildViewById(rootView, id);
+      if (editTextName == null) {
+        break missingId;
+      }
+
       id = R.id.editTextPassword;
       EditText editTextPassword = ViewBindings.findChildViewById(rootView, id);
       if (editTextPassword == null) {
@@ -116,12 +121,6 @@ public final class ActivityRegisterBinding implements ViewBinding {
       id = R.id.editTextPhone;
       EditText editTextPhone = ViewBindings.findChildViewById(rootView, id);
       if (editTextPhone == null) {
-        break missingId;
-      }
-
-      id = R.id.imageViewCamera;
-      ImageView imageViewCamera = ViewBindings.findChildViewById(rootView, id);
-      if (imageViewCamera == null) {
         break missingId;
       }
 
@@ -138,7 +137,7 @@ public final class ActivityRegisterBinding implements ViewBinding {
       }
 
       return new ActivityRegisterBinding((ConstraintLayout) rootView, buttonBack, buttonRegister,
-          editTextEmail, editTextPassword, editTextPhone, imageViewCamera, textViewRegisterTitle,
+          editTextEmail, editTextName, editTextPassword, editTextPhone, textViewRegisterTitle,
           viewBackgroundShape);
     }
     String missingId = rootView.getResources().getResourceName(id);

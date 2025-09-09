@@ -54,7 +54,7 @@
         android:textColor="@color/text_on_primary"
         app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app.layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonVendor"

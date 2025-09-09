@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.miaumigo.app-mergeDebugResources-62:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
+            "outputFile": "com.miaumigo.app-mergeDebugResources-56:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\25327a965b5c2073bfeb5145747d3b9c\\transformed\\material-1.10.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
+                    "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\6d7643d92259925296ed1b0950b70188\\transformed\\material-1.10.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
