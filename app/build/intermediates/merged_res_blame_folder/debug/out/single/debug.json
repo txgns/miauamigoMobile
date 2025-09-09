@@ -1,15 +1,19 @@
 [
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_dog_placeholder_2.xml.flat",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\ic_dog_placeholder_2.xml"
-    },
-    {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_cat_placeholder.xml.flat",
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\ic_cat_placeholder.xml"
     },
     {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_dog_placeholder_2.xml.flat",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\ic_dog_placeholder_2.xml"
+    },
+    {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_button_secondary_background.xml.flat",
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\button_secondary_background.xml"
+    },
+    {
+        "merged": "com.miaumigo.app-merged_res-58:/layout_activity_login.xml.flat",
+        "source": "com.miaumigo.app-main-60:/layout/activity_login.xml"
     },
     {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\layout_fragment_products.xml.flat",
@@ -20,12 +24,12 @@
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\input_field_background.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\mipmap-xhdpi\\ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_profile.xml.flat",
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_home.xml.flat",
@@ -124,10 +128,6 @@
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_cart.xml"
     },
     {
-        "merged": "com.miaumigo.app-merged_res-58:/xml_network_security_config.xml.flat",
-        "source": "com.miaumigo.app-main-60:/xml/network_security_config.xml"
-    },
-    {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_button_vendor_background.xml.flat",
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\button_vendor_background.xml"
     },
@@ -214,6 +214,10 @@
     {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\drawable_ic_products.xml.flat",
         "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\drawable\\ic_products.xml"
+    },
+    {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\xml\\network_security_config.xml"
     },
     {
         "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-merged_res-58:\\layout_activity_product_detail.xml.flat",

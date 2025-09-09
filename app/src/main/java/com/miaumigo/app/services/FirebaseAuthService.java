@@ -29,6 +29,8 @@ public class FirebaseAuthService {
             // Handle Firebase initialization error
             mAuth = null;
             mDatabase = null;
+            // Log the error for debugging
+            e.printStackTrace();
         }
     }
 

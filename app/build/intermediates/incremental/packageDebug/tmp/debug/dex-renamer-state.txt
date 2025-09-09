@@ -1,4 +1,4 @@
-#Tue Sep 09 01:16:34 BRT 2025
+#Tue Sep 09 01:19:34 BRT 2025
 base.0=C\:\\Users\\txgns\\Documents\\Projetos\\miauamigoMobile\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\txgns\\Documents\\Projetos\\miauamigoMobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\txgns\\Documents\\Projetos\\miauamigoMobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex

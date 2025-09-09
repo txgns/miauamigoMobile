@@ -39,7 +39,7 @@
         android:theme="@style/Theme.MiauMigo"
         android:usesCleartextTraffic="false" >
         <activity
-            android:name="com.miaumigo.app.LoginActivity"
+            android:name="com.miaumigo.app.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MiauMigo.NoActionBar" >
             <intent-filter>
@@ -48,6 +48,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.miaumigo.app.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
         <activity
             android:name="com.miaumigo.app.RegisterActivity"
             android:exported="false"

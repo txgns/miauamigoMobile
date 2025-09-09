@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,24 +24,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Firebase
-        FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
+        try {
+            // Initialize Firebase
+            FirebaseApp.initializeApp(this);
+            mAuth = FirebaseAuth.getInstance();
 
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // User is already logged in, redirect to HomeActivity
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            // TODO: You might need to pass the USER_TYPE here if HomeActivity depends on it.
-            // You would typically fetch this from your database based on the currentUser.getUid()
-            startActivity(intent);
-            finish(); // Finish MainActivity so the user can't go back to it
-            return; // Return to prevent the rest of the onCreate from running
+            // Check if user is signed in (non-null) and update UI accordingly.
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+                // User is already logged in, redirect to HomeActivity
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                // TODO: You might need to pass the USER_TYPE here if HomeActivity depends on it.
+                // You would typically fetch this from your database based on the currentUser.getUid()
+                startActivity(intent);
+                finish(); // Finish MainActivity so the user can't go back to it
+                return; // Return to prevent the rest of the onCreate from running
+            }
+
+            initializeViews();
+            setupClickListeners();
+        } catch (Exception e) {
+            // If there's an error, show a simple message and finish
+            Toast.makeText(this, "Erro ao inicializar o app", Toast.LENGTH_LONG).show();
+            finish();
         }
-
-        initializeViews();
-        setupClickListeners();
     }
 
     private void initializeViews() {
