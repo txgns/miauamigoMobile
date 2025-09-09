@@ -62,28 +62,34 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
     private void loadProducts() {
         showLoading(true);
         
-        databaseService.getProducts(new FirebaseDatabaseService.ListCallback<Product>() {
-            @Override
-            public void onSuccess(List<Product> productList) {
-                showLoading(false);
-                products.clear();
-                products.addAll(productList);
-                productAdapter.notifyDataSetChanged();
-                
-                if (products.isEmpty()) {
-                    textViewEmpty.setVisibility(View.VISIBLE);
-                } else {
-                    textViewEmpty.setVisibility(View.GONE);
+        try {
+            databaseService.getProducts(new FirebaseDatabaseService.ListCallback<Product>() {
+                @Override
+                public void onSuccess(List<Product> productList) {
+                    showLoading(false);
+                    products.clear();
+                    if (productList != null) {
+                        products.addAll(productList);
+                    }
+                    productAdapter.notifyDataSetChanged();
+                    
+                    if (products.isEmpty()) {
+                        textViewEmpty.setVisibility(View.VISIBLE);
+                    } else {
+                        textViewEmpty.setVisibility(View.GONE);
+                    }
                 }
-            }
 
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
-                textViewEmpty.setVisibility(View.VISIBLE);
-            }
-        });
+                @Override
+                public void onError(String error) {
+                    showLoading(false);
+                    textViewEmpty.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (Exception e) {
+            showLoading(false);
+            textViewEmpty.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showLoading(boolean show) {

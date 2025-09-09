@@ -70,25 +70,36 @@ public class FirebaseDatabaseService {
 
     // Product operations
     public void getProducts(ListCallback<Product> callback) {
-        mDatabase.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Product> products = new ArrayList<>();
-                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    Product product = productSnapshot.getValue(Product.class);
-                    if (product != null) {
-                        product.setId(productSnapshot.getKey());
-                        products.add(product);
+        try {
+            mDatabase.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<Product> products = new ArrayList<>();
+                    if (snapshot.exists()) {
+                        for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                            try {
+                                Product product = productSnapshot.getValue(Product.class);
+                                if (product != null) {
+                                    product.setId(productSnapshot.getKey());
+                                    products.add(product);
+                                }
+                            } catch (Exception e) {
+                                // Skip invalid products
+                                continue;
+                            }
+                        }
                     }
+                    callback.onSuccess(products);
                 }
-                callback.onSuccess(products);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                callback.onError(error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    callback.onError("Erro ao carregar produtos");
+                }
+            });
+        } catch (Exception e) {
+            callback.onError("Erro de conexão");
+        }
     }
 
     public void getProduct(String productId, DataCallback<Product> callback) {

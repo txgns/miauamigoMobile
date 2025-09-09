@@ -66,7 +66,16 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set default fragment
         if (savedInstanceState == null) {
-            bottomNavigation.setSelectedItemId(R.id.navigation_home);
+            try {
+                bottomNavigation.setSelectedItemId(R.id.navigation_home);
+            } catch (Exception e) {
+                // Fallback: manually set the home fragment
+                Fragment homeFragment = new HomeFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, homeFragment);
+                transaction.commit();
+                getSupportActionBar().setTitle(getString(R.string.title_home));
+            }
         }
     }
 }

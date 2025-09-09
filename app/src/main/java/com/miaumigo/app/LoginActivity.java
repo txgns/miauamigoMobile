@@ -28,16 +28,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        authService = new FirebaseAuthService(this);
-        // Default to 'client' if no extra is passed
-        userType = getIntent().getStringExtra("USER_TYPE");
-        if (userType == null) {
-            userType = "client";
-        }
+        try {
+            authService = new FirebaseAuthService(this);
+            // Default to 'client' if no extra is passed
+            userType = getIntent().getStringExtra("USER_TYPE");
+            if (userType == null) {
+                userType = "client";
+            }
 
-        initializeViews();
-        setupStyling();
-        setupClickListeners();
+            initializeViews();
+            setupStyling();
+            setupClickListeners();
+        } catch (Exception e) {
+            // If there's an error, show a simple message and finish
+            Toast.makeText(this, "Erro ao inicializar o app", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void initializeViews() {
@@ -80,20 +86,24 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        authService.loginUser(email, password, new FirebaseAuthService.AuthCallback() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.putExtra("USER_TYPE", userType);
-                startActivity(intent);
-                finish();
-            }
+        try {
+            authService.loginUser(email, password, new FirebaseAuthService.AuthCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("USER_TYPE", userType);
+                    startActivity(intent);
+                    finish();
+                }
 
-            @Override
-            public void onError(String error) {
-                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(LoginActivity.this, "Erro ao fazer login. Tente novamente.", Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "Erro de conexão. Verifique sua internet.", Toast.LENGTH_LONG).show();
+        }
     }
 }

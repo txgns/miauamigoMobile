@@ -71,39 +71,45 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
     }
 
     private void loadCartItems() {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        if (currentUser == null) {
-            textViewEmpty.setVisibility(View.VISIBLE);
-            return;
-        }
-
-        showLoading(true);
-        
-        databaseService.getCart(currentUser.getUid(), new FirebaseDatabaseService.ListCallback<CartItem>() {
-            @Override
-            public void onSuccess(List<CartItem> items) {
-                showLoading(false);
-                cartItems.clear();
-                cartItems.addAll(items);
-                cartAdapter.notifyDataSetChanged();
-                calculateTotal();
-                
-                if (cartItems.isEmpty()) {
-                    textViewEmpty.setVisibility(View.VISIBLE);
-                    buttonCheckout.setVisibility(View.GONE);
-                } else {
-                    textViewEmpty.setVisibility(View.GONE);
-                    buttonCheckout.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+        try {
+            FirebaseUser currentUser = authService.getCurrentUser();
+            if (currentUser == null) {
                 textViewEmpty.setVisibility(View.VISIBLE);
+                return;
             }
-        });
+
+            showLoading(true);
+            
+            databaseService.getCart(currentUser.getUid(), new FirebaseDatabaseService.ListCallback<CartItem>() {
+                @Override
+                public void onSuccess(List<CartItem> items) {
+                    showLoading(false);
+                    cartItems.clear();
+                    if (items != null) {
+                        cartItems.addAll(items);
+                    }
+                    cartAdapter.notifyDataSetChanged();
+                    calculateTotal();
+                    
+                    if (cartItems.isEmpty()) {
+                        textViewEmpty.setVisibility(View.VISIBLE);
+                        buttonCheckout.setVisibility(View.GONE);
+                    } else {
+                        textViewEmpty.setVisibility(View.GONE);
+                        buttonCheckout.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    showLoading(false);
+                    textViewEmpty.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (Exception e) {
+            showLoading(false);
+            textViewEmpty.setVisibility(View.VISIBLE);
+        }
     }
 
     private void calculateTotal() {

@@ -22,8 +22,14 @@ public class FirebaseAuthService {
 
     public FirebaseAuthService(Context context) {
         this.context = context;
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        try {
+            mAuth = FirebaseAuth.getInstance();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+        } catch (Exception e) {
+            // Handle Firebase initialization error
+            mAuth = null;
+            mDatabase = null;
+        }
     }
 
     public interface AuthCallback {
@@ -54,6 +60,11 @@ public class FirebaseAuthService {
     }
 
     public void loginUser(String email, String password, AuthCallback callback) {
+        if (mAuth == null) {
+            callback.onError("Erro de inicialização do Firebase");
+            return;
+        }
+        
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -61,8 +72,7 @@ public class FirebaseAuthService {
                         if (task.isSuccessful()) {
                             callback.onSuccess();
                         } else {
-                            callback.onError(task.getException() != null ?
-                                task.getException().getMessage() : "Erro ao fazer login");
+                            callback.onError("Erro ao fazer login");
                         }
                     }
                 });

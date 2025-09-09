@@ -62,34 +62,41 @@ public class HomeFragment extends Fragment implements ProductAdapter.OnProductCl
     private void loadFeaturedProducts() {
         showLoading(true);
         
-        databaseService.getProducts(new FirebaseDatabaseService.ListCallback<Product>() {
-            @Override
-            public void onSuccess(List<Product> products) {
-                showLoading(false);
-                featuredProducts.clear();
-                
-                // Show first 6 products as featured
-                int count = Math.min(6, products.size());
-                for (int i = 0; i < count; i++) {
-                    featuredProducts.add(products.get(i));
+        try {
+            databaseService.getProducts(new FirebaseDatabaseService.ListCallback<Product>() {
+                @Override
+                public void onSuccess(List<Product> products) {
+                    showLoading(false);
+                    featuredProducts.clear();
+                    
+                    // Show first 6 products as featured
+                    if (products != null) {
+                        int count = Math.min(6, products.size());
+                        for (int i = 0; i < count; i++) {
+                            featuredProducts.add(products.get(i));
+                        }
+                    }
+                    
+                    productAdapter.notifyDataSetChanged();
+                    
+                    if (featuredProducts.isEmpty()) {
+                        textViewEmpty.setVisibility(View.VISIBLE);
+                    } else {
+                        textViewEmpty.setVisibility(View.GONE);
+                    }
                 }
-                
-                productAdapter.notifyDataSetChanged();
-                
-                if (featuredProducts.isEmpty()) {
-                    textViewEmpty.setVisibility(View.VISIBLE);
-                } else {
-                    textViewEmpty.setVisibility(View.GONE);
-                }
-            }
 
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
-                textViewEmpty.setVisibility(View.VISIBLE);
-            }
-        });
+                @Override
+                public void onError(String error) {
+                    showLoading(false);
+                    // Don't show error toast, just show empty state
+                    textViewEmpty.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (Exception e) {
+            showLoading(false);
+            textViewEmpty.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showLoading(boolean show) {
