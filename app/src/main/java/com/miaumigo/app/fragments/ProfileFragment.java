@@ -26,6 +26,7 @@ public class ProfileFragment extends Fragment {
     private TextView textViewEmail;
     private TextView textViewPhone;
     private Button buttonEditProfile;
+    private Button buttonEditAddress;
     private Button buttonLogout;
     private ProgressBar progressBar;
     private FirebaseAuthService authService;
@@ -48,6 +49,7 @@ public class ProfileFragment extends Fragment {
         textViewEmail = view.findViewById(R.id.textViewEmail);
         textViewPhone = view.findViewById(R.id.textViewPhone);
         buttonEditProfile = view.findViewById(R.id.buttonEditProfile);
+        buttonEditAddress = view.findViewById(R.id.buttonEditAddress);
         buttonLogout = view.findViewById(R.id.buttonLogout);
         progressBar = view.findViewById(R.id.progressBar);
         
@@ -57,8 +59,13 @@ public class ProfileFragment extends Fragment {
 
     private void setupClickListeners() {
         buttonEditProfile.setOnClickListener(v -> {
-            // TODO: Implement edit profile functionality
-            Toast.makeText(getContext(), "Funcionalidade de edição em desenvolvimento", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), com.miaumigo.app.EditProfileActivity.class);
+            startActivityForResult(intent, 1);
+        });
+
+        buttonEditAddress.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), com.miaumigo.app.EditAddressActivity.class);
+            startActivityForResult(intent, 2);
         });
 
         buttonLogout.setOnClickListener(v -> {
@@ -104,6 +111,15 @@ public class ProfileFragment extends Fragment {
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == 1 || requestCode == 2) && resultCode == getActivity().RESULT_OK) {
+            // Reload user profile after editing
+            loadUserProfile();
+        }
     }
 }
 

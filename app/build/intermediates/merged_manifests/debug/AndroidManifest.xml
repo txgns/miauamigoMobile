@@ -65,6 +65,14 @@
             android:exported="false"
             android:theme="@style/Theme.MiauMigo.NoActionBar" />
         <activity
+            android:name="com.miaumigo.app.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+        <activity
+            android:name="com.miaumigo.app.EditAddressActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+        <activity
             android:name="com.google.firebase.auth.internal.GenericIdpActivity"
             android:excludeFromRecents="true"
             android:exported="true"

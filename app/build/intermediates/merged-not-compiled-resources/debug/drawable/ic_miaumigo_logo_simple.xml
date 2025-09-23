@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M60,10 A50,50 0 1,1 60,110 A50,50 0 1,1 60,10 Z" />
+
+    <!-- Cat head -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,40 C50,40 40,50 40,65 C40,80 50,90 60,90 C70,90 80,80 80,65 C80,50 70,40 60,40 Z" />
+
+    <!-- Cat ears -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,45 C45,40 40,45 45,50 C50,55 50,50 50,45 Z" />
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,45 C75,40 80,45 75,50 C70,55 70,50 70,45 Z" />
+
+    <!-- Orange ear patches -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M50,47 C48,45 46,47 48,49 C50,51 50,49 50,47 Z" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M70,47 C72,45 74,47 72,49 C70,51 70,49 70,47 Z" />
+
+    <!-- Pink inner ears -->
+    <path
+        android:fillColor="#FFB6C1"
+        android:pathData="M50,49 C49,48 48,49 49,50 C50,51 50,50 50,49 Z" />
+    
+    <path
+        android:fillColor="#FFB6C1"
+        android:pathData="M70,49 C71,48 72,49 71,50 C70,51 70,50 70,49 Z" />
+
+    <!-- Cat eyes -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M55,60 C53,58 51,60 53,62 C55,64 55,62 55,60 Z" />
+    
+    <path
+        android:fillColor="#000000"
+        android:pathData="M65,60 C67,58 69,60 67,62 C65,64 65,62 65,60 Z" />
+
+    <!-- Cat nose -->
+    <path
+        android:fillColor="#FFB6C1"
+        android:pathData="M60,65 C59,64 61,64 60,65 Z" />
+
+    <!-- Cat mouth -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M60,68 C58,66 62,66 60,68 Z" />
+
+    <!-- Cat whiskers -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M45,65 L40,65" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M45,67 L40,67" />
+    
+    <path
+        android:fillColor="#000000"
+        android:pathData="M75,65 L80,65" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M75,67 L80,67" />
+
+    <!-- Small hearts around -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M30,50 C28,48 25,48 23,50 C21,52 21,55 23,57 L30,64 L37,57 C39,55 39,52 37,50 C35,48 32,48 30,50 Z" />
+    
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M90,50 C88,48 85,48 83,50 C81,52 81,55 83,57 L90,64 L97,57 C99,55 99,52 97,50 C95,48 92,48 90,50 Z" />
+
+    <!-- Small paw prints -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M25,75 C23,73 21,75 23,77 C25,79 25,77 25,75 Z" />
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M95,75 C93,73 91,75 93,77 C95,79 95,77 95,75 Z" />
+
+</vector>

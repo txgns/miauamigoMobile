@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.miaumigo.app.models.Address;
 import com.miaumigo.app.models.CartItem;
 import com.miaumigo.app.models.Order;
 import com.miaumigo.app.models.Product;
@@ -259,6 +260,96 @@ public class FirebaseDatabaseService {
                         callback.onSuccess(null);
                     } else {
                         callback.onError("Erro ao atualizar status do pedido");
+                    }
+                });
+    }
+
+    // Address operations
+    public void createAddress(Address address, DataCallback<Void> callback) {
+        String addressId = mDatabase.child("addresses").push().getKey();
+        address.setId(addressId);
+        address.setUpdatedAt(System.currentTimeMillis());
+        mDatabase.child("addresses").child(addressId).setValue(address)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(null);
+                    } else {
+                        callback.onError("Erro ao criar endereço");
+                    }
+                });
+    }
+
+    public void getUserAddresses(String userId, ListCallback<Address> callback) {
+        mDatabase.child("addresses").orderByChild("userId").equalTo(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Address> addresses = new ArrayList<>();
+                        for (DataSnapshot addressSnapshot : snapshot.getChildren()) {
+                            Address address = addressSnapshot.getValue(Address.class);
+                            if (address != null) {
+                                address.setId(addressSnapshot.getKey());
+                                addresses.add(address);
+                            }
+                        }
+                        callback.onSuccess(addresses);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        callback.onError(error.getMessage());
+                    }
+                });
+    }
+
+    public void updateAddress(Address address, DataCallback<Void> callback) {
+        address.setUpdatedAt(System.currentTimeMillis());
+        mDatabase.child("addresses").child(address.getId()).setValue(address)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(null);
+                    } else {
+                        callback.onError("Erro ao atualizar endereço");
+                    }
+                });
+    }
+
+    public void deleteAddress(String addressId, DataCallback<Void> callback) {
+        mDatabase.child("addresses").child(addressId).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(null);
+                    } else {
+                        callback.onError("Erro ao deletar endereço");
+                    }
+                });
+    }
+
+    public void setDefaultAddress(String userId, String addressId, DataCallback<Void> callback) {
+        // First, remove default from all addresses
+        mDatabase.child("addresses").orderByChild("userId").equalTo(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot addressSnapshot : snapshot.getChildren()) {
+                            mDatabase.child("addresses").child(addressSnapshot.getKey())
+                                    .child("isDefault").setValue(false);
+                        }
+                        
+                        // Then set the selected address as default
+                        mDatabase.child("addresses").child(addressId).child("isDefault").setValue(true)
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        callback.onSuccess(null);
+                                    } else {
+                                        callback.onError("Erro ao definir endereço padrão");
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        callback.onError(error.getMessage());
                     }
                 });
     }

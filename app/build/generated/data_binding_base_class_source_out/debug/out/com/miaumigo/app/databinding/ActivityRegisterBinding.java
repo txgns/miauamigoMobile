@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final EditText editTextPhone;
 
   @NonNull
+  public final ImageView imageViewLogo;
+
+  @NonNull
+  public final TextView textViewAppName;
+
+  @NonNull
   public final TextView textViewRegisterTitle;
 
   @NonNull
@@ -48,7 +55,8 @@ public final class ActivityRegisterBinding implements ViewBinding {
   private ActivityRegisterBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonBack,
       @NonNull Button buttonRegister, @NonNull EditText editTextEmail,
       @NonNull EditText editTextName, @NonNull EditText editTextPassword,
-      @NonNull EditText editTextPhone, @NonNull TextView textViewRegisterTitle,
+      @NonNull EditText editTextPhone, @NonNull ImageView imageViewLogo,
+      @NonNull TextView textViewAppName, @NonNull TextView textViewRegisterTitle,
       @NonNull View viewBackgroundShape) {
     this.rootView = rootView;
     this.buttonBack = buttonBack;
@@ -57,6 +65,8 @@ public final class ActivityRegisterBinding implements ViewBinding {
     this.editTextName = editTextName;
     this.editTextPassword = editTextPassword;
     this.editTextPhone = editTextPhone;
+    this.imageViewLogo = imageViewLogo;
+    this.textViewAppName = textViewAppName;
     this.textViewRegisterTitle = textViewRegisterTitle;
     this.viewBackgroundShape = viewBackgroundShape;
   }
@@ -124,6 +134,18 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.imageViewLogo;
+      ImageView imageViewLogo = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewLogo == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewAppName;
+      TextView textViewAppName = ViewBindings.findChildViewById(rootView, id);
+      if (textViewAppName == null) {
+        break missingId;
+      }
+
       id = R.id.textViewRegisterTitle;
       TextView textViewRegisterTitle = ViewBindings.findChildViewById(rootView, id);
       if (textViewRegisterTitle == null) {
@@ -137,8 +159,8 @@ public final class ActivityRegisterBinding implements ViewBinding {
       }
 
       return new ActivityRegisterBinding((ConstraintLayout) rootView, buttonBack, buttonRegister,
-          editTextEmail, editTextName, editTextPassword, editTextPhone, textViewRegisterTitle,
-          viewBackgroundShape);
+          editTextEmail, editTextName, editTextPassword, editTextPhone, imageViewLogo,
+          textViewAppName, textViewRegisterTitle, viewBackgroundShape);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

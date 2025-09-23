@@ -1488,6 +1488,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background
 color info
 color input_background
 color m3_appbar_overlay_color
@@ -3101,6 +3102,8 @@ drawable ic_m3_chip_close
 drawable ic_male
 drawable ic_miaumigo_log
 drawable ic_miaumigo_logo
+drawable ic_miaumigo_logo_complete
+drawable ic_miaumigo_logo_simple
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -3303,9 +3306,12 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id buttonAddToCart
 id buttonBack
+id buttonCancel
+id buttonChangeAvatar
 id buttonCheckout
 id buttonClient
 id buttonDecrease
+id buttonEditAddress
 id buttonEditProfile
 id buttonIncrease
 id buttonLogin
@@ -3313,6 +3319,7 @@ id buttonLogout
 id buttonPanel
 id buttonRegister
 id buttonRemove
+id buttonSave
 id buttonVendor
 id cache_measures
 id callMeasure
@@ -3328,6 +3335,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id checkBoxDefault
 id checkbox
 id checked
 id checkoutSection
@@ -3390,10 +3398,17 @@ id easeInOut
 id easeOut
 id east
 id edge
+id editTextCity
+id editTextComplement
 id editTextEmail
 id editTextName
+id editTextNeighborhood
+id editTextNumber
 id editTextPassword
 id editTextPhone
+id editTextState
+id editTextStreet
+id editTextZipCode
 id edit_query
 id edit_text_id
 id elastic
@@ -3448,6 +3463,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageViewAvatar
 id imageViewLogo
 id imageViewPet
 id imageViewPetGender
@@ -3707,9 +3723,11 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textViewAppName
 id textViewDescription
 id textViewEmail
 id textViewEmpty
+id textViewForgotPassword
 id textViewItemCount
 id textViewLogin
 id textViewLoginSubtitle
@@ -3900,6 +3918,8 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_edit_address
+layout activity_edit_profile
 layout activity_home
 layout activity_login
 layout activity_main
@@ -3998,6 +4018,7 @@ layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu bottom_navigation_menu
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw firebase_common_keep

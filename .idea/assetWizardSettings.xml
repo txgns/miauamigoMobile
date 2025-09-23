@@ -79,6 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="imagePath" value="D:\Android\Android Studio\plugins\android\resources\images\asset_studio\oie_transparent.png" />
+                                                <entry key="scalingPercent" value="85" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,6 +108,13 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="dc973d" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>

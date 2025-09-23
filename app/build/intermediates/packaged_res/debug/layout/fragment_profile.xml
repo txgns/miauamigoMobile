@@ -163,6 +163,16 @@
             style="@style/ButtonPrimary" />
 
         <Button
+            android:id="@+id/buttonEditAddress"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:text="Gerenciar Endereços"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            style="@style/ButtonSecondary" />
+
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
             android:layout_height="56dp"

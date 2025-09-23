@@ -48,6 +48,16 @@
             android:exported="false"
             android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
+            android:name=".EditAddressActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
     </application>
 
 </manifest>

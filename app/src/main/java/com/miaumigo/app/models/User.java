@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String avatarUrl;
     private long updatedAt;
 
     // Required empty constructor for Firebase
@@ -39,5 +40,25 @@ public class User {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

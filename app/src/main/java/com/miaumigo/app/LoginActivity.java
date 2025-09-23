@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
-    private TextView textViewLoginSubtitle, textViewRegisterLink;
+    private TextView textViewLoginSubtitle, textViewRegisterLink, textViewForgotPassword;
     private FirebaseAuthService authService;
     private String userType;
 
@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             buttonLogin = findViewById(R.id.buttonLogin);
             textViewLoginSubtitle = findViewById(R.id.textViewLoginSubtitle);
             textViewRegisterLink = findViewById(R.id.textViewRegisterLink);
+            textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar views: " + e.getMessage());
@@ -83,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("USER_TYPE", userType);
             startActivity(intent);
         });
+
+        textViewForgotPassword.setOnClickListener(v -> resetPassword());
     }
 
     private void loginUser() {
@@ -113,5 +116,37 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Erro de conexão. Verifique sua internet.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void resetPassword() {
+        String email = editTextEmail.getText().toString().trim();
+        
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Digite seu email para redefinir a senha", Toast.LENGTH_SHORT).show();
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Digite um email válido", Toast.LENGTH_SHORT).show();
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        authService.resetPassword(email, new FirebaseAuthService.AuthCallback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(LoginActivity.this, 
+                    "Email de redefinição enviado! Verifique sua caixa de entrada.", 
+                    Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(LoginActivity.this, 
+                    "Erro ao enviar email de redefinição: " + error, 
+                    Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
