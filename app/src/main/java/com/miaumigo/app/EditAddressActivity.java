@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -60,6 +61,12 @@ public class EditAddressActivity extends AppCompatActivity {
     }
 
     private void initFirebase() {
+        FirebaseApp app = FirebaseApp.initializeApp(this);
+        if (app == null && FirebaseApp.getApps(this).isEmpty()) {
+            Toast.makeText(this, R.string.network_error, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {

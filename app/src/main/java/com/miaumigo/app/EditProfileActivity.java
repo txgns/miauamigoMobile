@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.miaumigo.app.models.User;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference usersReference;
     private FirebaseUser firebaseUser;
-    private UserProfile currentUser;
+    private User currentUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,12 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void initFirebase() {
+        FirebaseApp app = FirebaseApp.initializeApp(this);
+        if (app == null && FirebaseApp.getApps(this).isEmpty()) {
+            Toast.makeText(this, R.string.network_error, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
@@ -79,41 +87,43 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         showLoading(false);
-                        currentUser = snapshot.getValue(UserProfile.class);
+                        currentUser = snapshot.getValue(User.class);
                         if (currentUser == null) {
-                            currentUser = new UserProfile();
-                            currentUser.uid = firebaseUser.getUid();
-                            currentUser.email = firebaseUser.getEmail();
-                            currentUser.name = !TextUtils.isEmpty(firebaseUser.getDisplayName())
-                                    ? firebaseUser.getDisplayName() : "";
-                            currentUser.phone = firebaseUser.getPhoneNumber();
+                            currentUser = new User(
+                                    firebaseUser.getUid(),
+                                    !TextUtils.isEmpty(firebaseUser.getDisplayName())
+                                            ? firebaseUser.getDisplayName() : "",
+                                    firebaseUser.getEmail(),
+                                    firebaseUser.getPhoneNumber()
+                            );
                         } else {
-                            if (TextUtils.isEmpty(currentUser.uid)) {
-                                currentUser.uid = firebaseUser.getUid();
+                            if (TextUtils.isEmpty(currentUser.getUid())) {
+                                currentUser.setUid(firebaseUser.getUid());
                             }
-                            if (TextUtils.isEmpty(currentUser.email)) {
-                                currentUser.email = firebaseUser.getEmail();
+                            if (TextUtils.isEmpty(currentUser.getEmail())) {
+                                currentUser.setEmail(firebaseUser.getEmail());
                             }
                         }
 
-                        editTextName.setText(currentUser.name != null ? currentUser.name : "");
-                        editTextEmail.setText(currentUser.email != null ? currentUser.email : "");
-                        editTextPhone.setText(currentUser.phone != null ? currentUser.phone : "");
+                        editTextName.setText(currentUser.getName() != null ? currentUser.getName() : "");
+                        editTextEmail.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
+                        editTextPhone.setText(currentUser.getPhone() != null ? currentUser.getPhone() : "");
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         showLoading(false);
                         Toast.makeText(EditProfileActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                        currentUser = new UserProfile();
-                        currentUser.uid = firebaseUser.getUid();
-                        currentUser.email = firebaseUser.getEmail();
-                        currentUser.name = !TextUtils.isEmpty(firebaseUser.getDisplayName())
-                                ? firebaseUser.getDisplayName() : "";
-                        currentUser.phone = firebaseUser.getPhoneNumber();
-                        editTextName.setText(currentUser.name);
-                        editTextEmail.setText(currentUser.email);
-                        editTextPhone.setText(currentUser.phone != null ? currentUser.phone : "");
+                        currentUser = new User(
+                                firebaseUser.getUid(),
+                                !TextUtils.isEmpty(firebaseUser.getDisplayName())
+                                        ? firebaseUser.getDisplayName() : "",
+                                firebaseUser.getEmail(),
+                                firebaseUser.getPhoneNumber()
+                        );
+                        editTextName.setText(currentUser.getName());
+                        editTextEmail.setText(currentUser.getEmail());
+                        editTextPhone.setText(currentUser.getPhone() != null ? currentUser.getPhone() : "");
                     }
                 });
     }
@@ -138,10 +148,13 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
             return;
         }
-        currentUser.name = name;
-        currentUser.phone = TextUtils.isEmpty(phone) ? null : phone;
-        currentUser.email = firebaseUser.getEmail();
-        currentUser.updatedAt = System.currentTimeMillis();
+        currentUser.setName(name);
+        currentUser.setPhone(TextUtils.isEmpty(phone) ? null : phone);
+        currentUser.setEmail(firebaseUser.getEmail());
+        currentUser.setUpdatedAt(System.currentTimeMillis());
+        if (TextUtils.isEmpty(currentUser.getUid())) {
+            currentUser.setUid(firebaseUser.getUid());
+        }
 
         usersReference.child(firebaseUser.getUid())
                 .setValue(currentUser)
@@ -162,16 +175,5 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    private static class UserProfile {
-        public String uid;
-        public String name;
-        public String email;
-        public String phone;
-        public long updatedAt;
-
-        public UserProfile() {
-        }
     }
 }
