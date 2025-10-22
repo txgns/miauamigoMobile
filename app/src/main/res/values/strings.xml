@@ -75,4 +75,24 @@
     <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
     <string name="order_placed_success">Pedido realizado com sucesso!</string>
     <string name="network_error">Erro de conexão. Verifique sua internet.</string>
+    <string name="error_user_not_authenticated">Usuário não autenticado.</string>
+    <string name="error_name_required">Informe o nome.</string>
+    <string name="message_profile_updated">Perfil atualizado com sucesso!</string>
+    <string name="title_edit_profile">Editar Perfil</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_name">Nome</string>
+    <string name="label_phone_optional">Telefone (opcional)</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_back">Voltar</string>
+    <string name="title_edit_address">Editar Endereço</string>
+    <string name="label_street">Rua</string>
+    <string name="label_number">Número</string>
+    <string name="label_complement">Complemento</string>
+    <string name="label_neighborhood">Bairro</string>
+    <string name="label_city">Cidade</string>
+    <string name="label_state">Estado</string>
+    <string name="label_zip_code">CEP</string>
+    <string name="label_default_address">Endereço principal</string>
+    <string name="error_address_required_fields">Preencha todos os campos obrigatórios.</string>
+    <string name="message_address_saved">Endereço salvo com sucesso!</string>
 </resources>
