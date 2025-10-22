@@ -9,14 +9,24 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.models.Address;
-import com.miaumigo.app.services.FirebaseAuthService;
-import com.miaumigo.app.services.FirebaseDatabaseService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditAddressActivity extends AppCompatActivity {
@@ -31,8 +41,8 @@ public class EditAddressActivity extends AppCompatActivity {
     private CheckBox checkBoxDefault;
     private ProgressBar progressBar;
 
-    private FirebaseAuthService authService;
-    private FirebaseDatabaseService databaseService;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
     private Address currentAddress;
 
@@ -41,7 +51,7 @@ public class EditAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
 
-        initServices();
+        initFirebase();
         if (firebaseUser == null) {
             return;
         }
@@ -49,15 +59,15 @@ public class EditAddressActivity extends AppCompatActivity {
         loadAddress();
     }
 
-    private void initServices() {
-        authService = new FirebaseAuthService(this);
-        databaseService = new FirebaseDatabaseService(this);
-        firebaseUser = authService.getCurrentUser();
+    private void initFirebase() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
             Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     private void initViews() {
@@ -84,21 +94,32 @@ public class EditAddressActivity extends AppCompatActivity {
         }
 
         showLoading(true);
-        databaseService.getUserAddresses(firebaseUser.getUid(), new FirebaseDatabaseService.ListCallback<Address>() {
+        Query query = databaseReference.child("addresses")
+                .orderByChild("userId")
+                .equalTo(firebaseUser.getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(List<Address> data) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showLoading(false);
-                if (data != null && !data.isEmpty()) {
-                    currentAddress = getDefaultAddress(data);
+                List<Address> addresses = new ArrayList<>();
+                for (DataSnapshot addressSnapshot : snapshot.getChildren()) {
+                    Address address = addressSnapshot.getValue(Address.class);
+                    if (address != null) {
+                        address.setId(addressSnapshot.getKey());
+                        addresses.add(address);
+                    }
+                }
+                if (!addresses.isEmpty()) {
+                    currentAddress = getDefaultAddress(addresses);
                     populateFields(currentAddress);
                 }
             }
 
             @Override
-            public void onError(String error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 showLoading(false);
-                if (!TextUtils.isEmpty(error)) {
-                    Toast.makeText(EditAddressActivity.this, error, Toast.LENGTH_LONG).show();
+                if (!TextUtils.isEmpty(error.getMessage())) {
+                    Toast.makeText(EditAddressActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -163,39 +184,35 @@ public class EditAddressActivity extends AppCompatActivity {
         currentAddress.setZipCode(zip);
         currentAddress.setDefault(checkBoxDefault.isChecked());
 
-        FirebaseDatabaseService.DataCallback<Void> callback = new FirebaseDatabaseService.DataCallback<Void>() {
-            @Override
-            public void onSuccess(Void data) {
-                if (currentAddress.isDefault()) {
-                    databaseService.setDefaultAddress(firebaseUser.getUid(), currentAddress.getId(), new FirebaseDatabaseService.DataCallback<Void>() {
-                        @Override
-                        public void onSuccess(Void data) {
-                            handleAddressSaved();
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            showLoading(false);
-                            Toast.makeText(EditAddressActivity.this, error, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else {
-                    handleAddressSaved();
-                }
-            }
-
-            @Override
-            public void onError(String error) {
+        DatabaseReference addressesRef = databaseReference.child("addresses");
+        boolean isNewAddress = TextUtils.isEmpty(currentAddress.getId());
+        if (isNewAddress) {
+            String addressId = addressesRef.push().getKey();
+            if (TextUtils.isEmpty(addressId)) {
                 showLoading(false);
-                Toast.makeText(EditAddressActivity.this, error, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.network_error, Toast.LENGTH_LONG).show();
+                return;
             }
-        };
-
-        if (TextUtils.isEmpty(currentAddress.getId())) {
-            databaseService.createAddress(currentAddress, callback);
-        } else {
-            databaseService.updateAddress(currentAddress, callback);
+            currentAddress.setId(addressId);
         }
+        currentAddress.setUpdatedAt(System.currentTimeMillis());
+
+        addressesRef.child(currentAddress.getId()).setValue(currentAddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            if (currentAddress.isDefault()) {
+                                setDefaultAddress(currentAddress.getId());
+                            } else {
+                                handleAddressSaved();
+                            }
+                        } else {
+                            showLoading(false);
+                            Toast.makeText(EditAddressActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void handleAddressSaved() {
@@ -203,6 +220,43 @@ public class EditAddressActivity extends AppCompatActivity {
         Toast.makeText(EditAddressActivity.this, R.string.message_address_saved, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();
+    }
+
+    private void setDefaultAddress(String addressId) {
+        Query query = databaseReference.child("addresses")
+                .orderByChild("userId")
+                .equalTo(firebaseUser.getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Task<Void>> tasks = new ArrayList<>();
+                for (DataSnapshot addressSnapshot : snapshot.getChildren()) {
+                    boolean isTarget = addressSnapshot.getKey() != null && addressSnapshot.getKey().equals(addressId);
+                    tasks.add(addressSnapshot.getRef().child("isDefault").setValue(isTarget));
+                }
+
+                if (tasks.isEmpty()) {
+                    handleAddressSaved();
+                    return;
+                }
+
+                Task<Void> aggregate = Tasks.whenAll(tasks);
+                aggregate.addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        handleAddressSaved();
+                    } else {
+                        showLoading(false);
+                        Toast.makeText(EditAddressActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                showLoading(false);
+                Toast.makeText(EditAddressActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void showLoading(boolean show) {

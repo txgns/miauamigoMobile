@@ -8,13 +8,19 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.miaumigo.app.models.User;
-import com.miaumigo.app.services.FirebaseAuthService;
-import com.miaumigo.app.services.FirebaseDatabaseService;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -22,23 +28,30 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPhone;
     private ProgressBar progressBar;
-    private FirebaseAuthService authService;
-    private FirebaseDatabaseService databaseService;
-    private User currentUser;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference usersReference;
+    private FirebaseUser firebaseUser;
+    private UserProfile currentUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        initServices();
+        initFirebase();
         initViews();
         loadUserData();
     }
 
-    private void initServices() {
-        authService = new FirebaseAuthService(this);
-        databaseService = new FirebaseDatabaseService(this);
+    private void initFirebase() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser == null) {
+            Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        usersReference = FirebaseDatabase.getInstance().getReference().child("users");
     }
 
     private void initViews() {
@@ -57,39 +70,52 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void loadUserData() {
-        FirebaseUser firebaseUser = authService.getCurrentUser();
-        if (firebaseUser == null) {
-            Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
-            finish();
+        if (firebaseUser == null || usersReference == null) {
             return;
         }
-
         showLoading(true);
-        databaseService.getUser(firebaseUser.getUid(), new FirebaseDatabaseService.DataCallback<User>() {
-            @Override
-            public void onSuccess(User user) {
-                showLoading(false);
-                currentUser = user;
-                if (currentUser != null) {
-                    editTextName.setText(currentUser.getName());
-                    editTextEmail.setText(currentUser.getEmail());
-                    editTextPhone.setText(currentUser.getPhone());
-                }
-            }
+        usersReference.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        showLoading(false);
+                        currentUser = snapshot.getValue(UserProfile.class);
+                        if (currentUser == null) {
+                            currentUser = new UserProfile();
+                            currentUser.uid = firebaseUser.getUid();
+                            currentUser.email = firebaseUser.getEmail();
+                            currentUser.name = !TextUtils.isEmpty(firebaseUser.getDisplayName())
+                                    ? firebaseUser.getDisplayName() : "";
+                            currentUser.phone = firebaseUser.getPhoneNumber();
+                        } else {
+                            if (TextUtils.isEmpty(currentUser.uid)) {
+                                currentUser.uid = firebaseUser.getUid();
+                            }
+                            if (TextUtils.isEmpty(currentUser.email)) {
+                                currentUser.email = firebaseUser.getEmail();
+                            }
+                        }
 
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(EditProfileActivity.this, error, Toast.LENGTH_LONG).show();
-                currentUser = new User(firebaseUser.getUid(),
-                        !TextUtils.isEmpty(firebaseUser.getDisplayName()) ? firebaseUser.getDisplayName() : "",
-                        firebaseUser.getEmail(),
-                        firebaseUser.getPhoneNumber());
-                editTextEmail.setText(firebaseUser.getEmail());
-                editTextName.setText(currentUser.getName());
-                editTextPhone.setText(currentUser.getPhone());
-            }
-        });
+                        editTextName.setText(currentUser.name != null ? currentUser.name : "");
+                        editTextEmail.setText(currentUser.email != null ? currentUser.email : "");
+                        editTextPhone.setText(currentUser.phone != null ? currentUser.phone : "");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        showLoading(false);
+                        Toast.makeText(EditProfileActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        currentUser = new UserProfile();
+                        currentUser.uid = firebaseUser.getUid();
+                        currentUser.email = firebaseUser.getEmail();
+                        currentUser.name = !TextUtils.isEmpty(firebaseUser.getDisplayName())
+                                ? firebaseUser.getDisplayName() : "";
+                        currentUser.phone = firebaseUser.getPhoneNumber();
+                        editTextName.setText(currentUser.name);
+                        editTextEmail.setText(currentUser.email);
+                        editTextPhone.setText(currentUser.phone != null ? currentUser.phone : "");
+                    }
+                });
     }
 
     private void saveProfile() {
@@ -107,27 +133,45 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         showLoading(true);
-        currentUser.setName(name);
-        currentUser.setPhone(TextUtils.isEmpty(phone) ? null : phone);
+        if (firebaseUser == null || usersReference == null) {
+            showLoading(false);
+            Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
+            return;
+        }
+        currentUser.name = name;
+        currentUser.phone = TextUtils.isEmpty(phone) ? null : phone;
+        currentUser.email = firebaseUser.getEmail();
+        currentUser.updatedAt = System.currentTimeMillis();
 
-        databaseService.updateUser(currentUser, new FirebaseDatabaseService.DataCallback<Void>() {
-            @Override
-            public void onSuccess(Void data) {
-                showLoading(false);
-                Toast.makeText(EditProfileActivity.this, R.string.message_profile_updated, Toast.LENGTH_SHORT).show();
-                setResult(RESULT_OK);
-                finish();
-            }
-
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(EditProfileActivity.this, error, Toast.LENGTH_LONG).show();
-            }
-        });
+        usersReference.child(firebaseUser.getUid())
+                .setValue(currentUser)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        showLoading(false);
+                        if (task.isSuccessful()) {
+                            Toast.makeText(EditProfileActivity.this, R.string.message_profile_updated, Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+                            Toast.makeText(EditProfileActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private static class UserProfile {
+        public String uid;
+        public String name;
+        public String email;
+        public String phone;
+        public long updatedAt;
+
+        public UserProfile() {
+        }
     }
 }
