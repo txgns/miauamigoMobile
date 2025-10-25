@@ -15,12 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.miaumigo.app.R;
 import com.miaumigo.app.adapters.CartAdapter;
 import com.miaumigo.app.models.CartItem;
-import com.miaumigo.app.services.FirebaseAuthService;
-import com.miaumigo.app.services.FirebaseDatabaseService;
+import com.miaumigo.app.utils.CartManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,97 +30,82 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
     private TextView textViewTotal;
     private Button buttonCheckout;
     private ProgressBar progressBar;
+    
     private CartAdapter cartAdapter;
-    private FirebaseDatabaseService databaseService;
-    private FirebaseAuthService authService;
     private List<CartItem> cartItems;
-    private double totalAmount = 0.0;
+    private CartManager cartManager;
+    private double totalPrice = 0.0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         
-        initializeViews(view);
+        initViews(view);
         setupRecyclerView();
+        setupClickListeners();
         loadCartItems();
         
         return view;
     }
 
-    private void initializeViews(View view) {
+    private void initViews(View view) {
         recyclerViewCart = view.findViewById(R.id.recyclerViewCart);
         textViewEmpty = view.findViewById(R.id.textViewEmpty);
         textViewTotal = view.findViewById(R.id.textViewTotal);
         buttonCheckout = view.findViewById(R.id.buttonCheckout);
         progressBar = view.findViewById(R.id.progressBar);
-        
-        databaseService = new FirebaseDatabaseService(getContext());
-        authService = new FirebaseAuthService(getContext());
-        cartItems = new ArrayList<>();
-        
-        buttonCheckout.setOnClickListener(v -> proceedToCheckout());
     }
 
     private void setupRecyclerView() {
+        cartItems = new ArrayList<>();
+        cartManager = CartManager.getInstance(getContext());
         cartAdapter = new CartAdapter(cartItems, this);
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewCart.setAdapter(cartAdapter);
     }
 
+    private void setupClickListeners() {
+        buttonCheckout.setOnClickListener(v -> proceedToCheckout());
+    }
+
     private void loadCartItems() {
-        try {
-            FirebaseUser currentUser = authService.getCurrentUser();
-            if (currentUser == null) {
-                textViewEmpty.setVisibility(View.VISIBLE);
-                return;
-            }
-
-            showLoading(true);
-            
-            databaseService.getCart(currentUser.getUid(), new FirebaseDatabaseService.ListCallback<CartItem>() {
-                @Override
-                public void onSuccess(List<CartItem> items) {
-                    showLoading(false);
-                    cartItems.clear();
-                    if (items != null) {
-                        cartItems.addAll(items);
-                    }
-                    cartAdapter.notifyDataSetChanged();
-                    calculateTotal();
-                    
-                    if (cartItems.isEmpty()) {
-                        textViewEmpty.setVisibility(View.VISIBLE);
-                        buttonCheckout.setVisibility(View.GONE);
-                    } else {
-                        textViewEmpty.setVisibility(View.GONE);
-                        buttonCheckout.setVisibility(View.VISIBLE);
-                    }
-                }
-
-                @Override
-                public void onError(String error) {
-                    showLoading(false);
-                    textViewEmpty.setVisibility(View.VISIBLE);
-                }
-            });
-        } catch (Exception e) {
-            showLoading(false);
-            textViewEmpty.setVisibility(View.VISIBLE);
-        }
+        showLoading(true);
+        
+        // Carregar itens do carrinho usando CartManager
+        cartItems.clear();
+        cartItems.addAll(cartManager.getCartItems());
+        
+        cartAdapter.notifyDataSetChanged();
+        calculateTotal();
+        updateEmptyState();
+        
+        showLoading(false);
     }
 
     private void calculateTotal() {
-        totalAmount = 0.0;
+        totalPrice = 0.0;
         for (CartItem item : cartItems) {
-            totalAmount += item.getTotalPrice();
+            totalPrice += item.getPrice() * item.getQuantity();
         }
-        textViewTotal.setText(String.format("Total: R$ %.2f", totalAmount));
+        
+        textViewTotal.setText(String.format("R$ %.2f", totalPrice));
+    }
+
+    private void updateEmptyState() {
+        if (cartItems.isEmpty()) {
+            textViewEmpty.setVisibility(View.VISIBLE);
+            recyclerViewCart.setVisibility(View.GONE);
+            buttonCheckout.setEnabled(false);
+        } else {
+            textViewEmpty.setVisibility(View.GONE);
+            recyclerViewCart.setVisibility(View.VISIBLE);
+            buttonCheckout.setEnabled(true);
+        }
     }
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        recyclerViewCart.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     private void proceedToCheckout() {
@@ -131,55 +114,21 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
             return;
         }
         
-        // TODO: Implement checkout process
-        Toast.makeText(getContext(), "Funcionalidade de checkout em desenvolvimento", Toast.LENGTH_LONG).show();
+        // Implementar lógica de checkout
+        Toast.makeText(getContext(), "Redirecionando para checkout...", Toast.LENGTH_SHORT).show();
+        // Aqui você implementaria a navegação para a tela de checkout
     }
 
     @Override
-    public void onQuantityChanged(CartItem cartItem, int newQuantity) {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        if (currentUser == null) return;
-
-        databaseService.updateCartItem(currentUser.getUid(), cartItem.getProductId(), newQuantity, 
-            new FirebaseDatabaseService.DataCallback<Void>() {
-                @Override
-                public void onSuccess(Void data) {
-                    cartItem.setQuantity(newQuantity);
-                    cartAdapter.notifyDataSetChanged();
-                    calculateTotal();
-                }
-
-                @Override
-                public void onError(String error) {
-                    Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                }
-            });
+    public void onRemoveItem(CartItem item) {
+        cartManager.removeFromCart(item.getId());
+        loadCartItems(); // Recarregar itens do carrinho
+        Toast.makeText(getContext(), "Item removido do carrinho", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onRemoveItem(CartItem cartItem) {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        if (currentUser == null) return;
-
-        databaseService.removeFromCart(currentUser.getUid(), cartItem.getProductId(), 
-            new FirebaseDatabaseService.DataCallback<Void>() {
-                @Override
-                public void onSuccess(Void data) {
-                    cartItems.remove(cartItem);
-                    cartAdapter.notifyDataSetChanged();
-                    calculateTotal();
-                    
-                    if (cartItems.isEmpty()) {
-                        textViewEmpty.setVisibility(View.VISIBLE);
-                        buttonCheckout.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onError(String error) {
-                    Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                }
-            });
+    public void onUpdateQuantity(CartItem item, int newQuantity) {
+        cartManager.updateQuantity(item.getId(), newQuantity);
+        loadCartItems(); // Recarregar itens do carrinho
     }
 }
-

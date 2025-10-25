@@ -652,6 +652,8 @@
     <color name="background_material_light">@color/material_grey_50</color>
     <color name="black">#000000</color>
     <color name="border_light">#E0E0E0</color>
+    <color name="bottom_nav_item_color">#757575</color>
+    <color name="bottom_nav_item_selected">#3498db</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -2018,6 +2020,8 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns2:g example="Mail" id="application_name">%s</ns2:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="action_back">Voltar</string>
+    <string name="action_save">Salvar</string>
     <string name="add_to_cart">Adicionar ao Carrinho</string>
     <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
@@ -2077,7 +2081,17 @@
     <string description="Screen reader announcement for when a checkbox is on error. [CHAR LIMIT=NONE]" name="error_a11y_label">
     Error: invalid
   </string>
+    <string name="error_address_required_fields">Preencha todos os campos obrigatórios.</string>
+    <string name="error_email_required">E-mail é obrigatório</string>
     <string name="error_icon_content_description">Error</string>
+    <string name="error_login_failed">Falha no login</string>
+    <string name="error_name_required">Informe o nome.</string>
+    <string name="error_password_min_length">Senha deve ter pelo menos 6 caracteres</string>
+    <string name="error_password_required">Senha é obrigatória</string>
+    <string name="error_passwords_do_not_match">As senhas não coincidem</string>
+    <string name="error_product_not_found">Produto não encontrado</string>
+    <string name="error_registration_failed">Falha no cadastro</string>
+    <string name="error_user_not_authenticated">Usuário não autenticado.</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
@@ -2085,6 +2099,7 @@
     <string name="fallback_menu_item_open_in_browser">Open in browser</string>
     <string name="fallback_menu_item_share_link">Share link</string>
     <string name="featured_products">Produtos em Destaque</string>
+    <string name="firebase_database_url" translatable="false">https://miaumigo-686d4-default-rtdb.firebaseio.com</string>
     <string name="forgot_password">Esqueci minha senha</string>
     <string name="gcm_defaultSenderId" translatable="false">30273334005</string>
     <string name="google_api_key" translatable="false">AIzaSyBkvLlE1vat4rRHE2ZL0szxoclxuU1Vk8U</string>
@@ -2097,6 +2112,17 @@
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="in_stock">Em estoque</string>
     <string name="item_view_role_description">Tab</string>
+    <string name="label_city">Cidade</string>
+    <string name="label_complement">Complemento</string>
+    <string name="label_default_address">Endereço principal</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_name">Nome</string>
+    <string name="label_neighborhood">Bairro</string>
+    <string name="label_number">Número</string>
+    <string name="label_phone_optional">Telefone (opcional)</string>
+    <string name="label_state">Estado</string>
+    <string name="label_street">Rua</string>
+    <string name="label_zip_code">CEP</string>
     <string name="loading">Carregando...</string>
     <string name="login">Entrar</string>
     <string name="login_error">Erro ao fazer login. Verifique suas credenciais.</string>
@@ -2140,6 +2166,10 @@
     <string description="Suffix for time in 12-hour standard, after noon. [CHAR_LIMIT=2]" name="material_timepicker_pm">PM</string>
     <string description="Title for the dialog with a time picker. [CHAR_LIMIT=32]" name="material_timepicker_select_time">Select time</string>
     <string name="material_timepicker_text_input_mode_description">Switch to text input mode for the time input.</string>
+    <string name="message_address_saved">Endereço salvo com sucesso!</string>
+    <string name="message_product_added_to_cart">Produto adicionado ao carrinho!</string>
+    <string name="message_profile_updated">Perfil atualizado com sucesso!</string>
+    <string name="message_registration_successful">Cadastro realizado com sucesso!</string>
     <string description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]" name="mtrl_badge_numberless_content_description">New notification</string>
     <string name="mtrl_checkbox_button_icon_path_checked" translatable="false">M14,18.2 11.4,15.6 10,17 14,21 22,13 20.6,11.6z</string>
     <string name="mtrl_checkbox_button_icon_path_group_name" translatable="false">icon</string>
@@ -2233,6 +2263,7 @@
     <string name="phone">Telefone</string>
     <string name="price">Preço</string>
     <string name="processing">Processando</string>
+    <string name="product_details">Detalhes do Produto</string>
     <string name="products">Produtos</string>
     <string name="profile">Perfil</string>
     <string name="project_id" translatable="false">miaumigo-686d4</string>
@@ -2255,6 +2286,8 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="success">Sucesso</string>
     <string name="title_dashboard">Painel</string>
+    <string name="title_edit_address">Editar Endereço</string>
+    <string name="title_edit_profile">Editar Perfil</string>
     <string name="title_home">Início</string>
     <string name="title_notifications">Notificações</string>
     <string name="total">Total</string>

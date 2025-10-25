@@ -1,6 +1,7 @@
 package com.miaumigo.app;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -8,166 +9,149 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.miaumigo.app.models.CartItem;
-import com.miaumigo.app.models.Product;
-import com.miaumigo.app.services.FirebaseAuthService;
-import com.miaumigo.app.services.FirebaseDatabaseService;
+import com.miaumigo.app.utils.CartManager;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView imageViewProduct;
-    private TextView textViewName;
-    private TextView textViewPrice;
-    private TextView textViewDescription;
-    private TextView textViewRating;
-    private TextView textViewStock;
+    private TextView textViewProductName;
+    private TextView textViewProductDescription;
+    private TextView textViewProductPrice;
     private Button buttonAddToCart;
-    private FloatingActionButton fabBack;
     private ProgressBar progressBar;
-    
-    private FirebaseDatabaseService databaseService;
-    private FirebaseAuthService authService;
-    private Product product;
+
+    private FirebaseAuth firebaseAuth;
+    private String productId;
+    private String productName;
+    private String productDescription;
+    private String productPrice;
+    private String productImageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        initializeViews();
-        setupClickListeners();
-        loadProductDetails();
+        initFirebase();
+        initViews();
+        loadProductData();
     }
 
-    private void initializeViews() {
+    private void initFirebase() {
+        FirebaseApp app = FirebaseApp.initializeApp(this);
+        if (app == null && FirebaseApp.getApps(this).isEmpty()) {
+            Toast.makeText(this, R.string.network_error, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    private void initViews() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.product_details);
+        }
+
         imageViewProduct = findViewById(R.id.imageViewProduct);
-        textViewName = findViewById(R.id.textViewName);
-        textViewPrice = findViewById(R.id.textViewPrice);
-        textViewDescription = findViewById(R.id.textViewDescription);
-        textViewRating = findViewById(R.id.textViewRating);
-        textViewStock = findViewById(R.id.textViewStock);
+        textViewProductName = findViewById(R.id.textViewProductName);
+        textViewProductDescription = findViewById(R.id.textViewProductDescription);
+        textViewProductPrice = findViewById(R.id.textViewProductPrice);
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
-        fabBack = findViewById(R.id.fabBack);
         progressBar = findViewById(R.id.progressBar);
-        
-        databaseService = new FirebaseDatabaseService(this);
-        authService = new FirebaseAuthService(this);
-    }
 
-    private void setupClickListeners() {
-        fabBack.setOnClickListener(v -> finish());
-        
         buttonAddToCart.setOnClickListener(v -> addToCart());
     }
 
-    private void loadProductDetails() {
-        String productId = getIntent().getStringExtra("product_id");
-        if (productId == null) {
-            Toast.makeText(this, "Produto não encontrado", Toast.LENGTH_SHORT).show();
+    private void loadProductData() {
+        // Recupera os dados do produto passados via Intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            productId = extras.getString("product_id");
+            productName = extras.getString("product_name");
+            productDescription = extras.getString("product_description");
+            productPrice = extras.getString("product_price");
+            productImageUrl = extras.getString("product_image");
+
+            displayProductData();
+        } else {
+            Toast.makeText(this, R.string.error_product_not_found, Toast.LENGTH_LONG).show();
             finish();
+        }
+    }
+
+    private void displayProductData() {
+        if (productName != null) {
+            textViewProductName.setText(productName);
+        }
+        
+        if (productDescription != null) {
+            textViewProductDescription.setText(productDescription);
+        }
+        
+        if (productPrice != null) {
+            textViewProductPrice.setText(productPrice);
+        }
+        
+        if (productImageUrl != null && !productImageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(productImageUrl)
+                    .placeholder(R.drawable.ic_product_placeholder)
+                    .error(R.drawable.ic_product_placeholder)
+                    .into(imageViewProduct);
+        }
+    }
+
+    private void addToCart() {
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
             return;
         }
 
         showLoading(true);
         
-        databaseService.getProduct(productId, new FirebaseDatabaseService.DataCallback<Product>() {
-            @Override
-            public void onSuccess(Product productData) {
-                showLoading(false);
-                product = productData;
-                displayProductDetails();
-            }
-
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(ProductDetailActivity.this, error, Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
-    }
-
-    private void displayProductDetails() {
-        if (product == null) return;
-
-        textViewName.setText(product.getName());
-        textViewPrice.setText(product.getFormattedPrice());
-        textViewDescription.setText(product.getDescription());
-        textViewRating.setText(String.format("%.1f ⭐ (%d avaliações)", product.getRating(), product.getReviewCount()));
-
-        // Stock status
-        if (product.isInStock()) {
-            textViewStock.setText("Em estoque");
-            textViewStock.setTextColor(getColor(R.color.success));
-            buttonAddToCart.setEnabled(true);
-        } else {
-            textViewStock.setText("Fora de estoque");
-            textViewStock.setTextColor(getColor(R.color.error));
-            buttonAddToCart.setEnabled(false);
-        }
-
-        // Load product image
-        if (product.getImages() != null && !product.getImages().isEmpty()) {
-            Glide.with(this)
-                    .load(product.getImages().get(0))
-                    .placeholder(R.drawable.ic_product_placeholder)
-                    .error(R.drawable.ic_product_placeholder)
-                    .into(imageViewProduct);
-        } else {
-            imageViewProduct.setImageResource(R.drawable.ic_product_placeholder);
-        }
-    }
-
-    private void addToCart() {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        if (currentUser == null) {
-            Toast.makeText(this, "Faça login para adicionar produtos ao carrinho", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (product == null || !product.isInStock()) {
-            Toast.makeText(this, "Produto não disponível", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String productImage = (product.getImages() != null && !product.getImages().isEmpty()) 
-            ? product.getImages().get(0) : null;
-        
+        // Adicionar produto ao carrinho usando CartManager
+        CartManager cartManager = CartManager.getInstance(this);
         CartItem cartItem = new CartItem(
-            product.getId(),
-            product.getName(),
-            productImage,
-            product.getPrice(),
-            1
+            productId,
+            productName,
+            Double.parseDouble(productPrice.replace("R$ ", "").replace(",", ".")),
+            1,
+            productImageUrl
         );
-
-        databaseService.addToCart(currentUser.getUid(), cartItem, new FirebaseDatabaseService.DataCallback<Void>() {
-            @Override
-            public void onSuccess(Void data) {
-                Toast.makeText(ProductDetailActivity.this, getString(R.string.add_to_cart_success), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(String error) {
-                Toast.makeText(ProductDetailActivity.this, error, Toast.LENGTH_LONG).show();
-            }
-        });
+        
+        cartManager.addToCart(cartItem);
+        
+        buttonAddToCart.postDelayed(() -> {
+            showLoading(false);
+            Toast.makeText(ProductDetailActivity.this, R.string.message_product_added_to_cart, Toast.LENGTH_SHORT).show();
+        }, 1000);
     }
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        imageViewProduct.setVisibility(show ? View.GONE : View.VISIBLE);
-        textViewName.setVisibility(show ? View.GONE : View.VISIBLE);
-        textViewPrice.setVisibility(show ? View.GONE : View.VISIBLE);
-        textViewDescription.setVisibility(show ? View.GONE : View.VISIBLE);
-        textViewRating.setVisibility(show ? View.GONE : View.VISIBLE);
-        textViewStock.setVisibility(show ? View.GONE : View.VISIBLE);
-        buttonAddToCart.setVisibility(show ? View.GONE : View.VISIBLE);
+        buttonAddToCart.setEnabled(!show);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
-

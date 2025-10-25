@@ -5,14 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.textfield.TextInputEditText;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -23,43 +23,39 @@ public final class ActivityEditProfileBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final Button buttonCancel;
+  public final Button buttonBackProfile;
 
   @NonNull
-  public final Button buttonChangeAvatar;
+  public final Button buttonSaveProfile;
 
   @NonNull
-  public final Button buttonSave;
+  public final EditText editTextEmail;
 
   @NonNull
-  public final TextInputEditText editTextEmail;
+  public final EditText editTextName;
 
   @NonNull
-  public final TextInputEditText editTextName;
-
-  @NonNull
-  public final TextInputEditText editTextPhone;
-
-  @NonNull
-  public final ImageView imageViewAvatar;
+  public final EditText editTextPhone;
 
   @NonNull
   public final ProgressBar progressBar;
 
-  private ActivityEditProfileBinding(@NonNull ScrollView rootView, @NonNull Button buttonCancel,
-      @NonNull Button buttonChangeAvatar, @NonNull Button buttonSave,
-      @NonNull TextInputEditText editTextEmail, @NonNull TextInputEditText editTextName,
-      @NonNull TextInputEditText editTextPhone, @NonNull ImageView imageViewAvatar,
-      @NonNull ProgressBar progressBar) {
+  @NonNull
+  public final TextView textTitle;
+
+  private ActivityEditProfileBinding(@NonNull ScrollView rootView,
+      @NonNull Button buttonBackProfile, @NonNull Button buttonSaveProfile,
+      @NonNull EditText editTextEmail, @NonNull EditText editTextName,
+      @NonNull EditText editTextPhone, @NonNull ProgressBar progressBar,
+      @NonNull TextView textTitle) {
     this.rootView = rootView;
-    this.buttonCancel = buttonCancel;
-    this.buttonChangeAvatar = buttonChangeAvatar;
-    this.buttonSave = buttonSave;
+    this.buttonBackProfile = buttonBackProfile;
+    this.buttonSaveProfile = buttonSaveProfile;
     this.editTextEmail = editTextEmail;
     this.editTextName = editTextName;
     this.editTextPhone = editTextPhone;
-    this.imageViewAvatar = imageViewAvatar;
     this.progressBar = progressBar;
+    this.textTitle = textTitle;
   }
 
   @Override
@@ -89,45 +85,33 @@ public final class ActivityEditProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.buttonCancel;
-      Button buttonCancel = ViewBindings.findChildViewById(rootView, id);
-      if (buttonCancel == null) {
+      id = R.id.buttonBackProfile;
+      Button buttonBackProfile = ViewBindings.findChildViewById(rootView, id);
+      if (buttonBackProfile == null) {
         break missingId;
       }
 
-      id = R.id.buttonChangeAvatar;
-      Button buttonChangeAvatar = ViewBindings.findChildViewById(rootView, id);
-      if (buttonChangeAvatar == null) {
-        break missingId;
-      }
-
-      id = R.id.buttonSave;
-      Button buttonSave = ViewBindings.findChildViewById(rootView, id);
-      if (buttonSave == null) {
+      id = R.id.buttonSaveProfile;
+      Button buttonSaveProfile = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSaveProfile == null) {
         break missingId;
       }
 
       id = R.id.editTextEmail;
-      TextInputEditText editTextEmail = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextEmail = ViewBindings.findChildViewById(rootView, id);
       if (editTextEmail == null) {
         break missingId;
       }
 
       id = R.id.editTextName;
-      TextInputEditText editTextName = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextName = ViewBindings.findChildViewById(rootView, id);
       if (editTextName == null) {
         break missingId;
       }
 
       id = R.id.editTextPhone;
-      TextInputEditText editTextPhone = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextPhone = ViewBindings.findChildViewById(rootView, id);
       if (editTextPhone == null) {
-        break missingId;
-      }
-
-      id = R.id.imageViewAvatar;
-      ImageView imageViewAvatar = ViewBindings.findChildViewById(rootView, id);
-      if (imageViewAvatar == null) {
         break missingId;
       }
 
@@ -137,8 +121,14 @@ public final class ActivityEditProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityEditProfileBinding((ScrollView) rootView, buttonCancel, buttonChangeAvatar,
-          buttonSave, editTextEmail, editTextName, editTextPhone, imageViewAvatar, progressBar);
+      id = R.id.textTitle;
+      TextView textTitle = ViewBindings.findChildViewById(rootView, id);
+      if (textTitle == null) {
+        break missingId;
+      }
+
+      return new ActivityEditProfileBinding((ScrollView) rootView, buttonBackProfile,
+          buttonSaveProfile, editTextEmail, editTextName, editTextPhone, progressBar, textTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

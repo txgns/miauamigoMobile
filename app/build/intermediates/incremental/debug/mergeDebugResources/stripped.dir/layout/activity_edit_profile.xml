@@ -1,168 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:fillViewport="true"
+    android:padding="16dp"
     tools:context=".EditProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
-        <!-- Header -->
         <TextView
+            android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="32dp"
-            android:text="Editar Perfil"
-            android:textColor="@color/text_primary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:text="@string/title_edit_profile"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_marginBottom="16dp" />
 
-        <!-- Avatar Section -->
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/label_email"
+            android:inputType="textEmailAddress"
+            android:enabled="false"
+            android:focusable="false" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/label_phone_optional"
+            android:inputType="phone" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageViewAvatar"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/circle_background"
-                android:contentDescription="Profile Picture"
-                android:padding="20dp"
-                android:src="@drawable/ic_person"
-                app:tint="@color/primary" />
+            android:layout_marginTop="24dp"
+            android:gravity="end"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonChangeAvatar"
+                android:id="@+id/buttonBackProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alterar Foto"
-                android:textSize="14sp"
-                style="@style/ButtonSecondary" />
+                android:text="@string/action_back" />
 
-        </LinearLayout>
-
-        <!-- Profile Information Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/buttonSaveProfile"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="Informações Pessoais"
-                    android:textColor="@color/text_primary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <!-- Name Field -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Nome completo"
-                    app:boxStrokeColor="@color/primary"
-                    app:hintTextColor="@color/primary">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:textColor="@color/text_primary" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Email Field -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Email"
-                    app:boxStrokeColor="@color/primary"
-                    app:hintTextColor="@color/primary">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:textColor="@color/text_primary" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Phone Field -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Telefone"
-                    app:boxStrokeColor="@color/primary"
-                    app:hintTextColor="@color/primary">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:textColor="@color/text_primary" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Action Buttons -->
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:text="Salvar Alterações"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            style="@style/ButtonPrimary" />
-
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Cancelar"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            style="@style/ButtonSecondary" />
+                android:layout_marginStart="12dp"
+                android:text="@string/action_save" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:indeterminateTint="@color/primary"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
             android:visibility="gone" />
 
     </LinearLayout>
-
 </ScrollView>

@@ -6,6 +6,8 @@
     <color name="background">#f4f6f9</color>
     <color name="black">#000000</color>
     <color name="border_light">#E0E0E0</color>
+    <color name="bottom_nav_item_color">#757575</color>
+    <color name="bottom_nav_item_selected">#3498db</color>
     <color name="error">#c0392b</color>
     <color name="ic_launcher_background">#DC973D</color>
     <color name="info">#3498db</color>
@@ -23,6 +25,8 @@
     <color name="text_secondary">#757575</color>
     <color name="warning">#f1c40f</color>
     <color name="white">#FFFFFF</color>
+    <string name="action_back">Voltar</string>
+    <string name="action_save">Salvar</string>
     <string name="add_to_cart">Adicionar ao Carrinho</string>
     <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
     <string name="app_name">MiauMigo</string>
@@ -40,7 +44,18 @@
     <string name="edit">Editar</string>
     <string name="email">E-mail</string>
     <string name="error">Erro</string>
+    <string name="error_address_required_fields">Preencha todos os campos obrigatórios.</string>
+    <string name="error_email_required">E-mail é obrigatório</string>
+    <string name="error_login_failed">Falha no login</string>
+    <string name="error_name_required">Informe o nome.</string>
+    <string name="error_password_min_length">Senha deve ter pelo menos 6 caracteres</string>
+    <string name="error_password_required">Senha é obrigatória</string>
+    <string name="error_passwords_do_not_match">As senhas não coincidem</string>
+    <string name="error_product_not_found">Produto não encontrado</string>
+    <string name="error_registration_failed">Falha no cadastro</string>
+    <string name="error_user_not_authenticated">Usuário não autenticado.</string>
     <string name="featured_products">Produtos em Destaque</string>
+    <string name="firebase_database_url" translatable="false">https://miaumigo-686d4-default-rtdb.firebaseio.com</string>
     <string name="forgot_password">Esqueci minha senha</string>
     <string name="gcm_defaultSenderId" translatable="false">30273334005</string>
     <string name="google_api_key" translatable="false">AIzaSyBkvLlE1vat4rRHE2ZL0szxoclxuU1Vk8U</string>
@@ -50,11 +65,26 @@
     <string name="has_account">Já tem uma conta? Entre</string>
     <string name="home">Início</string>
     <string name="in_stock">Em estoque</string>
+    <string name="label_city">Cidade</string>
+    <string name="label_complement">Complemento</string>
+    <string name="label_default_address">Endereço principal</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_name">Nome</string>
+    <string name="label_neighborhood">Bairro</string>
+    <string name="label_number">Número</string>
+    <string name="label_phone_optional">Telefone (opcional)</string>
+    <string name="label_state">Estado</string>
+    <string name="label_street">Rua</string>
+    <string name="label_zip_code">CEP</string>
     <string name="loading">Carregando...</string>
     <string name="login">Entrar</string>
     <string name="login_error">Erro ao fazer login. Verifique suas credenciais.</string>
     <string name="login_success">Login realizado com sucesso!</string>
     <string name="logout">Sair</string>
+    <string name="message_address_saved">Endereço salvo com sucesso!</string>
+    <string name="message_product_added_to_cart">Produto adicionado ao carrinho!</string>
+    <string name="message_profile_updated">Perfil atualizado com sucesso!</string>
+    <string name="message_registration_successful">Cadastro realizado com sucesso!</string>
     <string name="name">Nome</string>
     <string name="network_error">Erro de conexão. Verifique sua internet.</string>
     <string name="no_account">Não tem uma conta? Cadastre-se</string>
@@ -73,6 +103,7 @@
     <string name="phone">Telefone</string>
     <string name="price">Preço</string>
     <string name="processing">Processando</string>
+    <string name="product_details">Detalhes do Produto</string>
     <string name="products">Produtos</string>
     <string name="profile">Perfil</string>
     <string name="project_id" translatable="false">miaumigo-686d4</string>
@@ -86,6 +117,8 @@
     <string name="shipped">Enviado</string>
     <string name="success">Sucesso</string>
     <string name="title_dashboard">Painel</string>
+    <string name="title_edit_address">Editar Endereço</string>
+    <string name="title_edit_profile">Editar Perfil</string>
     <string name="title_home">Início</string>
     <string name="title_notifications">Notificações</string>
     <string name="total">Total</string>

@@ -21,6 +21,9 @@ public final class ItemProductBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
+  public final ImageView imageViewFavorite;
+
+  @NonNull
   public final ImageView imageViewProduct;
 
   @NonNull
@@ -36,10 +39,11 @@ public final class ItemProductBinding implements ViewBinding {
   public final TextView textViewStock;
 
   private ItemProductBinding(@NonNull MaterialCardView rootView,
-      @NonNull ImageView imageViewProduct, @NonNull TextView textViewName,
-      @NonNull TextView textViewPrice, @NonNull TextView textViewRating,
-      @NonNull TextView textViewStock) {
+      @NonNull ImageView imageViewFavorite, @NonNull ImageView imageViewProduct,
+      @NonNull TextView textViewName, @NonNull TextView textViewPrice,
+      @NonNull TextView textViewRating, @NonNull TextView textViewStock) {
     this.rootView = rootView;
+    this.imageViewFavorite = imageViewFavorite;
     this.imageViewProduct = imageViewProduct;
     this.textViewName = textViewName;
     this.textViewPrice = textViewPrice;
@@ -74,6 +78,12 @@ public final class ItemProductBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.imageViewFavorite;
+      ImageView imageViewFavorite = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewFavorite == null) {
+        break missingId;
+      }
+
       id = R.id.imageViewProduct;
       ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
       if (imageViewProduct == null) {
@@ -104,8 +114,8 @@ public final class ItemProductBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemProductBinding((MaterialCardView) rootView, imageViewProduct, textViewName,
-          textViewPrice, textViewRating, textViewStock);
+      return new ItemProductBinding((MaterialCardView) rootView, imageViewFavorite,
+          imageViewProduct, textViewName, textViewPrice, textViewRating, textViewStock);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

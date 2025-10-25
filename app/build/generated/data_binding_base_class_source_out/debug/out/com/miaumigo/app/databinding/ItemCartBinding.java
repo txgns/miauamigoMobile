@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -22,13 +21,13 @@ public final class ItemCartBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final MaterialButton buttonDecrease;
+  public final TextView buttonDecrease;
 
   @NonNull
-  public final MaterialButton buttonIncrease;
+  public final TextView buttonIncrease;
 
   @NonNull
-  public final MaterialButton buttonRemove;
+  public final TextView buttonRemove;
 
   @NonNull
   public final ImageView imageViewProduct;
@@ -42,11 +41,14 @@ public final class ItemCartBinding implements ViewBinding {
   @NonNull
   public final TextView textViewQuantity;
 
-  private ItemCartBinding(@NonNull MaterialCardView rootView,
-      @NonNull MaterialButton buttonDecrease, @NonNull MaterialButton buttonIncrease,
-      @NonNull MaterialButton buttonRemove, @NonNull ImageView imageViewProduct,
-      @NonNull TextView textViewName, @NonNull TextView textViewPrice,
-      @NonNull TextView textViewQuantity) {
+  @NonNull
+  public final TextView textViewTotal;
+
+  private ItemCartBinding(@NonNull MaterialCardView rootView, @NonNull TextView buttonDecrease,
+      @NonNull TextView buttonIncrease, @NonNull TextView buttonRemove,
+      @NonNull ImageView imageViewProduct, @NonNull TextView textViewName,
+      @NonNull TextView textViewPrice, @NonNull TextView textViewQuantity,
+      @NonNull TextView textViewTotal) {
     this.rootView = rootView;
     this.buttonDecrease = buttonDecrease;
     this.buttonIncrease = buttonIncrease;
@@ -55,6 +57,7 @@ public final class ItemCartBinding implements ViewBinding {
     this.textViewName = textViewName;
     this.textViewPrice = textViewPrice;
     this.textViewQuantity = textViewQuantity;
+    this.textViewTotal = textViewTotal;
   }
 
   @Override
@@ -85,19 +88,19 @@ public final class ItemCartBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.buttonDecrease;
-      MaterialButton buttonDecrease = ViewBindings.findChildViewById(rootView, id);
+      TextView buttonDecrease = ViewBindings.findChildViewById(rootView, id);
       if (buttonDecrease == null) {
         break missingId;
       }
 
       id = R.id.buttonIncrease;
-      MaterialButton buttonIncrease = ViewBindings.findChildViewById(rootView, id);
+      TextView buttonIncrease = ViewBindings.findChildViewById(rootView, id);
       if (buttonIncrease == null) {
         break missingId;
       }
 
       id = R.id.buttonRemove;
-      MaterialButton buttonRemove = ViewBindings.findChildViewById(rootView, id);
+      TextView buttonRemove = ViewBindings.findChildViewById(rootView, id);
       if (buttonRemove == null) {
         break missingId;
       }
@@ -126,8 +129,15 @@ public final class ItemCartBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewTotal;
+      TextView textViewTotal = ViewBindings.findChildViewById(rootView, id);
+      if (textViewTotal == null) {
+        break missingId;
+      }
+
       return new ItemCartBinding((MaterialCardView) rootView, buttonDecrease, buttonIncrease,
-          buttonRemove, imageViewProduct, textViewName, textViewPrice, textViewQuantity);
+          buttonRemove, imageViewProduct, textViewName, textViewPrice, textViewQuantity,
+          textViewTotal);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

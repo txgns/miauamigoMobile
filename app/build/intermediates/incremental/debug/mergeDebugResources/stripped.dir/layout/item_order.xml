@@ -25,37 +25,52 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/textViewOrderNumber"
+                android:id="@+id/textViewOrderId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Pedido #12345678" />
+                tools:text="Pedido #ORD001" />
 
             <TextView
-                android:id="@+id/textViewOrderStatus"
+                android:id="@+id/textViewStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/status_background"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:padding="8dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="Pendente" />
+                tools:text="Processando" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewOrderDate"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            tools:text="15/12/2023 14:30" />
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                tools:text="Data: 15/12/2023" />
+
+            <TextView
+                android:id="@+id/textViewItemCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                tools:text="3 itens" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,26 +79,25 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/textViewItemCount"
+                android:id="@+id/textViewDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
-                tools:text="3 item(s)" />
+                tools:text="15/12/2023" />
 
             <TextView
-                android:id="@+id/textViewOrderTotal"
+                android:id="@+id/textViewTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="R$ 189,90" />
+                tools:text="R$ 155,40" />
 
         </LinearLayout>
 
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
-

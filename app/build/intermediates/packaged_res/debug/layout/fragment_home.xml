@@ -1,82 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
     tools:context=".fragments.HomeFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
 
+        <!-- Welcome Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:gravity="center">
 
-            <!-- Search Bar -->
-            <EditText
-                android:id="@+id/search_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/search_hint"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="8dp"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"/>
-
-            <!-- Categories -->
             <TextView
-                android:id="@+id/categories_title"
-                style="@style/TextSubtitle"
+                android:id="@+id/textViewWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/categories" />
+                android:layout_marginBottom="8dp"
+                android:text="Bem-vindo ao MiauMigo!"
+                android:textColor="@color/text_primary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categories_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <!-- Featured Products -->
             <TextView
-                android:id="@+id/featured_products_title"
-                style="@style/TextSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/featured_products" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewFeaturedProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2" />
+                android:text="Encontre os melhores produtos para seu pet"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp"
+                android:gravity="center" />
 
         </LinearLayout>
-    </ScrollView>
 
-    <TextView
-        android:id="@+id/textViewEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_products_found"
-        android:visibility="gone" />
+        <!-- Quick Actions -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-</RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Ações Rápidas"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="Editar Perfil"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    style="@style/ButtonPrimary" />
+
+                <Button
+                    android:id="@+id/buttonEditAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Gerenciar Endereços"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    style="@style/ButtonSecondary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Featured Products Preview -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Produtos em Destaque"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confira nossa seleção especial de produtos para pets"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="16dp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Ver Todos os Produtos"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    style="@style/ButtonPrimary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

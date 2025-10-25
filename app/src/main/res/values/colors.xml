@@ -33,4 +33,8 @@
     <!-- For compatibility with previous files -->
     <color name="primary_client">#3498db</color>
     <color name="primary_vendor">#e74c3c</color>
+    
+    <!-- Bottom Navigation -->
+    <color name="bottom_nav_item_color">#757575</color>
+    <color name="bottom_nav_item_selected">#3498db</color>
 </resources>

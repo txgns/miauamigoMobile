@@ -20,29 +20,29 @@ public final class ItemOrderBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
+  public final TextView textViewDate;
+
+  @NonNull
   public final TextView textViewItemCount;
 
   @NonNull
-  public final TextView textViewOrderDate;
+  public final TextView textViewOrderId;
 
   @NonNull
-  public final TextView textViewOrderNumber;
+  public final TextView textViewStatus;
 
   @NonNull
-  public final TextView textViewOrderStatus;
+  public final TextView textViewTotal;
 
-  @NonNull
-  public final TextView textViewOrderTotal;
-
-  private ItemOrderBinding(@NonNull MaterialCardView rootView, @NonNull TextView textViewItemCount,
-      @NonNull TextView textViewOrderDate, @NonNull TextView textViewOrderNumber,
-      @NonNull TextView textViewOrderStatus, @NonNull TextView textViewOrderTotal) {
+  private ItemOrderBinding(@NonNull MaterialCardView rootView, @NonNull TextView textViewDate,
+      @NonNull TextView textViewItemCount, @NonNull TextView textViewOrderId,
+      @NonNull TextView textViewStatus, @NonNull TextView textViewTotal) {
     this.rootView = rootView;
+    this.textViewDate = textViewDate;
     this.textViewItemCount = textViewItemCount;
-    this.textViewOrderDate = textViewOrderDate;
-    this.textViewOrderNumber = textViewOrderNumber;
-    this.textViewOrderStatus = textViewOrderStatus;
-    this.textViewOrderTotal = textViewOrderTotal;
+    this.textViewOrderId = textViewOrderId;
+    this.textViewStatus = textViewStatus;
+    this.textViewTotal = textViewTotal;
   }
 
   @Override
@@ -72,38 +72,38 @@ public final class ItemOrderBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.textViewDate;
+      TextView textViewDate = ViewBindings.findChildViewById(rootView, id);
+      if (textViewDate == null) {
+        break missingId;
+      }
+
       id = R.id.textViewItemCount;
       TextView textViewItemCount = ViewBindings.findChildViewById(rootView, id);
       if (textViewItemCount == null) {
         break missingId;
       }
 
-      id = R.id.textViewOrderDate;
-      TextView textViewOrderDate = ViewBindings.findChildViewById(rootView, id);
-      if (textViewOrderDate == null) {
+      id = R.id.textViewOrderId;
+      TextView textViewOrderId = ViewBindings.findChildViewById(rootView, id);
+      if (textViewOrderId == null) {
         break missingId;
       }
 
-      id = R.id.textViewOrderNumber;
-      TextView textViewOrderNumber = ViewBindings.findChildViewById(rootView, id);
-      if (textViewOrderNumber == null) {
+      id = R.id.textViewStatus;
+      TextView textViewStatus = ViewBindings.findChildViewById(rootView, id);
+      if (textViewStatus == null) {
         break missingId;
       }
 
-      id = R.id.textViewOrderStatus;
-      TextView textViewOrderStatus = ViewBindings.findChildViewById(rootView, id);
-      if (textViewOrderStatus == null) {
+      id = R.id.textViewTotal;
+      TextView textViewTotal = ViewBindings.findChildViewById(rootView, id);
+      if (textViewTotal == null) {
         break missingId;
       }
 
-      id = R.id.textViewOrderTotal;
-      TextView textViewOrderTotal = ViewBindings.findChildViewById(rootView, id);
-      if (textViewOrderTotal == null) {
-        break missingId;
-      }
-
-      return new ItemOrderBinding((MaterialCardView) rootView, textViewItemCount, textViewOrderDate,
-          textViewOrderNumber, textViewOrderStatus, textViewOrderTotal);
+      return new ItemOrderBinding((MaterialCardView) rootView, textViewDate, textViewItemCount,
+          textViewOrderId, textViewStatus, textViewTotal);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

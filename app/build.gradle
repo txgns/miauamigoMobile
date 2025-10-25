@@ -36,11 +36,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    
+    // Configurações para resolver problemas de JDK
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
     buildFeatures {
         viewBinding true
     }
     
-    // Configurações para reduzir o tamanho do APK
+    // Configurações para resolver problemas de JDK e reduzir o tamanho do APK
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'

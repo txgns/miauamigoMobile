@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
@@ -15,74 +16,87 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonClient, buttonVendor;
-    private TextView textViewLogin;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
+    private ProgressBar progressBar;
+    private Button buttonLogin;
+    private Button buttonRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initFirebase();
+        initViews();
+        checkUserAuthentication();
+    }
+
+    private void initFirebase() {
         try {
-            // Initialize Firebase
-            FirebaseApp.initializeApp(this);
-            mAuth = FirebaseAuth.getInstance();
-
-            // Check if user is signed in (non-null) and update UI accordingly.
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if (currentUser != null) {
-                // User is already logged in, redirect to HomeActivity
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                // TODO: You might need to pass the USER_TYPE here if HomeActivity depends on it.
-                // You would typically fetch this from your database based on the currentUser.getUid()
-                startActivity(intent);
-                finish(); // Finish MainActivity so the user can't go back to it
-                return; // Return to prevent the rest of the onCreate from running
-            }
-
-            initializeViews();
-            setupClickListeners();
+            // Inicialização mais simples e robusta
+            firebaseAuth = FirebaseAuth.getInstance();
+            
+            // Executar diagnóstico completo
+            FirebaseConnectionTester.runFullDiagnostic(this);
+            
         } catch (Exception e) {
-            // If there's an error, show a simple message and finish
-            Toast.makeText(this, "Erro ao inicializar o app", Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(this, "Erro Firebase: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            // Não fechar o app, apenas mostrar erro
         }
     }
 
-    private void initializeViews() {
-        buttonClient = findViewById(R.id.buttonClient);
-        buttonVendor = findViewById(R.id.buttonVendor);
-        textViewLogin = findViewById(R.id.textViewLogin);
+    private void initViews() {
+        progressBar = findViewById(R.id.progressBar);
+        buttonLogin = findViewById(R.id.buttonClient);
+        buttonRegister = findViewById(R.id.buttonVendor);
+
+        buttonLogin.setOnClickListener(v -> openLoginActivity());
+        buttonRegister.setOnClickListener(v -> openRegisterActivity());
     }
 
-    private void setupClickListeners() {
-        buttonClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start LoginActivity with a hint for client
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.putExtra("USER_TYPE", "client");
-                startActivity(intent);
-            }
-        });
+    private void checkUserAuthentication() {
+        showLoading(true);
+        
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            // Usuário já está logado, vai para a tela principal
+            openHomeActivity();
+        } else {
+            // Usuário não está logado, mostra as opções de login/registro
+            showLoading(false);
+        }
+    }
 
-        buttonVendor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start LoginActivity with a hint for vendor
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.putExtra("USER_TYPE", "vendor");
-                startActivity(intent);
-            }
-        });
+    private void openLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
-        textViewLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+    private void openRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showLoading(boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+        buttonLogin.setEnabled(!show);
+        buttonRegister.setEnabled(!show);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Verifica se o usuário está logado quando a atividade é iniciada
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            openHomeActivity();
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ImageView imageViewLogo;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final TextView textViewAppName;
 
   @NonNull
@@ -44,12 +48,14 @@ public final class ActivityMainBinding implements ViewBinding {
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonClient,
       @NonNull Button buttonVendor, @NonNull ImageView imageViewLogo,
-      @NonNull TextView textViewAppName, @NonNull TextView textViewLogin,
-      @NonNull TextView textViewSubtitle, @NonNull TextView textViewWelcome) {
+      @NonNull ProgressBar progressBar, @NonNull TextView textViewAppName,
+      @NonNull TextView textViewLogin, @NonNull TextView textViewSubtitle,
+      @NonNull TextView textViewWelcome) {
     this.rootView = rootView;
     this.buttonClient = buttonClient;
     this.buttonVendor = buttonVendor;
     this.imageViewLogo = imageViewLogo;
+    this.progressBar = progressBar;
     this.textViewAppName = textViewAppName;
     this.textViewLogin = textViewLogin;
     this.textViewSubtitle = textViewSubtitle;
@@ -101,6 +107,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.textViewAppName;
       TextView textViewAppName = ViewBindings.findChildViewById(rootView, id);
       if (textViewAppName == null) {
@@ -126,7 +138,8 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((ConstraintLayout) rootView, buttonClient, buttonVendor,
-          imageViewLogo, textViewAppName, textViewLogin, textViewSubtitle, textViewWelcome);
+          imageViewLogo, progressBar, textViewAppName, textViewLogin, textViewSubtitle,
+          textViewWelcome);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

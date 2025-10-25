@@ -95,4 +95,16 @@
     <string name="label_default_address">Endereço principal</string>
     <string name="error_address_required_fields">Preencha todos os campos obrigatórios.</string>
     <string name="message_address_saved">Endereço salvo com sucesso!</string>
+    
+    <!-- Additional strings for new activities -->
+    <string name="product_details">Detalhes do Produto</string>
+    <string name="error_product_not_found">Produto não encontrado</string>
+    <string name="message_product_added_to_cart">Produto adicionado ao carrinho!</string>
+    <string name="error_email_required">E-mail é obrigatório</string>
+    <string name="error_password_required">Senha é obrigatória</string>
+    <string name="error_password_min_length">Senha deve ter pelo menos 6 caracteres</string>
+    <string name="error_passwords_do_not_match">As senhas não coincidem</string>
+    <string name="error_login_failed">Falha no login</string>
+    <string name="error_registration_failed">Falha no cadastro</string>
+    <string name="message_registration_successful">Cadastro realizado com sucesso!</string>
 </resources>

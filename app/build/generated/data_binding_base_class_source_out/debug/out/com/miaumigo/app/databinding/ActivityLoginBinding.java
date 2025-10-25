@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,9 @@ public final class ActivityLoginBinding implements ViewBinding {
   public final ImageView imageViewLogo;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final TextView textViewAppName;
 
   @NonNull
@@ -47,23 +51,25 @@ public final class ActivityLoginBinding implements ViewBinding {
   public final TextView textViewLoginTitle;
 
   @NonNull
-  public final TextView textViewRegisterLink;
+  public final TextView textViewRegister;
 
   private ActivityLoginBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonLogin,
       @NonNull EditText editTextEmail, @NonNull EditText editTextPassword,
-      @NonNull ImageView imageViewLogo, @NonNull TextView textViewAppName,
-      @NonNull TextView textViewForgotPassword, @NonNull TextView textViewLoginSubtitle,
-      @NonNull TextView textViewLoginTitle, @NonNull TextView textViewRegisterLink) {
+      @NonNull ImageView imageViewLogo, @NonNull ProgressBar progressBar,
+      @NonNull TextView textViewAppName, @NonNull TextView textViewForgotPassword,
+      @NonNull TextView textViewLoginSubtitle, @NonNull TextView textViewLoginTitle,
+      @NonNull TextView textViewRegister) {
     this.rootView = rootView;
     this.buttonLogin = buttonLogin;
     this.editTextEmail = editTextEmail;
     this.editTextPassword = editTextPassword;
     this.imageViewLogo = imageViewLogo;
+    this.progressBar = progressBar;
     this.textViewAppName = textViewAppName;
     this.textViewForgotPassword = textViewForgotPassword;
     this.textViewLoginSubtitle = textViewLoginSubtitle;
     this.textViewLoginTitle = textViewLoginTitle;
-    this.textViewRegisterLink = textViewRegisterLink;
+    this.textViewRegister = textViewRegister;
   }
 
   @Override
@@ -117,6 +123,12 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.textViewAppName;
       TextView textViewAppName = ViewBindings.findChildViewById(rootView, id);
       if (textViewAppName == null) {
@@ -141,15 +153,15 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.textViewRegisterLink;
-      TextView textViewRegisterLink = ViewBindings.findChildViewById(rootView, id);
-      if (textViewRegisterLink == null) {
+      id = R.id.textViewRegister;
+      TextView textViewRegister = ViewBindings.findChildViewById(rootView, id);
+      if (textViewRegister == null) {
         break missingId;
       }
 
       return new ActivityLoginBinding((ConstraintLayout) rootView, buttonLogin, editTextEmail,
-          editTextPassword, imageViewLogo, textViewAppName, textViewForgotPassword,
-          textViewLoginSubtitle, textViewLoginTitle, textViewRegisterLink);
+          editTextPassword, imageViewLogo, progressBar, textViewAppName, textViewForgotPassword,
+          textViewLoginSubtitle, textViewLoginTitle, textViewRegister);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -12,80 +12,76 @@ import com.miaumigo.app.R;
 import com.miaumigo.app.models.Order;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
-    private List<Order> orders;
+    private List<Order> orderList;
+    private SimpleDateFormat dateFormat;
 
-    public OrderAdapter(List<Order> orders) {
-        this.orders = orders;
+    public OrderAdapter(List<Order> orderList) {
+        this.orderList = orderList;
+        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     }
 
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_order, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new OrderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Order order = orders.get(position);
+        Order order = orderList.get(position);
         holder.bind(order);
     }
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        return orderList.size();
     }
 
-    static class OrderViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewOrderNumber;
-        private TextView textViewOrderDate;
-        private TextView textViewOrderStatus;
-        private TextView textViewOrderTotal;
+    class OrderViewHolder extends RecyclerView.ViewHolder {
+        private TextView textViewOrderId;
+        private TextView textViewDate;
+        private TextView textViewStatus;
+        private TextView textViewTotal;
         private TextView textViewItemCount;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewOrderNumber = itemView.findViewById(R.id.textViewOrderNumber);
-            textViewOrderDate = itemView.findViewById(R.id.textViewOrderDate);
-            textViewOrderStatus = itemView.findViewById(R.id.textViewOrderStatus);
-            textViewOrderTotal = itemView.findViewById(R.id.textViewOrderTotal);
+            textViewOrderId = itemView.findViewById(R.id.textViewOrderId);
+            textViewDate = itemView.findViewById(R.id.textViewDate);
+            textViewStatus = itemView.findViewById(R.id.textViewStatus);
+            textViewTotal = itemView.findViewById(R.id.textViewTotal);
             textViewItemCount = itemView.findViewById(R.id.textViewItemCount);
         }
 
         public void bind(Order order) {
-            textViewOrderNumber.setText("Pedido #" + order.getId().substring(0, 8));
-            textViewOrderTotal.setText(order.getFormattedTotalAmount());
-            textViewItemCount.setText(order.getTotalItems() + " item(s)");
-            textViewOrderStatus.setText(order.getStatusDisplayName());
+            textViewOrderId.setText("Pedido #" + order.getId());
+            textViewDate.setText(dateFormat.format(order.getDate()));
+            textViewStatus.setText(order.getStatus());
+            textViewTotal.setText(String.format("R$ %.2f", order.getTotal()));
+            textViewItemCount.setText(order.getItemCount() + " item(s)");
 
-            // Format date
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-            String formattedDate = dateFormat.format(new Date(order.getOrderDate()));
-            textViewOrderDate.setText(formattedDate);
-
-            // Set status color
+            // Definir cor do status
             int statusColor = getStatusColor(order.getStatus());
-            textViewOrderStatus.setTextColor(statusColor);
+            textViewStatus.setTextColor(statusColor);
         }
 
         private int getStatusColor(String status) {
             switch (status.toLowerCase()) {
-                case "pending":
+                case "pendente":
                     return itemView.getContext().getColor(R.color.warning);
-                case "processing":
-                    return itemView.getContext().getColor(R.color.info);
-                case "shipped":
+                case "processando":
                     return itemView.getContext().getColor(R.color.primary);
-                case "delivered":
+                case "enviado":
+                    return itemView.getContext().getColor(R.color.info);
+                case "entregue":
                     return itemView.getContext().getColor(R.color.success);
-                case "cancelled":
+                case "cancelado":
                     return itemView.getContext().getColor(R.color.error);
                 default:
                     return itemView.getContext().getColor(R.color.text_secondary);
@@ -93,4 +89,3 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
     }
 }
-

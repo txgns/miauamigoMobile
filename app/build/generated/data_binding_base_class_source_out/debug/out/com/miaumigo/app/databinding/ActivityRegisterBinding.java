@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,9 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final Button buttonRegister;
 
   @NonNull
+  public final EditText editTextConfirmPassword;
+
+  @NonNull
   public final EditText editTextEmail;
 
   @NonNull
@@ -44,6 +48,9 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final ImageView imageViewLogo;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final TextView textViewAppName;
 
   @NonNull
@@ -53,19 +60,22 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final View viewBackgroundShape;
 
   private ActivityRegisterBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonBack,
-      @NonNull Button buttonRegister, @NonNull EditText editTextEmail,
-      @NonNull EditText editTextName, @NonNull EditText editTextPassword,
-      @NonNull EditText editTextPhone, @NonNull ImageView imageViewLogo,
+      @NonNull Button buttonRegister, @NonNull EditText editTextConfirmPassword,
+      @NonNull EditText editTextEmail, @NonNull EditText editTextName,
+      @NonNull EditText editTextPassword, @NonNull EditText editTextPhone,
+      @NonNull ImageView imageViewLogo, @NonNull ProgressBar progressBar,
       @NonNull TextView textViewAppName, @NonNull TextView textViewRegisterTitle,
       @NonNull View viewBackgroundShape) {
     this.rootView = rootView;
     this.buttonBack = buttonBack;
     this.buttonRegister = buttonRegister;
+    this.editTextConfirmPassword = editTextConfirmPassword;
     this.editTextEmail = editTextEmail;
     this.editTextName = editTextName;
     this.editTextPassword = editTextPassword;
     this.editTextPhone = editTextPhone;
     this.imageViewLogo = imageViewLogo;
+    this.progressBar = progressBar;
     this.textViewAppName = textViewAppName;
     this.textViewRegisterTitle = textViewRegisterTitle;
     this.viewBackgroundShape = viewBackgroundShape;
@@ -110,6 +120,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.editTextConfirmPassword;
+      EditText editTextConfirmPassword = ViewBindings.findChildViewById(rootView, id);
+      if (editTextConfirmPassword == null) {
+        break missingId;
+      }
+
       id = R.id.editTextEmail;
       EditText editTextEmail = ViewBindings.findChildViewById(rootView, id);
       if (editTextEmail == null) {
@@ -140,6 +156,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.textViewAppName;
       TextView textViewAppName = ViewBindings.findChildViewById(rootView, id);
       if (textViewAppName == null) {
@@ -159,8 +181,8 @@ public final class ActivityRegisterBinding implements ViewBinding {
       }
 
       return new ActivityRegisterBinding((ConstraintLayout) rootView, buttonBack, buttonRegister,
-          editTextEmail, editTextName, editTextPassword, editTextPhone, imageViewLogo,
-          textViewAppName, textViewRegisterTitle, viewBackgroundShape);
+          editTextConfirmPassword, editTextEmail, editTextName, editTextPassword, editTextPhone,
+          imageViewLogo, progressBar, textViewAppName, textViewRegisterTitle, viewBackgroundShape);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

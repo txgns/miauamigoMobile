@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.material.button.MaterialButton;
 import com.miaumigo.app.R;
 import com.miaumigo.app.models.CartItem;
 
@@ -22,8 +20,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private OnCartItemClickListener listener;
 
     public interface OnCartItemClickListener {
-        void onQuantityChanged(CartItem cartItem, int newQuantity);
-        void onRemoveItem(CartItem cartItem);
+        void onRemoveItem(CartItem item);
+        void onUpdateQuantity(CartItem item, int newQuantity);
     }
 
     public CartAdapter(List<CartItem> cartItems, OnCartItemClickListener listener) {
@@ -34,15 +32,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_cart, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
         return new CartViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartItem cartItem = cartItems.get(position);
-        holder.bind(cartItem, listener);
+        CartItem item = cartItems.get(position);
+        holder.bind(item);
     }
 
     @Override
@@ -50,14 +47,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return cartItems.size();
     }
 
-    static class CartViewHolder extends RecyclerView.ViewHolder {
+    class CartViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageViewProduct;
         private TextView textViewName;
         private TextView textViewPrice;
         private TextView textViewQuantity;
-        private MaterialButton buttonDecrease;
-        private MaterialButton buttonIncrease;
-        private MaterialButton buttonRemove;
+        private TextView textViewTotal;
+        private TextView buttonRemove;
+        private TextView buttonIncrease;
+        private TextView buttonDecrease;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,45 +63,44 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
             textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
-            buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
-            buttonIncrease = itemView.findViewById(R.id.buttonIncrease);
+            textViewTotal = itemView.findViewById(R.id.textViewTotal);
             buttonRemove = itemView.findViewById(R.id.buttonRemove);
-        }
+            buttonIncrease = itemView.findViewById(R.id.buttonIncrease);
+            buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
 
-        public void bind(CartItem cartItem, OnCartItemClickListener listener) {
-            textViewName.setText(cartItem.getProductName());
-            textViewPrice.setText(cartItem.getFormattedTotalPrice());
-            textViewQuantity.setText(String.valueOf(cartItem.getQuantity()));
-
-            // Load product image
-            if (cartItem.getProductImage() != null && !cartItem.getProductImage().isEmpty()) {
-                Glide.with(itemView.getContext())
-                        .load(cartItem.getProductImage())
-                        .placeholder(R.drawable.ic_product_placeholder)
-                        .error(R.drawable.ic_product_placeholder)
-                        .into(imageViewProduct);
-            } else {
-                imageViewProduct.setImageResource(R.drawable.ic_product_placeholder);
-            }
-
-            // Quantity buttons
-            buttonDecrease.setOnClickListener(v -> {
-                int newQuantity = cartItem.getQuantity() - 1;
-                if (newQuantity >= 0) {
-                    listener.onQuantityChanged(cartItem, newQuantity);
+            buttonRemove.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onRemoveItem(cartItems.get(getAdapterPosition()));
                 }
             });
 
             buttonIncrease.setOnClickListener(v -> {
-                int newQuantity = cartItem.getQuantity() + 1;
-                listener.onQuantityChanged(cartItem, newQuantity);
+                if (listener != null) {
+                    CartItem item = cartItems.get(getAdapterPosition());
+                    listener.onUpdateQuantity(item, item.getQuantity() + 1);
+                }
             });
 
-            // Remove button
-            buttonRemove.setOnClickListener(v -> {
-                listener.onRemoveItem(cartItem);
+            buttonDecrease.setOnClickListener(v -> {
+                if (listener != null) {
+                    CartItem item = cartItems.get(getAdapterPosition());
+                    if (item.getQuantity() > 1) {
+                        listener.onUpdateQuantity(item, item.getQuantity() - 1);
+                    } else {
+                        listener.onRemoveItem(item);
+                    }
+                }
             });
+        }
+
+        public void bind(CartItem item) {
+            textViewName.setText(item.getName());
+            textViewPrice.setText(String.format("R$ %.2f", item.getPrice()));
+            textViewQuantity.setText(String.valueOf(item.getQuantity()));
+            textViewTotal.setText(String.format("R$ %.2f", item.getTotalPrice()));
+
+            // Aqui você carregaria a imagem usando Glide ou Picasso
+            imageViewProduct.setImageResource(R.drawable.ic_product_placeholder);
         }
     }
 }
-

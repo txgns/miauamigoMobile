@@ -14,11 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.miaumigo.app.EditProfileActivity;
+import com.miaumigo.app.EditAddressActivity;
+import com.miaumigo.app.MainActivity;
 import com.miaumigo.app.R;
-import com.miaumigo.app.models.User;
-import com.miaumigo.app.services.FirebaseAuthService;
-import com.miaumigo.app.services.FirebaseDatabaseService;
 
 public class ProfileFragment extends Fragment {
 
@@ -29,22 +30,23 @@ public class ProfileFragment extends Fragment {
     private Button buttonEditAddress;
     private Button buttonLogout;
     private ProgressBar progressBar;
-    private FirebaseAuthService authService;
-    private FirebaseDatabaseService databaseService;
+    
+    private FirebaseAuth firebaseAuth;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         
-        initializeViews(view);
+        initViews(view);
+        initFirebase();
         setupClickListeners();
-        loadUserProfile();
+        loadUserData();
         
         return view;
     }
 
-    private void initializeViews(View view) {
+    private void initViews(View view) {
         textViewName = view.findViewById(R.id.textViewName);
         textViewEmail = view.findViewById(R.id.textViewEmail);
         textViewPhone = view.findViewById(R.id.textViewPhone);
@@ -52,74 +54,51 @@ public class ProfileFragment extends Fragment {
         buttonEditAddress = view.findViewById(R.id.buttonEditAddress);
         buttonLogout = view.findViewById(R.id.buttonLogout);
         progressBar = view.findViewById(R.id.progressBar);
-        
-        authService = new FirebaseAuthService(getContext());
-        databaseService = new FirebaseDatabaseService(getContext());
+    }
+
+    private void initFirebase() {
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     private void setupClickListeners() {
-        buttonEditProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), com.miaumigo.app.EditProfileActivity.class);
-            startActivityForResult(intent, 1);
-        });
-
-        buttonEditAddress.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), com.miaumigo.app.EditAddressActivity.class);
-            startActivityForResult(intent, 2);
-        });
-
-        buttonLogout.setOnClickListener(v -> {
-            authService.logout();
-            Intent intent = new Intent(getContext(), com.miaumigo.app.LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            getActivity().finish();
-        });
+        buttonEditProfile.setOnClickListener(v -> openEditProfile());
+        buttonEditAddress.setOnClickListener(v -> openEditAddress());
+        buttonLogout.setOnClickListener(v -> logout());
     }
 
-    private void loadUserProfile() {
-        FirebaseUser currentUser = authService.getCurrentUser();
-        if (currentUser == null) {
-            return;
+    private void loadUserData() {
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            textViewName.setText(currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "Usuário");
+            textViewEmail.setText(currentUser.getEmail());
+            textViewPhone.setText("Telefone não informado");
         }
+    }
 
+    private void openEditProfile() {
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void openEditAddress() {
+        Intent intent = new Intent(getActivity(), EditAddressActivity.class);
+        startActivity(intent);
+    }
+
+    private void logout() {
         showLoading(true);
+        firebaseAuth.signOut();
+        showLoading(false);
         
-        databaseService.getUser(currentUser.getUid(), new FirebaseDatabaseService.DataCallback<User>() {
-            @Override
-            public void onSuccess(User user) {
-                showLoading(false);
-                if (user != null) {
-                    textViewName.setText(user.getName());
-                    textViewEmail.setText(user.getEmail());
-                    textViewPhone.setText(user.getPhone() != null ? user.getPhone() : "Não informado");
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                showLoading(false);
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
-                
-                // Fallback to Firebase user data
-                textViewName.setText(currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "Usuário");
-                textViewEmail.setText(currentUser.getEmail());
-                textViewPhone.setText("Não informado");
-            }
-        });
+        Toast.makeText(getContext(), "Logout realizado com sucesso", Toast.LENGTH_SHORT).show();
+        
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ((requestCode == 1 || requestCode == 2) && resultCode == getActivity().RESULT_OK) {
-            // Reload user profile after editing
-            loadUserProfile();
-        }
-    }
 }
-

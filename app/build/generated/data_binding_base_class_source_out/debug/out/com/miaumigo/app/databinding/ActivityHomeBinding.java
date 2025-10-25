@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -20,33 +20,33 @@ import java.lang.String;
 
 public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
-  public final BottomNavigationView bottomNavigation;
+  public final BottomNavigationView bottomNavigationView;
 
   @NonNull
   public final FrameLayout fragmentContainer;
 
   @NonNull
-  public final Toolbar toolbar;
+  public final ProgressBar progressBar;
 
   @NonNull
-  public final ImageView toolbarLogo;
+  public final Toolbar toolbar;
 
-  private ActivityHomeBinding(@NonNull RelativeLayout rootView,
-      @NonNull BottomNavigationView bottomNavigation, @NonNull FrameLayout fragmentContainer,
-      @NonNull Toolbar toolbar, @NonNull ImageView toolbarLogo) {
+  private ActivityHomeBinding(@NonNull LinearLayout rootView,
+      @NonNull BottomNavigationView bottomNavigationView, @NonNull FrameLayout fragmentContainer,
+      @NonNull ProgressBar progressBar, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
-    this.bottomNavigation = bottomNavigation;
+    this.bottomNavigationView = bottomNavigationView;
     this.fragmentContainer = fragmentContainer;
+    this.progressBar = progressBar;
     this.toolbar = toolbar;
-    this.toolbarLogo = toolbarLogo;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -71,15 +71,21 @@ public final class ActivityHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.bottom_navigation;
-      BottomNavigationView bottomNavigation = ViewBindings.findChildViewById(rootView, id);
-      if (bottomNavigation == null) {
+      id = R.id.bottomNavigationView;
+      BottomNavigationView bottomNavigationView = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNavigationView == null) {
         break missingId;
       }
 
-      id = R.id.fragment_container;
+      id = R.id.fragmentContainer;
       FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
       if (fragmentContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
         break missingId;
       }
 
@@ -89,14 +95,8 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.toolbar_logo;
-      ImageView toolbarLogo = ViewBindings.findChildViewById(rootView, id);
-      if (toolbarLogo == null) {
-        break missingId;
-      }
-
-      return new ActivityHomeBinding((RelativeLayout) rootView, bottomNavigation, fragmentContainer,
-          toolbar, toolbarLogo);
+      return new ActivityHomeBinding((LinearLayout) rootView, bottomNavigationView,
+          fragmentContainer, progressBar, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -111,6 +111,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Confirmar Senha"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="0dp"
@@ -133,6 +148,16 @@
         android:background="@android:color/transparent"
         android:textColor="@color/text_secondary"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

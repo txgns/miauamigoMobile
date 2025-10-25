@@ -1,49 +1,39 @@
 package com.miaumigo.app.models;
 
 public class CartItem {
-    private String productId;
-    private String productName;
-    private String productImage;
+    private String id;
+    private String name;
     private double price;
     private int quantity;
-    private long addedAt;
+    private String imageUrl;
 
     public CartItem() {
-        // Default constructor required for Firebase
+        // Construtor vazio necessário para Firebase
     }
 
-    public CartItem(String productId, String productName, String productImage, double price, int quantity) {
-        this.productId = productId;
-        this.productName = productName;
-        this.productImage = productImage;
+    public CartItem(String id, String name, double price, int quantity, String imageUrl) {
+        this.id = id;
+        this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.addedAt = System.currentTimeMillis();
+        this.imageUrl = imageUrl;
     }
 
-    // Getters and Setters
-    public String getProductId() {
-        return productId;
+    // Getters e Setters
+    public String getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
@@ -62,24 +52,15 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public long getAddedAt() {
-        return addedAt;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setAddedAt(long addedAt) {
-        this.addedAt = addedAt;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getTotalPrice() {
         return price * quantity;
     }
-
-    public String getFormattedPrice() {
-        return String.format("R$ %.2f", price);
-    }
-
-    public String getFormattedTotalPrice() {
-        return String.format("R$ %.2f", getTotalPrice());
-    }
 }
-

@@ -6,15 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,13 +21,10 @@ import java.lang.String;
 
 public final class ActivityProductDetailBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
   public final Button buttonAddToCart;
-
-  @NonNull
-  public final FloatingActionButton fabBack;
 
   @NonNull
   public final ImageView imageViewProduct;
@@ -37,45 +33,35 @@ public final class ActivityProductDetailBinding implements ViewBinding {
   public final ProgressBar progressBar;
 
   @NonNull
-  public final TextView textViewDescription;
+  public final TextView textViewProductDescription;
 
   @NonNull
-  public final TextView textViewName;
+  public final TextView textViewProductName;
 
   @NonNull
-  public final TextView textViewPrice;
+  public final TextView textViewProductPrice;
 
   @NonNull
-  public final TextView textViewRating;
+  public final Toolbar toolbar;
 
-  @NonNull
-  public final TextView textViewStock;
-
-  @NonNull
-  public final MaterialToolbar toolbar;
-
-  private ActivityProductDetailBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull Button buttonAddToCart, @NonNull FloatingActionButton fabBack,
-      @NonNull ImageView imageViewProduct, @NonNull ProgressBar progressBar,
-      @NonNull TextView textViewDescription, @NonNull TextView textViewName,
-      @NonNull TextView textViewPrice, @NonNull TextView textViewRating,
-      @NonNull TextView textViewStock, @NonNull MaterialToolbar toolbar) {
+  private ActivityProductDetailBinding(@NonNull LinearLayout rootView,
+      @NonNull Button buttonAddToCart, @NonNull ImageView imageViewProduct,
+      @NonNull ProgressBar progressBar, @NonNull TextView textViewProductDescription,
+      @NonNull TextView textViewProductName, @NonNull TextView textViewProductPrice,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.buttonAddToCart = buttonAddToCart;
-    this.fabBack = fabBack;
     this.imageViewProduct = imageViewProduct;
     this.progressBar = progressBar;
-    this.textViewDescription = textViewDescription;
-    this.textViewName = textViewName;
-    this.textViewPrice = textViewPrice;
-    this.textViewRating = textViewRating;
-    this.textViewStock = textViewStock;
+    this.textViewProductDescription = textViewProductDescription;
+    this.textViewProductName = textViewProductName;
+    this.textViewProductPrice = textViewProductPrice;
     this.toolbar = toolbar;
   }
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -106,12 +92,6 @@ public final class ActivityProductDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.fabBack;
-      FloatingActionButton fabBack = ViewBindings.findChildViewById(rootView, id);
-      if (fabBack == null) {
-        break missingId;
-      }
-
       id = R.id.imageViewProduct;
       ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
       if (imageViewProduct == null) {
@@ -124,45 +104,33 @@ public final class ActivityProductDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.textViewDescription;
-      TextView textViewDescription = ViewBindings.findChildViewById(rootView, id);
-      if (textViewDescription == null) {
+      id = R.id.textViewProductDescription;
+      TextView textViewProductDescription = ViewBindings.findChildViewById(rootView, id);
+      if (textViewProductDescription == null) {
         break missingId;
       }
 
-      id = R.id.textViewName;
-      TextView textViewName = ViewBindings.findChildViewById(rootView, id);
-      if (textViewName == null) {
+      id = R.id.textViewProductName;
+      TextView textViewProductName = ViewBindings.findChildViewById(rootView, id);
+      if (textViewProductName == null) {
         break missingId;
       }
 
-      id = R.id.textViewPrice;
-      TextView textViewPrice = ViewBindings.findChildViewById(rootView, id);
-      if (textViewPrice == null) {
-        break missingId;
-      }
-
-      id = R.id.textViewRating;
-      TextView textViewRating = ViewBindings.findChildViewById(rootView, id);
-      if (textViewRating == null) {
-        break missingId;
-      }
-
-      id = R.id.textViewStock;
-      TextView textViewStock = ViewBindings.findChildViewById(rootView, id);
-      if (textViewStock == null) {
+      id = R.id.textViewProductPrice;
+      TextView textViewProductPrice = ViewBindings.findChildViewById(rootView, id);
+      if (textViewProductPrice == null) {
         break missingId;
       }
 
       id = R.id.toolbar;
-      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityProductDetailBinding((CoordinatorLayout) rootView, buttonAddToCart,
-          fabBack, imageViewProduct, progressBar, textViewDescription, textViewName, textViewPrice,
-          textViewRating, textViewStock, toolbar);
+      return new ActivityProductDetailBinding((LinearLayout) rootView, buttonAddToCart,
+          imageViewProduct, progressBar, textViewProductDescription, textViewProductName,
+          textViewProductPrice, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

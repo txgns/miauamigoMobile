@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="default_web_client_id" translatable="false">30273334005-hk1uh3qcie3l9ru2ppk81a441i0icgsj.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://miaumigo-686d4-default-rtdb.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">30273334005</string>
     <string name="google_api_key" translatable="false">AIzaSyBkvLlE1vat4rRHE2ZL0szxoclxuU1Vk8U</string>
     <string name="google_app_id" translatable="false">1:30273334005:android:4b3682de95ccc2d01a73bc</string>

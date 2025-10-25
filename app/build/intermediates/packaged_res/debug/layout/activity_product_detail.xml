@@ -1,146 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:orientation="vertical"
+    android:background="@color/app_background"
     tools:context=".ProductDetailActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            app:title=""
-            app:titleTextColor="@color/white" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Detalhes do Produto"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/ic_arrow_back" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Product Image -->
             <ImageView
                 android:id="@+id/imageViewProduct"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
                 android:contentDescription="Product Image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_product_placeholder"
-                tools:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/ic_product_placeholder" />
 
-            <!-- Product Details -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/textViewProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/text_primary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="Ração Premium para Cães" />
 
-                <TextView
-                    android:id="@+id/textViewName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textColor="@color/text_primary"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    tools:text="Ração Premium para Cães" />
+            <TextView
+                android:id="@+id/textViewProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/primary"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:text="R$ 89,90" />
 
-                <TextView
-                    android:id="@+id/textViewPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/primary"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    tools:text="R$ 89,90" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Descrição"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/textViewProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp"
+                tools:text="Ração premium desenvolvida especialmente para cães adultos de todas as raças. Contém ingredientes naturais e balanceados para garantir a saúde e vitalidade do seu pet." />
 
-                    <TextView
-                        android:id="@+id/textViewRating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="16sp"
-                        tools:text="4.5 ⭐ (23 avaliações)" />
-
-                    <TextView
-                        android:id="@+id/textViewStock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/success"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:text="Em estoque" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/description"
-                    android:textColor="@color/text_primary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="32dp"
-                    android:lineSpacingExtra="4dp"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="16sp"
-                    tools:text="Ração premium desenvolvida especialmente para cães adultos de todas as raças. Contém ingredientes naturais e balanceados para garantir a saúde e vitalidade do seu pet." />
-
-                <Button
-                    android:id="@+id/buttonAddToCart"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/add_to_cart"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    style="@style/ButtonPrimary" />
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/buttonAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/add_to_cart"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                style="@style/ButtonPrimary" />
 
         </LinearLayout>
 
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_arrow_back"
-        app:backgroundTint="@color/primary"
-        app:layout_anchor="@id/toolbar"
-        app:layout_anchorGravity="start|top"
-        app:tint="@color/white" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -150,5 +97,5 @@
         android:indeterminateTint="@color/primary"
         android:visibility="gone" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
 

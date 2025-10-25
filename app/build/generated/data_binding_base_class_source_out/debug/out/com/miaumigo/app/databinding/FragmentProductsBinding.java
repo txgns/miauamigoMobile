@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -21,6 +22,9 @@ import java.lang.String;
 public final class FragmentProductsBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
+
+  @NonNull
+  public final TextInputEditText editTextSearch;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -35,9 +39,11 @@ public final class FragmentProductsBinding implements ViewBinding {
   public final TextView textViewEmpty;
 
   private FragmentProductsBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerViewProducts,
-      @NonNull TextInputLayout textInputLayoutSearch, @NonNull TextView textViewEmpty) {
+      @NonNull TextInputEditText editTextSearch, @NonNull ProgressBar progressBar,
+      @NonNull RecyclerView recyclerViewProducts, @NonNull TextInputLayout textInputLayoutSearch,
+      @NonNull TextView textViewEmpty) {
     this.rootView = rootView;
+    this.editTextSearch = editTextSearch;
     this.progressBar = progressBar;
     this.recyclerViewProducts = recyclerViewProducts;
     this.textInputLayoutSearch = textInputLayoutSearch;
@@ -71,6 +77,12 @@ public final class FragmentProductsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.editTextSearch;
+      TextInputEditText editTextSearch = ViewBindings.findChildViewById(rootView, id);
+      if (editTextSearch == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -95,7 +107,7 @@ public final class FragmentProductsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentProductsBinding((ConstraintLayout) rootView, progressBar,
+      return new FragmentProductsBinding((ConstraintLayout) rootView, editTextSearch, progressBar,
           recyclerViewProducts, textInputLayoutSearch, textViewEmpty);
     }
     String missingId = rootView.getResources().getResourceName(id);

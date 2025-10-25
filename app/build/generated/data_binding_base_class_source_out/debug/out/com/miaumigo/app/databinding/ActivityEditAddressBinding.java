@@ -6,13 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.textfield.TextInputEditText;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -23,56 +24,61 @@ public final class ActivityEditAddressBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final Button buttonCancel;
+  public final Button buttonBackAddress;
 
   @NonNull
-  public final Button buttonSave;
+  public final Button buttonSaveAddress;
 
   @NonNull
-  public final CheckBox checkBoxDefault;
+  public final CheckBox checkboxDefaultAddress;
 
   @NonNull
-  public final TextInputEditText editTextCity;
+  public final EditText editTextCity;
 
   @NonNull
-  public final TextInputEditText editTextComplement;
+  public final EditText editTextComplement;
 
   @NonNull
-  public final TextInputEditText editTextNeighborhood;
+  public final EditText editTextNeighborhood;
 
   @NonNull
-  public final TextInputEditText editTextNumber;
+  public final EditText editTextNumber;
 
   @NonNull
-  public final TextInputEditText editTextState;
+  public final EditText editTextState;
 
   @NonNull
-  public final TextInputEditText editTextStreet;
+  public final EditText editTextStreet;
 
   @NonNull
-  public final TextInputEditText editTextZipCode;
+  public final EditText editTextZip;
 
   @NonNull
   public final ProgressBar progressBar;
 
-  private ActivityEditAddressBinding(@NonNull ScrollView rootView, @NonNull Button buttonCancel,
-      @NonNull Button buttonSave, @NonNull CheckBox checkBoxDefault,
-      @NonNull TextInputEditText editTextCity, @NonNull TextInputEditText editTextComplement,
-      @NonNull TextInputEditText editTextNeighborhood, @NonNull TextInputEditText editTextNumber,
-      @NonNull TextInputEditText editTextState, @NonNull TextInputEditText editTextStreet,
-      @NonNull TextInputEditText editTextZipCode, @NonNull ProgressBar progressBar) {
+  @NonNull
+  public final TextView textTitleAddress;
+
+  private ActivityEditAddressBinding(@NonNull ScrollView rootView,
+      @NonNull Button buttonBackAddress, @NonNull Button buttonSaveAddress,
+      @NonNull CheckBox checkboxDefaultAddress, @NonNull EditText editTextCity,
+      @NonNull EditText editTextComplement, @NonNull EditText editTextNeighborhood,
+      @NonNull EditText editTextNumber, @NonNull EditText editTextState,
+      @NonNull EditText editTextStreet, @NonNull EditText editTextZip,
+      @NonNull ProgressBar progressBar, @NonNull TextView textTitleAddress) {
     this.rootView = rootView;
-    this.buttonCancel = buttonCancel;
-    this.buttonSave = buttonSave;
-    this.checkBoxDefault = checkBoxDefault;
+    this.buttonBackAddress = buttonBackAddress;
+    this.buttonSaveAddress = buttonSaveAddress;
+    this.checkboxDefaultAddress = checkboxDefaultAddress;
     this.editTextCity = editTextCity;
     this.editTextComplement = editTextComplement;
     this.editTextNeighborhood = editTextNeighborhood;
     this.editTextNumber = editTextNumber;
     this.editTextState = editTextState;
     this.editTextStreet = editTextStreet;
-    this.editTextZipCode = editTextZipCode;
+    this.editTextZip = editTextZip;
     this.progressBar = progressBar;
+    this.textTitleAddress = textTitleAddress;
   }
 
   @Override
@@ -102,63 +108,63 @@ public final class ActivityEditAddressBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.buttonCancel;
-      Button buttonCancel = ViewBindings.findChildViewById(rootView, id);
-      if (buttonCancel == null) {
+      id = R.id.buttonBackAddress;
+      Button buttonBackAddress = ViewBindings.findChildViewById(rootView, id);
+      if (buttonBackAddress == null) {
         break missingId;
       }
 
-      id = R.id.buttonSave;
-      Button buttonSave = ViewBindings.findChildViewById(rootView, id);
-      if (buttonSave == null) {
+      id = R.id.buttonSaveAddress;
+      Button buttonSaveAddress = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSaveAddress == null) {
         break missingId;
       }
 
-      id = R.id.checkBoxDefault;
-      CheckBox checkBoxDefault = ViewBindings.findChildViewById(rootView, id);
-      if (checkBoxDefault == null) {
+      id = R.id.checkboxDefaultAddress;
+      CheckBox checkboxDefaultAddress = ViewBindings.findChildViewById(rootView, id);
+      if (checkboxDefaultAddress == null) {
         break missingId;
       }
 
       id = R.id.editTextCity;
-      TextInputEditText editTextCity = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextCity = ViewBindings.findChildViewById(rootView, id);
       if (editTextCity == null) {
         break missingId;
       }
 
       id = R.id.editTextComplement;
-      TextInputEditText editTextComplement = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextComplement = ViewBindings.findChildViewById(rootView, id);
       if (editTextComplement == null) {
         break missingId;
       }
 
       id = R.id.editTextNeighborhood;
-      TextInputEditText editTextNeighborhood = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextNeighborhood = ViewBindings.findChildViewById(rootView, id);
       if (editTextNeighborhood == null) {
         break missingId;
       }
 
       id = R.id.editTextNumber;
-      TextInputEditText editTextNumber = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextNumber = ViewBindings.findChildViewById(rootView, id);
       if (editTextNumber == null) {
         break missingId;
       }
 
       id = R.id.editTextState;
-      TextInputEditText editTextState = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextState = ViewBindings.findChildViewById(rootView, id);
       if (editTextState == null) {
         break missingId;
       }
 
       id = R.id.editTextStreet;
-      TextInputEditText editTextStreet = ViewBindings.findChildViewById(rootView, id);
+      EditText editTextStreet = ViewBindings.findChildViewById(rootView, id);
       if (editTextStreet == null) {
         break missingId;
       }
 
-      id = R.id.editTextZipCode;
-      TextInputEditText editTextZipCode = ViewBindings.findChildViewById(rootView, id);
-      if (editTextZipCode == null) {
+      id = R.id.editTextZip;
+      EditText editTextZip = ViewBindings.findChildViewById(rootView, id);
+      if (editTextZip == null) {
         break missingId;
       }
 
@@ -168,9 +174,16 @@ public final class ActivityEditAddressBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityEditAddressBinding((ScrollView) rootView, buttonCancel, buttonSave,
-          checkBoxDefault, editTextCity, editTextComplement, editTextNeighborhood, editTextNumber,
-          editTextState, editTextStreet, editTextZipCode, progressBar);
+      id = R.id.textTitleAddress;
+      TextView textTitleAddress = ViewBindings.findChildViewById(rootView, id);
+      if (textTitleAddress == null) {
+        break missingId;
+      }
+
+      return new ActivityEditAddressBinding((ScrollView) rootView, buttonBackAddress,
+          buttonSaveAddress, checkboxDefaultAddress, editTextCity, editTextComplement,
+          editTextNeighborhood, editTextNumber, editTextState, editTextStreet, editTextZip,
+          progressBar, textTitleAddress);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,13 +4,11 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.miaumigo.app.R;
@@ -20,47 +18,28 @@ import java.lang.String;
 
 public final class FragmentHomeBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
-  public final RecyclerView categoriesRecyclerView;
+  public final Button buttonEditAddress;
 
   @NonNull
-  public final TextView categoriesTitle;
+  public final Button buttonEditProfile;
 
   @NonNull
-  public final TextView featuredProductsTitle;
+  public final TextView textViewWelcome;
 
-  @NonNull
-  public final ProgressBar progressBar;
-
-  @NonNull
-  public final RecyclerView recyclerViewFeaturedProducts;
-
-  @NonNull
-  public final EditText searchEditText;
-
-  @NonNull
-  public final TextView textViewEmpty;
-
-  private FragmentHomeBinding(@NonNull RelativeLayout rootView,
-      @NonNull RecyclerView categoriesRecyclerView, @NonNull TextView categoriesTitle,
-      @NonNull TextView featuredProductsTitle, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerViewFeaturedProducts, @NonNull EditText searchEditText,
-      @NonNull TextView textViewEmpty) {
+  private FragmentHomeBinding(@NonNull ScrollView rootView, @NonNull Button buttonEditAddress,
+      @NonNull Button buttonEditProfile, @NonNull TextView textViewWelcome) {
     this.rootView = rootView;
-    this.categoriesRecyclerView = categoriesRecyclerView;
-    this.categoriesTitle = categoriesTitle;
-    this.featuredProductsTitle = featuredProductsTitle;
-    this.progressBar = progressBar;
-    this.recyclerViewFeaturedProducts = recyclerViewFeaturedProducts;
-    this.searchEditText = searchEditText;
-    this.textViewEmpty = textViewEmpty;
+    this.buttonEditAddress = buttonEditAddress;
+    this.buttonEditProfile = buttonEditProfile;
+    this.textViewWelcome = textViewWelcome;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -85,51 +64,26 @@ public final class FragmentHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.categories_recycler_view;
-      RecyclerView categoriesRecyclerView = ViewBindings.findChildViewById(rootView, id);
-      if (categoriesRecyclerView == null) {
+      id = R.id.buttonEditAddress;
+      Button buttonEditAddress = ViewBindings.findChildViewById(rootView, id);
+      if (buttonEditAddress == null) {
         break missingId;
       }
 
-      id = R.id.categories_title;
-      TextView categoriesTitle = ViewBindings.findChildViewById(rootView, id);
-      if (categoriesTitle == null) {
+      id = R.id.buttonEditProfile;
+      Button buttonEditProfile = ViewBindings.findChildViewById(rootView, id);
+      if (buttonEditProfile == null) {
         break missingId;
       }
 
-      id = R.id.featured_products_title;
-      TextView featuredProductsTitle = ViewBindings.findChildViewById(rootView, id);
-      if (featuredProductsTitle == null) {
+      id = R.id.textViewWelcome;
+      TextView textViewWelcome = ViewBindings.findChildViewById(rootView, id);
+      if (textViewWelcome == null) {
         break missingId;
       }
 
-      id = R.id.progressBar;
-      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
-      if (progressBar == null) {
-        break missingId;
-      }
-
-      id = R.id.recyclerViewFeaturedProducts;
-      RecyclerView recyclerViewFeaturedProducts = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerViewFeaturedProducts == null) {
-        break missingId;
-      }
-
-      id = R.id.search_edit_text;
-      EditText searchEditText = ViewBindings.findChildViewById(rootView, id);
-      if (searchEditText == null) {
-        break missingId;
-      }
-
-      id = R.id.textViewEmpty;
-      TextView textViewEmpty = ViewBindings.findChildViewById(rootView, id);
-      if (textViewEmpty == null) {
-        break missingId;
-      }
-
-      return new FragmentHomeBinding((RelativeLayout) rootView, categoriesRecyclerView,
-          categoriesTitle, featuredProductsTitle, progressBar, recyclerViewFeaturedProducts,
-          searchEditText, textViewEmpty);
+      return new FragmentHomeBinding((ScrollView) rootView, buttonEditAddress, buttonEditProfile,
+          textViewWelcome);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

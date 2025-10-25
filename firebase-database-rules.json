@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "users": {
+      ".read": true,
+      ".write": true
+    },
+    "addresses": {
+      ".read": true,
+      ".write": true
+    },
+    "test": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
