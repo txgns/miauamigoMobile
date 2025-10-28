@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
-    private Button buttonLogin;
-    private Button buttonRegister;
+    private Button buttonClient;
+    private Button buttonVendor;
+    private android.widget.TextView textViewLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         progressBar = findViewById(R.id.progressBar);
-        buttonLogin = findViewById(R.id.buttonClient);
-        buttonRegister = findViewById(R.id.buttonVendor);
+        buttonClient = findViewById(R.id.buttonClient);
+        buttonVendor = findViewById(R.id.buttonVendor);
+        textViewLogin = findViewById(R.id.textViewLogin);
 
-        buttonLogin.setOnClickListener(v -> openLoginActivity());
-        buttonRegister.setOnClickListener(v -> openRegisterActivity());
+        // Botões para CRIAR CONTA (Registro)
+        buttonClient.setOnClickListener(v -> openClientRegisterActivity());
+        buttonVendor.setOnClickListener(v -> openVendorRegisterActivity());
+        
+        // Link para fazer LOGIN
+        textViewLogin.setOnClickListener(v -> showLoginOptions());
     }
 
     private void checkUserAuthentication() {
@@ -67,14 +73,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    // Métodos para CRIAR CONTA (Registro)
+    private void openClientRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        intent.putExtra("is_vendor", false);
         startActivity(intent);
     }
 
-    private void openRegisterActivity() {
+    private void openVendorRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
+        intent.putExtra("is_vendor", true);
         startActivity(intent);
+    }
+    
+    // Métodos para fazer LOGIN (para quem já tem conta)
+    private void showLoginOptions() {
+        // Criar diálogo para escolher tipo de login
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Como você deseja entrar?");
+        builder.setMessage("Escolha o tipo de conta:");
+        
+        builder.setPositiveButton("Cliente", (dialog, which) -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("is_vendor", false);
+            startActivity(intent);
+        });
+        
+        builder.setNegativeButton("Vendedor", (dialog, which) -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("is_vendor", true);
+            startActivity(intent);
+        });
+        
+        builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
+        
+        builder.show();
     }
 
     private void openHomeActivity() {
@@ -86,8 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        buttonLogin.setEnabled(!show);
-        buttonRegister.setEnabled(!show);
+        buttonClient.setEnabled(!show);
+        buttonVendor.setEnabled(!show);
+        textViewLogin.setEnabled(!show);
     }
 
     @Override

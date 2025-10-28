@@ -31,16 +31,24 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
     private Button buttonRegister;
-    private TextView textViewLogin;
+    private Button buttonBack;
+    private TextView textViewRegisterTitle;
     private ProgressBar progressBar;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private boolean isVendorRegister = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        
+        // Verifica se é registro de vendedor
+        Intent intent = getIntent();
+        if (intent != null) {
+            isVendorRegister = intent.getBooleanExtra("is_vendor", false);
+        }
 
         initFirebase();
         initViews();
@@ -64,11 +72,23 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         buttonRegister = findViewById(R.id.buttonRegister);
-        textViewLogin = findViewById(R.id.textViewLogin);
+        buttonBack = findViewById(R.id.buttonBack);
+        textViewRegisterTitle = findViewById(R.id.textViewRegisterTitle);
         progressBar = findViewById(R.id.progressBar);
 
         buttonRegister.setOnClickListener(v -> registerUser());
-        textViewLogin.setOnClickListener(v -> openLoginActivity());
+        buttonBack.setOnClickListener(v -> finish());
+        
+        // Atualiza o título baseado no tipo de registro
+        updateUIForUserType();
+    }
+    
+    private void updateUIForUserType() {
+        if (isVendorRegister) {
+            textViewRegisterTitle.setText("Criar Conta - Vendedor");
+        } else {
+            textViewRegisterTitle.setText("Criar Conta - Cliente");
+        }
     }
 
     private void registerUser() {
@@ -131,12 +151,31 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserProfile(FirebaseUser firebaseUser, String name, String phone) {
+        // Atualiza o displayName no FirebaseAuth
+        com.google.firebase.auth.UserProfileChangeRequest profileUpdates = 
+            new com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+        
+        firebaseUser.updateProfile(profileUpdates)
+                .addOnCompleteListener(profileTask -> {
+                    // Independente do resultado, salva no banco de dados
+                    saveUserToDatabase(firebaseUser, name, phone);
+                });
+    }
+    
+    private void saveUserToDatabase(FirebaseUser firebaseUser, String name, String phone) {
+        // Define o role baseado no tipo de registro
+        String role = isVendorRegister ? "vendor" : "customer";
+        
         User user = new User(
                 firebaseUser.getUid(),
                 name,
                 firebaseUser.getEmail(),
-                phone.isEmpty() ? null : phone
+                phone.isEmpty() ? null : phone,
+                role
         );
+        user.setUpdatedAt(System.currentTimeMillis());
 
         databaseReference.child("users").child(firebaseUser.getUid())
                 .setValue(user)
@@ -145,19 +184,16 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         showLoading(false);
                         if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, R.string.message_registration_successful, Toast.LENGTH_SHORT).show();
+                            String successMessage = isVendorRegister ? 
+                                "Cadastro de vendedor realizado com sucesso!" : 
+                                getString(R.string.message_registration_successful);
+                            Toast.makeText(RegisterActivity.this, successMessage, Toast.LENGTH_SHORT).show();
                             openHomeActivity();
                         } else {
                             Toast.makeText(RegisterActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-    }
-
-    private void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void openHomeActivity() {
@@ -170,6 +206,11 @@ public class RegisterActivity extends AppCompatActivity {
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         buttonRegister.setEnabled(!show);
-        textViewLogin.setEnabled(!show);
+        buttonBack.setEnabled(!show);
+        editTextName.setEnabled(!show);
+        editTextEmail.setEnabled(!show);
+        editTextPhone.setEnabled(!show);
+        editTextPassword.setEnabled(!show);
+        editTextConfirmPassword.setEnabled(!show);
     }
 }

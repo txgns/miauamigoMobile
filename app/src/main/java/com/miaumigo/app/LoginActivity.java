@@ -29,18 +29,27 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private Button buttonLogin;
     private TextView textViewRegister;
+    private TextView textViewLoginSubtitle;
     private ProgressBar progressBar;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private boolean isVendorLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        
+        // Verifica se é login de vendedor
+        Intent intent = getIntent();
+        if (intent != null) {
+            isVendorLogin = intent.getBooleanExtra("is_vendor", false);
+        }
 
         initFirebase();
         initViews();
+        updateUIForUserType();
     }
 
     private void initFirebase() {
@@ -61,10 +70,21 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewRegister = findViewById(R.id.textViewRegister);
+        textViewLoginSubtitle = findViewById(R.id.textViewLoginSubtitle);
         progressBar = findViewById(R.id.progressBar);
 
         buttonLogin.setOnClickListener(v -> loginUser());
         textViewRegister.setOnClickListener(v -> openRegisterActivity());
+    }
+    
+    private void updateUIForUserType() {
+        if (isVendorLogin) {
+            textViewLoginSubtitle.setText("Como Vendedor");
+            textViewLoginSubtitle.setTextColor(getColor(R.color.primary_vendor));
+        } else {
+            textViewLoginSubtitle.setText("Como Cliente");
+            textViewLoginSubtitle.setTextColor(getColor(R.color.primary_client));
+        }
     }
 
     private void loginUser() {
@@ -138,8 +158,34 @@ public class LoginActivity extends AppCompatActivity {
                             // Usuário não existe no banco, cria um novo registro
                             createUserInDatabase(firebaseUser);
                         } else {
-                            // Usuário existe, vai para a tela principal
-                            openHomeActivity();
+                            // Usuário existe, verifica o role
+                            User userData = snapshot.getValue(User.class);
+                            if (userData != null) {
+                                // Atualiza o displayName se necessário
+                                if (userData.getName() != null && !userData.getName().isEmpty()) {
+                                    updateFirebaseAuthProfile(firebaseUser, userData.getName());
+                                }
+                                
+                                // Verifica se o tipo de usuário corresponde ao tipo de login
+                                boolean userIsVendor = "vendor".equals(userData.getRole());
+                                if (isVendorLogin && !userIsVendor) {
+                                    Toast.makeText(LoginActivity.this, 
+                                        "Esta conta não é de vendedor. Use o login de cliente.", 
+                                        Toast.LENGTH_LONG).show();
+                                    firebaseAuth.signOut();
+                                    return;
+                                } else if (!isVendorLogin && userIsVendor) {
+                                    Toast.makeText(LoginActivity.this, 
+                                        "Esta conta é de vendedor. Use o login de vendedor.", 
+                                        Toast.LENGTH_LONG).show();
+                                    firebaseAuth.signOut();
+                                    return;
+                                }
+                                
+                                openHomeActivity();
+                            } else {
+                                createUserInDatabase(firebaseUser);
+                            }
                         }
                     }
 
@@ -149,14 +195,36 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    
+    private void updateFirebaseAuthProfile(FirebaseUser firebaseUser, String name) {
+        if (firebaseUser.getDisplayName() == null || firebaseUser.getDisplayName().isEmpty()) {
+            com.google.firebase.auth.UserProfileChangeRequest profileUpdates = 
+                new com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .build();
+            
+            firebaseUser.updateProfile(profileUpdates);
+        }
+    }
 
     private void createUserInDatabase(FirebaseUser firebaseUser) {
+        String displayName = firebaseUser.getDisplayName();
+        if (displayName == null || displayName.isEmpty()) {
+            displayName = firebaseUser.getEmail() != null ? 
+                firebaseUser.getEmail().split("@")[0] : "Usuário";
+        }
+        
+        // Define o role baseado no tipo de login
+        String role = isVendorLogin ? "vendor" : "customer";
+        
         User user = new User(
                 firebaseUser.getUid(),
-                firebaseUser.getDisplayName() != null ? firebaseUser.getDisplayName() : "",
+                displayName,
                 firebaseUser.getEmail(),
-                firebaseUser.getPhoneNumber()
+                firebaseUser.getPhoneNumber(),
+                role
         );
+        user.setUpdatedAt(System.currentTimeMillis());
 
         databaseReference.child("users").child(firebaseUser.getUid())
                 .setValue(user)
@@ -174,6 +242,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
+        intent.putExtra("is_vendor", isVendorLogin);
         startActivity(intent);
     }
 

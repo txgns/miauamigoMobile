@@ -82,7 +82,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             productId = extras.getString("product_id");
             productName = extras.getString("product_name");
             productDescription = extras.getString("product_description");
-            productPrice = extras.getString("product_price");
+            
+            // Recebe o preço como double e formata
+            double price = extras.getDouble("product_price", 0.0);
+            productPrice = String.format("%.2f", price);
+            
             productImageUrl = extras.getString("product_image");
 
             displayProductData();
@@ -102,7 +106,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
         
         if (productPrice != null) {
-            textViewProductPrice.setText(productPrice);
+            // Formata o preço para exibição
+            String formattedPrice = "R$ " + productPrice.replace(".", ",");
+            textViewProductPrice.setText(formattedPrice);
         }
         
         if (productImageUrl != null && !productImageUrl.isEmpty()) {
@@ -111,6 +117,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                     .placeholder(R.drawable.ic_product_placeholder)
                     .error(R.drawable.ic_product_placeholder)
                     .into(imageViewProduct);
+        } else {
+            imageViewProduct.setImageResource(R.drawable.ic_product_placeholder);
         }
     }
 
@@ -123,22 +131,41 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         showLoading(true);
         
-        // Adicionar produto ao carrinho usando CartManager
-        CartManager cartManager = CartManager.getInstance(this);
-        CartItem cartItem = new CartItem(
-            productId,
-            productName,
-            Double.parseDouble(productPrice.replace("R$ ", "").replace(",", ".")),
-            1,
-            productImageUrl
-        );
-        
-        cartManager.addToCart(cartItem);
-        
-        buttonAddToCart.postDelayed(() -> {
+        try {
+            // Adicionar produto ao carrinho usando CartManager
+            CartManager cartManager = CartManager.getInstance(this);
+            
+            // Converte o preço de forma segura
+            double price = 0.0;
+            if (productPrice != null && !productPrice.isEmpty()) {
+                // Remove formatação brasileira (R$, pontos de milhar e substitui vírgula por ponto)
+                String cleanPrice = productPrice
+                    .replace("R$", "")
+                    .replace(" ", "")
+                    .replace(".", "")
+                    .replace(",", ".")
+                    .trim();
+                price = Double.parseDouble(cleanPrice);
+            }
+            
+            CartItem cartItem = new CartItem(
+                productId,
+                productName,
+                price,
+                1,
+                productImageUrl != null ? productImageUrl : ""
+            );
+            
+            cartManager.addToCart(cartItem);
+            
+            buttonAddToCart.postDelayed(() -> {
+                showLoading(false);
+                Toast.makeText(ProductDetailActivity.this, R.string.message_product_added_to_cart, Toast.LENGTH_SHORT).show();
+            }, 500);
+        } catch (Exception e) {
             showLoading(false);
-            Toast.makeText(ProductDetailActivity.this, R.string.message_product_added_to_cart, Toast.LENGTH_SHORT).show();
-        }, 1000);
+            Toast.makeText(this, "Erro ao adicionar produto ao carrinho: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void showLoading(boolean show) {

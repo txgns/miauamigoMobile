@@ -14,9 +14,15 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.EditProfileActivity;
 import com.miaumigo.app.EditAddressActivity;
 import com.miaumigo.app.R;
+import com.miaumigo.app.models.User;
 
 public class HomeFragment extends Fragment {
 
@@ -24,6 +30,7 @@ public class HomeFragment extends Fragment {
     private Button buttonEditProfile;
     private Button buttonEditAddress;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Nullable
     @Override
@@ -46,6 +53,7 @@ public class HomeFragment extends Fragment {
 
     private void initFirebase() {
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     private void setupClickListeners() {
@@ -56,9 +64,39 @@ public class HomeFragment extends Fragment {
     private void loadUserData() {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
-            String welcomeText = "Bem-vindo, " + (currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "Usuário") + "!";
-            textViewWelcome.setText(welcomeText);
+            // Buscar dados completos do usuário do Realtime Database
+            databaseReference.child("users").child(currentUser.getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                User user = snapshot.getValue(User.class);
+                                if (user != null && user.getName() != null && !user.getName().isEmpty()) {
+                                    String welcomeText = "Bem-vindo, " + user.getName() + "!";
+                                    textViewWelcome.setText(welcomeText);
+                                } else {
+                                    setDefaultWelcome(currentUser);
+                                }
+                            } else {
+                                setDefaultWelcome(currentUser);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            setDefaultWelcome(currentUser);
+                        }
+                    });
         }
+    }
+    
+    private void setDefaultWelcome(FirebaseUser currentUser) {
+        String userName = "Usuário";
+        if (currentUser.getDisplayName() != null && !currentUser.getDisplayName().isEmpty()) {
+            userName = currentUser.getDisplayName();
+        }
+        String welcomeText = "Bem-vindo, " + userName + "!";
+        textViewWelcome.setText(welcomeText);
     }
 
     private void openEditProfile() {

@@ -2,6 +2,8 @@ package com.miaumigo.app.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,7 +26,9 @@ import com.miaumigo.app.adapters.ProductAdapter;
 import com.miaumigo.app.models.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductsFragment extends Fragment implements ProductAdapter.OnProductClickListener {
 
@@ -36,6 +40,14 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private List<Product> filteredProductList;
+    
+    // Para debounce na busca
+    private Handler searchHandler;
+    private Runnable searchRunnable;
+    private static final long SEARCH_DELAY_MS = 300; // 300ms de delay
+    
+    // Mapa de sinônimos para busca mais inteligente
+    private Map<String, List<String>> synonymsMap;
 
     @Nullable
     @Override
@@ -43,11 +55,22 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         
         initViews(view);
+        initSearchHandler();
+        initSynonymsMap();
         setupRecyclerView();
         setupSearch();
         loadProducts();
         
         return view;
+    }
+    
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Limpa callbacks pendentes
+        if (searchHandler != null && searchRunnable != null) {
+            searchHandler.removeCallbacks(searchRunnable);
+        }
     }
 
     private void initViews(View view) {
@@ -55,6 +78,25 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
         editTextSearch = view.findViewById(R.id.editTextSearch);
         textViewEmpty = view.findViewById(R.id.textViewEmpty);
         progressBar = view.findViewById(R.id.progressBar);
+    }
+    
+    private void initSearchHandler() {
+        searchHandler = new Handler(Looper.getMainLooper());
+    }
+    
+    private void initSynonymsMap() {
+        synonymsMap = new HashMap<>();
+        
+        // Adiciona sinônimos comuns para produtos pet
+        synonymsMap.put("cachorro", List.of("cão", "cães", "dog", "canino"));
+        synonymsMap.put("gato", List.of("felino", "cat", "gatinho"));
+        synonymsMap.put("comida", List.of("ração", "alimento", "feed"));
+        synonymsMap.put("brinquedo", List.of("toy", "brincadeira", "diversão"));
+        synonymsMap.put("remedio", List.of("remédio", "medicamento", "medicina"));
+        synonymsMap.put("higiene", List.of("banho", "limpeza", "shampoo"));
+        synonymsMap.put("caminha", List.of("cama", "colchão", "almofada"));
+        synonymsMap.put("camisa", List.of("camiseta", "blusa", "roupa"));
+        synonymsMap.put("passear", List.of("passeio", "coleira", "guia"));
     }
 
     private void setupRecyclerView() {
@@ -73,7 +115,14 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterProducts(s.toString());
+                // Cancela a busca anterior se ainda estiver pendente
+                if (searchRunnable != null) {
+                    searchHandler.removeCallbacks(searchRunnable);
+                }
+                
+                // Cria uma nova busca com delay (debounce)
+                searchRunnable = () -> filterProducts(s.toString());
+                searchHandler.postDelayed(searchRunnable, SEARCH_DELAY_MS);
             }
 
             @Override
@@ -108,9 +157,40 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
         if (query.isEmpty()) {
             filteredProductList.addAll(productList);
         } else {
+            String lowerQuery = query.toLowerCase().trim();
+            
+            // Busca expandida com sinônimos
+            List<String> searchTerms = new ArrayList<>();
+            searchTerms.add(lowerQuery);
+            
+            // Adiciona sinônimos se existirem
+            for (Map.Entry<String, List<String>> entry : synonymsMap.entrySet()) {
+                if (lowerQuery.contains(entry.getKey())) {
+                    searchTerms.addAll(entry.getValue());
+                }
+                for (String synonym : entry.getValue()) {
+                    if (lowerQuery.contains(synonym)) {
+                        searchTerms.add(entry.getKey());
+                        searchTerms.addAll(entry.getValue());
+                        break;
+                    }
+                }
+            }
+            
+            // Filtra produtos usando todos os termos de busca
             for (Product product : productList) {
-                if (product.getName().toLowerCase().contains(query.toLowerCase()) ||
-                    product.getDescription().toLowerCase().contains(query.toLowerCase())) {
+                String productName = product.getName().toLowerCase();
+                String productDesc = product.getDescription().toLowerCase();
+                
+                boolean matches = false;
+                for (String term : searchTerms) {
+                    if (productName.contains(term) || productDesc.contains(term)) {
+                        matches = true;
+                        break;
+                    }
+                }
+                
+                if (matches && !filteredProductList.contains(product)) {
                     filteredProductList.add(product);
                 }
             }

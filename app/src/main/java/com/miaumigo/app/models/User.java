@@ -6,16 +6,33 @@ public class User {
     private String email;
     private String phone;
     private String avatarUrl;
+    private String role; // "customer" or "vendor"
     private long updatedAt;
+    private long createdAt;
 
     // Required empty constructor for Firebase
-    public User() {}
+    public User() {
+        this.role = "customer"; // Default role
+    }
 
     public User(String uid, String name, String email, String phone) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.role = "customer"; // Default role
+        this.createdAt = System.currentTimeMillis();
+        this.updatedAt = System.currentTimeMillis();
+    }
+    
+    public User(String uid, String name, String email, String phone, String role) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+        this.createdAt = System.currentTimeMillis();
+        this.updatedAt = System.currentTimeMillis();
     }
 
     public String getUid() {
@@ -64,5 +81,29 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    public String getRole() {
+        return role != null ? role : "customer";
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+    public long getCreatedAt() {
+        return createdAt;
+    }
+    
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    public boolean isVendor() {
+        return "vendor".equals(role);
+    }
+    
+    public boolean isCustomer() {
+        return "customer".equals(role) || role == null;
     }
 }
