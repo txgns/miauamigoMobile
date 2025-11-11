@@ -41,6 +41,8 @@
             android:maxLines="5"
             android:minHeight="48dp"
             android:background="@drawable/edit_text_background"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
             android:padding="12dp" />
 
         <ImageButton

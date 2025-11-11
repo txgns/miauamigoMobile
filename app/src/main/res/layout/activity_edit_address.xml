@@ -17,12 +17,14 @@
             android:layout_height="wrap_content"
             android:text="@string/title_edit_address"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/text_primary"
             android:layout_marginBottom="16dp" />
 
         <EditText
             android:id="@+id/editTextStreet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/InputField"
             android:hint="@string/label_street"
             android:inputType="textCapWords" />
 
@@ -31,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_number"
             android:inputType="text" />
 
@@ -39,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_complement"
             android:inputType="text" />
 
@@ -47,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_neighborhood"
             android:inputType="textCapWords" />
 
@@ -55,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_city"
             android:inputType="textCapWords" />
 
@@ -63,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_state"
             android:inputType="textCapCharacters"
             android:maxLength="2" />
@@ -72,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            style="@style/InputField"
             android:hint="@string/label_zip_code"
             android:inputType="number" />
 
@@ -80,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/label_default_address" />
+            android:text="@string/label_default_address"
+            android:textColor="@color/text_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,14 +102,16 @@
                 android:id="@+id/buttonBackAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_back" />
+                android:text="@string/action_back"
+                style="@style/ButtonSecondary" />
 
             <Button
                 android:id="@+id/buttonSaveAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="@string/action_save" />
+                android:text="@string/action_save"
+                style="@style/ButtonPrimary" />
         </LinearLayout>
 
         <ProgressBar

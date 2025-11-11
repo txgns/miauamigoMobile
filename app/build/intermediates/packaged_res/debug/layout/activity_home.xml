@@ -12,10 +12,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
+        android:background="@color/marrom"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="@string/app_name"
-        app:titleTextColor="@color/white" />
+        android:logo="@drawable/miaumigo_logo"
+        app:title=""
+        app:titleTextColor="@android:color/transparent"
+        app:contentInsetStartWithNavigation="0dp" />
 
     <FrameLayout
         android:id="@+id/fragmentContainer"

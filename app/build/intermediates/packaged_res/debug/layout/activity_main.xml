@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/imageViewLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_miaumigo_logo_simple" 
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="48dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/miaumigo_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -23,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="MIAUMIGO SHOP"
+        android:textColor="@color/text_primary"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

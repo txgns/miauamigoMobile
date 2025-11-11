@@ -9,13 +9,14 @@
 
     <ImageView
         android:id="@+id/imageViewLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_miaumigo_logo_simple" />
+        android:src="@drawable/miaumigo_logo"
+        android:adjustViewBounds="true" />
 
     <TextView
         android:id="@+id/textViewAppName"
@@ -34,9 +35,9 @@
         android:id="@+id/textViewLoginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Entrar"
-        android:textSize="28sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
         app:layout_constraintTop_toBottomOf="@+id/textViewAppName"
@@ -47,7 +48,7 @@
         android:id="@+id/textViewLoginSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textSize="18sp"
         android:textColor="@color/text_secondary"
         app:layout_constraintTop_toBottomOf="@+id/textViewLoginTitle"
@@ -62,11 +63,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
+        style="@style/InputField"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:background="@drawable/input_field_background"
         app:layout_constraintTop_toBottomOf="@+id/textViewLoginSubtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -78,11 +77,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"
-        android:hint="Password"
+        style="@style/InputField"
+        android:hint="Senha"
         android:inputType="textPassword"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:background="@drawable/input_field_background"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

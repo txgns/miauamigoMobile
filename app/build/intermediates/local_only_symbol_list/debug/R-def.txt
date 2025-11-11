@@ -10,10 +10,12 @@ color black
 color border_light
 color bottom_nav_item_color
 color bottom_nav_item_selected
+color button_primary
 color error
 color ic_launcher_background
 color info
 color input_background
+color marrom
 color primary
 color primary_client
 color primary_dark
@@ -67,6 +69,8 @@ drawable ic_profile
 drawable ic_profile_placeholder
 drawable ic_search
 drawable input_field_background
+drawable miaumigo_logo
+drawable register_header_background
 drawable status_background
 drawable vendor_background_shape
 id action_address
@@ -338,6 +342,7 @@ string total
 string update_quantity
 style ButtonPrimary
 style ButtonSecondary
+style InputField
 style TextBody
 style TextCaption
 style TextSubtitle

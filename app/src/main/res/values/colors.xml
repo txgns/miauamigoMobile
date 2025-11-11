@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme colors -->
-    <color name="primary">#3498db</color>
-    <color name="primary_dark">#2980b9</color>
-    <color name="primary_light">#85c1e9</color>
-    <color name="accent">#e74c3c</color>
-    <color name="accent_dark">#c0392b</color>
+    <!-- Core palette -->
+    <color name="primary">#FFDE59</color> <!-- Amarelo padrão -->
+    <color name="primary_dark">#D9A441</color> <!-- Amarelo alaranjado -->
+    <color name="primary_light">#FFE88D</color>
+    <color name="accent">#FA7268</color> <!-- Rosa -->
+    <color name="accent_dark">#C9554E</color>
+    <color name="marrom">#522A0F</color>
+    <color name="button_primary">#005F83</color> <!-- Azul para botões -->
 
     <!-- Standard colors -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
     <!-- UI colors -->
-    <color name="background">#f4f6f9</color>
+    <color name="background">#FFF8E1</color>
     <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#E0E0E0</color>
-    <color name="app_background">#f4f6f9</color>
+    <color name="surface_variant">#FFE9A8</color>
+    <color name="app_background">#FFF8E1</color>
     <color name="input_background">#FFFFFF</color>
-    <color name="border_light">#E0E0E0</color>
+    <color name="border_light">#D9A441</color>
 
     <!-- Semantic colors -->
-    <color name="success">#27ae60</color>
-    <color name="error">#c0392b</color>
-    <color name="warning">#f1c40f</color>
-    <color name="info">#3498db</color>
+    <color name="success">#27AE60</color>
+    <color name="error">#C0392B</color>
+    <color name="warning">#E67E22</color>
+    <color name="info">#005F83</color>
 
     <!-- Text colors -->
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
+    <color name="text_primary">#522A0F</color>
+    <color name="text_secondary">#7B4A23</color>
     <color name="text_on_primary">#FFFFFF</color>
 
     <!-- For compatibility with previous files -->
-    <color name="primary_client">#3498db</color>
-    <color name="primary_vendor">#e74c3c</color>
+    <color name="primary_client">@color/primary</color>
+    <color name="primary_vendor">@color/marrom</color>
     
     <!-- Bottom Navigation -->
-    <color name="bottom_nav_item_color">#757575</color>
-    <color name="bottom_nav_item_selected">#3498db</color>
+    <color name="bottom_nav_item_color">#7B4A23</color>
+    <color name="bottom_nav_item_selected">@color/marrom</color>
 </resources>
