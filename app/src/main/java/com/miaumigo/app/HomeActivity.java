@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         fragmentContainerHost = findViewById(R.id.fragmentContainer);
 
         if (chatbotFab != null) {
+            chatbotFab.shrink();
             chatbotFab.setOnClickListener(v -> openChatbotActivity());
         }
 
