@@ -70,9 +70,6 @@ MiauMigo é um aplicativo mobile de e-commerce especializado em produtos para an
    - ✅ Validação de tipo de conta
    - ✅ Fluxos separados para cliente/vendedor
 
-📄 **Documentação Completa:** Veja [CORREÇÕES_IMPLEMENTADAS.md](CORREÇÕES_IMPLEMENTADAS.md) para detalhes técnicos
-
-📘 **Guia de Uso:** Veja [GUIA_RAPIDO.md](GUIA_RAPIDO.md) para instruções de uso
 
 ## 🏗️ Arquitetura
 
@@ -294,10 +291,6 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abrir um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ## 👨‍💻 Desenvolvedor
 
