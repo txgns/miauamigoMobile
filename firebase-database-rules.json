@@ -1,14 +1,65 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true,
     "users": {
-      ".read": true,
-      ".write": true
+      "$uid": {
+        ".read": "$uid === auth.uid || (root.child('users').child(auth.uid).child('role').val() === 'vendor')",
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "products": {
+      ".read": "auth != null && (data.child('visibleToCustomers').val() === true || root.child('users').child(auth.uid).child('role').val() === 'vendor')",
+      "$productId": {
+        ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor' && (data.child('vendorId').val() === auth.uid || !data.exists())"
+      }
+    },
+    "stores": {
+      ".read": "auth != null",
+      "$storeId": {
+        ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor' && (data.child('vendorId').val() === auth.uid || !data.exists())"
+      }
+    },
+    "vendor_stores": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'"
+    },
+    "chats": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'",
+      "$chatId": {
+        ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor' && (data.child('vendor1Id').val() === auth.uid || data.child('vendor2Id').val() === auth.uid || !data.exists())",
+        "messages": {
+          "$messageId": {
+            ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor' && (data.child('senderId').val() === auth.uid || !data.exists())"
+          }
+        }
+      }
+    },
+    "announcements": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'",
+      "$announcementId": {
+        ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor' && (data.child('vendorId').val() === auth.uid || !data.exists())"
+      }
+    },
+    "vendor_announcements": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'"
+    },
+    "vendors": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'vendor'",
+      "$vendorId": {
+        ".write": "$vendorId === auth.uid && root.child('users').child(auth.uid).child('role').val() === 'vendor'"
+      }
+    },
+    "orders": {
+      "$orderId": {
+        ".read": "auth != null && (data.child('userId').val() === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'vendor')",
+        ".write": "auth != null && (data.child('userId').val() === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'vendor')"
+      }
     },
     "addresses": {
-      ".read": true,
-      ".write": true
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
     },
     "test": {
       ".read": true,

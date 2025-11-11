@@ -59,6 +59,31 @@
             android:exported="false"
             android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
+        <activity
+            android:name=".VendorHomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
+            android:name=".CreateAnnouncementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
+            android:name=".StoreManagementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
+            android:name=".ProductManagementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
     </application>
 
 </manifest>

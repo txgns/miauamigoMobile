@@ -20,6 +20,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.ProductDetailActivity;
 import com.miaumigo.app.R;
 import com.miaumigo.app.adapters.ProductAdapter;
@@ -40,6 +45,8 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private List<Product> filteredProductList;
+    private DatabaseReference productsReference;
+    private ValueEventListener productsListener;
     
     // Para debounce na busca
     private Handler searchHandler;
@@ -70,6 +77,9 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
         // Limpa callbacks pendentes
         if (searchHandler != null && searchRunnable != null) {
             searchHandler.removeCallbacks(searchRunnable);
+        }
+        if (productsReference != null && productsListener != null) {
+            productsReference.removeEventListener(productsListener);
         }
     }
 
@@ -132,23 +142,55 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
 
     private void loadProducts() {
         showLoading(true);
-        
-        // Simular carregamento de produtos
-        // Em uma implementação real, isso viria do Firebase ou API
-        productList.clear();
-        productList.add(new Product("1", "Ração Premium para Cães", "Ração de alta qualidade para cães adultos", 89.90, "https://example.com/racao.jpg", 4.5, true));
-        productList.add(new Product("2", "Brinquedo para Gatos", "Brinquedo interativo para gatos", 25.50, "https://example.com/brinquedo.jpg", 4.2, true));
-        productList.add(new Product("3", "Coleira Antipulgas", "Coleira repelente de pulgas e carrapatos", 45.00, "https://example.com/coleira.jpg", 4.7, true));
-        productList.add(new Product("4", "Areia Sanitária", "Areia sanitária para gatos", 35.90, "https://example.com/areia.jpg", 4.0, true));
-        productList.add(new Product("5", "Petisco para Cães", "Petisco natural para cães", 15.80, "https://example.com/petisco.jpg", 4.3, true));
-        productList.add(new Product("6", "Bebedouro Automático", "Bebedouro com sensor automático", 120.00, "https://example.com/bebedouro.jpg", 4.6, true));
-        
-        filteredProductList.clear();
-        filteredProductList.addAll(productList);
-        productAdapter.notifyDataSetChanged();
-        
-        showLoading(false);
-        updateEmptyState();
+        if (productsReference == null) {
+            productsReference = FirebaseDatabase.getInstance().getReference("products");
+        }
+        if (productsListener != null) {
+            productsReference.removeEventListener(productsListener);
+        }
+
+        productsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList.clear();
+
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Product product = productSnapshot.getValue(Product.class);
+                    if (product != null && product.isVisibleToCustomers() && product.isInStock()) {
+                        productList.add(product);
+                    }
+                }
+
+                productList.sort((p1, p2) -> {
+                    long time1 = p1.getUpdatedAt() > 0 ? p1.getUpdatedAt() : p1.getCreatedAt();
+                    long time2 = p2.getUpdatedAt() > 0 ? p2.getUpdatedAt() : p2.getCreatedAt();
+                    return Long.compare(time2, time1);
+                });
+
+                String currentQuery = editTextSearch.getText() != null ? editTextSearch.getText().toString() : "";
+                if (currentQuery.isEmpty()) {
+                    filteredProductList.clear();
+                    filteredProductList.addAll(productList);
+                    productAdapter.notifyDataSetChanged();
+                    updateEmptyState();
+                    showLoading(false);
+                } else {
+                    filterProducts(currentQuery);
+                    showLoading(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                showLoading(false);
+                Toast.makeText(getContext(), "Erro ao carregar produtos: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                filteredProductList.clear();
+                productAdapter.notifyDataSetChanged();
+                updateEmptyState();
+            }
+        };
+
+        productsReference.addValueEventListener(productsListener);
     }
 
     private void filterProducts(String query) {
@@ -179,8 +221,8 @@ public class ProductsFragment extends Fragment implements ProductAdapter.OnProdu
             
             // Filtra produtos usando todos os termos de busca
             for (Product product : productList) {
-                String productName = product.getName().toLowerCase();
-                String productDesc = product.getDescription().toLowerCase();
+                String productName = product.getName() != null ? product.getName().toLowerCase() : "";
+                String productDesc = product.getDescription() != null ? product.getDescription().toLowerCase() : "";
                 
                 boolean matches = false;
                 for (String term : searchTerms) {

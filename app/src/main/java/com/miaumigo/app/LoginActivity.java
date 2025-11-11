@@ -182,7 +182,12 @@ public class LoginActivity extends AppCompatActivity {
                                     return;
                                 }
                                 
-                                openHomeActivity();
+                                // Redireciona para a activity apropriada
+                                if (userIsVendor) {
+                                    openVendorHomeActivity();
+                                } else {
+                                    openHomeActivity();
+                                }
                             } else {
                                 createUserInDatabase(firebaseUser);
                             }
@@ -232,7 +237,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            openHomeActivity();
+                            // Redireciona para a activity apropriada
+                            if (isVendorLogin) {
+                                openVendorHomeActivity();
+                            } else {
+                                openHomeActivity();
+                            }
                         } else {
                             Toast.makeText(LoginActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
                         }
@@ -248,6 +258,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openVendorHomeActivity() {
+        Intent intent = new Intent(this, VendorHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

@@ -188,7 +188,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 "Cadastro de vendedor realizado com sucesso!" : 
                                 getString(R.string.message_registration_successful);
                             Toast.makeText(RegisterActivity.this, successMessage, Toast.LENGTH_SHORT).show();
-                            openHomeActivity();
+                            
+                            // Redireciona para a activity apropriada
+                            if (isVendorRegister) {
+                                openVendorHomeActivity();
+                            } else {
+                                openHomeActivity();
+                            }
                         } else {
                             Toast.makeText(RegisterActivity.this, R.string.network_error, Toast.LENGTH_LONG).show();
                         }
@@ -198,6 +204,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void openHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openVendorHomeActivity() {
+        Intent intent = new Intent(this, VendorHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

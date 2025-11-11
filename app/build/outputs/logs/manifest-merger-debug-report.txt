@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-64:12
-INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-64:12
-INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-64:12
-INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-64:12
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-89:12
+INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-89:12
+INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-89:12
+INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:2:1-89:12
 MERGED from [androidx.databinding:viewbinding:8.1.2] C:\Users\txgns\.gradle\caches\transforms-3\92616e5361ba2589a8f22f999d049611\transformed\jetified-viewbinding-8.1.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.5] C:\Users\txgns\.gradle\caches\transforms-3\9218c18b3b6c67a6b4c96ff8344084f1\transformed\navigation-common-2.7.5\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.5] C:\Users\txgns\.gradle\caches\transforms-3\143139a2279e2ebffb4c5d309e80b7fa\transformed\navigation-common-ktx-2.7.5\AndroidManifest.xml:2:1-7:12
@@ -157,8 +157,8 @@ ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\Androi
 	android:name
 		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:7:22-73
 application
-ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:9:5-62:19
-INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:9:5-62:19
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:9:5-87:19
+INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:9:5-87:19
 MERGED from [com.google.android.material:material:1.10.0] C:\Users\txgns\.gradle\caches\transforms-3\6d7643d92259925296ed1b0950b70188\transformed\material-1.10.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.10.0] C:\Users\txgns\.gradle\caches\transforms-3\6d7643d92259925296ed1b0950b70188\transformed\material-1.10.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\txgns\.gradle\caches\transforms-3\71e942c459feac9478e5d8fce97972d5\transformed\jetified-firebase-auth-22.3.1\AndroidManifest.xml:28:5-73:19
@@ -315,6 +315,46 @@ ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\Androi
 		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:60:13-62
 	android:name
 		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:58:13-48
+activity#com.miaumigo.app.VendorHomeActivity
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:62:9-65:65
+	android:exported
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:64:13-37
+	android:theme
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:65:13-62
+	android:name
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:63:13-47
+activity#com.miaumigo.app.ChatActivity
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:67:9-70:65
+	android:exported
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:69:13-37
+	android:theme
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:70:13-62
+	android:name
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:68:13-41
+activity#com.miaumigo.app.CreateAnnouncementActivity
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:72:9-75:65
+	android:exported
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:74:13-37
+	android:theme
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:75:13-62
+	android:name
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:73:13-55
+activity#com.miaumigo.app.StoreManagementActivity
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:77:9-80:65
+	android:exported
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:79:13-37
+	android:theme
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:80:13-62
+	android:name
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:78:13-52
+activity#com.miaumigo.app.ProductManagementActivity
+ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:82:9-85:65
+	android:exported
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:84:13-37
+	android:theme
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:85:13-62
+	android:name
+		ADDED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml:83:13-54
 uses-sdk
 INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\txgns\Documents\Projetos\miauamigoMobile\app\src\main\AndroidManifest.xml

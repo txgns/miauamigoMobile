@@ -65,8 +65,33 @@ public class MainActivity extends AppCompatActivity {
         
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
-            // Usuário já está logado, vai para a tela principal
-            openHomeActivity();
+            // Verifica o role do usuário e redireciona para a activity apropriada
+            com.google.firebase.database.DatabaseReference userRef = 
+                com.google.firebase.database.FirebaseDatabase.getInstance()
+                    .getReference("users").child(currentUser.getUid());
+            
+            userRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot snapshot) {
+                    showLoading(false);
+                    if (snapshot.exists()) {
+                        com.miaumigo.app.models.User user = snapshot.getValue(com.miaumigo.app.models.User.class);
+                        if (user != null && "vendor".equals(user.getRole())) {
+                            openVendorHomeActivity();
+                        } else {
+                            openHomeActivity();
+                        }
+                    } else {
+                        openHomeActivity();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) {
+                    showLoading(false);
+                    openHomeActivity();
+                }
+            });
         } else {
             // Usuário não está logado, mostra as opções de login/registro
             showLoading(false);
@@ -117,6 +142,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    private void openVendorHomeActivity() {
+        Intent intent = new Intent(this, VendorHomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         buttonClient.setEnabled(!show);
@@ -130,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         // Verifica se o usuário está logado quando a atividade é iniciada
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
-            openHomeActivity();
+            checkUserAuthentication();
         }
     }
 }

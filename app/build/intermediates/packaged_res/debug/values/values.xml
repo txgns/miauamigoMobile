@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
+    <array name="announcement_types">
+        <item>Venda</item>
+        <item>Troca</item>
+        <item>Busca</item>
+    </array>
+    <array name="product_conditions">
+        <item>Novo</item>
+        <item>Usado</item>
+        <item>Recondicionado</item>
+    </array>
     <color name="accent">#e74c3c</color>
     <color name="accent_dark">#c0392b</color>
     <color name="app_background">#f4f6f9</color>

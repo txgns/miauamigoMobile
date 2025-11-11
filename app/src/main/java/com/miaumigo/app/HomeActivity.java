@@ -128,7 +128,39 @@ public class HomeActivity extends AppCompatActivity {
         if (currentUser == null) {
             // Usuário não está logado, volta para a tela principal
             openMainActivity();
+            return;
         }
+        
+        // Verifica se o usuário é vendedor e redireciona
+        com.google.firebase.database.DatabaseReference userRef = 
+            com.google.firebase.database.FirebaseDatabase.getInstance()
+                .getReference("users").child(currentUser.getUid());
+        
+        userRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    com.miaumigo.app.models.User user = snapshot.getValue(com.miaumigo.app.models.User.class);
+                    if (user != null && "vendor".equals(user.getRole())) {
+                        // É vendedor, redireciona para VendorHomeActivity
+                        openVendorHomeActivity();
+                    }
+                    // Se for cliente, continua na HomeActivity
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) {
+                // Em caso de erro, continua na HomeActivity
+            }
+        });
+    }
+
+    private void openVendorHomeActivity() {
+        Intent intent = new Intent(this, VendorHomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void openMainActivity() {

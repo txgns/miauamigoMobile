@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="announcement_types">
+        <item>Venda</item>
+        <item>Troca</item>
+        <item>Busca</item>
+    </array>
+    
+    <array name="product_conditions">
+        <item>Novo</item>
+        <item>Usado</item>
+        <item>Recondicionado</item>
+    </array>
+</resources>
+
