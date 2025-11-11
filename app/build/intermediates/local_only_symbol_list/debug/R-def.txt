@@ -29,6 +29,9 @@ color text_primary
 color text_secondary
 color warning
 color white
+dimen chatbot_fab_bottom_space
+drawable bot_message_bg
+drawable button_chatbot_background
 drawable button_client_background
 drawable button_secondary_background
 drawable button_vendor_background
@@ -39,6 +42,7 @@ drawable ic_arrow_back
 drawable ic_cart
 drawable ic_cat_placeholder
 drawable ic_cat_placeholder_2
+drawable ic_chatbot
 drawable ic_dashboard_black_24dp
 drawable ic_delete
 drawable ic_dog_placeholder
@@ -72,10 +76,13 @@ drawable input_field_background
 drawable miaumigo_logo
 drawable register_header_background
 drawable status_background
+drawable user_message_bg
 drawable vendor_background_shape
 id action_address
 id action_logout
 id action_profile
+id bot_message_text
+id bot_message_time
 id bottomNavigationView
 id buttonAddToCart
 id buttonBack
@@ -99,6 +106,9 @@ id buttonSaveAddress
 id buttonSaveProfile
 id buttonSend
 id buttonVendor
+id chat_recycler_view
+id chatbotAnchor
+id chatbotSpacer
 id checkBoxInStock
 id checkBoxVisibleToCustomers
 id checkboxDefaultAddress
@@ -124,8 +134,11 @@ id editTextStoreName
 id editTextStreet
 id editTextZip
 id fabAddProduct
+id fabChatbot
 id fabCreateAnnouncement
 id fragmentContainer
+id fragmentContent
+id homeContent
 id imageViewAvatar
 id imageViewFavorite
 id imageViewLogo
@@ -134,6 +147,7 @@ id imageViewPetGender
 id imageViewProduct
 id imageViewStoreBanner
 id imageViewStoreLogo
+id message_input
 id navigation_announcements
 id navigation_cart
 id navigation_chat
@@ -154,6 +168,7 @@ id recyclerViewChats
 id recyclerViewMessages
 id recyclerViewOrders
 id recyclerViewProducts
+id send_button
 id spinnerCondition
 id spinnerType
 id textInputLayoutSearch
@@ -203,9 +218,12 @@ id textViewVendorName
 id textViewVendorPhone
 id textViewWelcome
 id toolbar
+id user_message_text
+id user_message_time
 id viewBackgroundShape
 id viewOnlineIndicator
 layout activity_chat
+layout activity_chatbot
 layout activity_create_announcement
 layout activity_edit_address
 layout activity_edit_profile
@@ -230,6 +248,8 @@ layout fragment_vendor_store
 layout item_announcement
 layout item_cart
 layout item_chat
+layout item_chatbot_bot_message
+layout item_chatbot_user_message
 layout item_message_received
 layout item_message_sent
 layout item_order
@@ -252,6 +272,7 @@ string cancelled
 string cart
 string cart_empty
 string categories
+string chatbot_send
 string checkout
 string confirm_password
 string default_web_client_id

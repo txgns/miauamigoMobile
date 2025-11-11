@@ -1,10 +1,12 @@
 package com.miaumigo.app;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +31,9 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
     private BottomNavigationView bottomNavigationView;
+    private ExtendedFloatingActionButton chatbotFab;
+    private FrameLayout chatbotAnchor;
+    private View fragmentContainerHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,27 @@ public class HomeActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        chatbotFab = findViewById(R.id.fabChatbot);
+        chatbotAnchor = findViewById(R.id.chatbotAnchor);
+        fragmentContainerHost = findViewById(R.id.fragmentContainer);
+
+        if (chatbotFab != null) {
+            chatbotFab.setOnClickListener(v -> openChatbotActivity());
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            getWindow().getDecorView().setOnApplyWindowInsetsListener((v, insets) -> {
+                int insetBottom = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
+                adjustChatbotAnchor(insetBottom);
+                return v.onApplyWindowInsets(insets);
+            });
+        } else {
+            fragmentContainerHost.setOnApplyWindowInsetsListener((v, insets) -> {
+                int insetBottom = insets.getSystemWindowInsetBottom();
+                adjustChatbotAnchor(insetBottom);
+                return v.onApplyWindowInsets(insets);
+            });
+        }
     }
 
     private void setupBottomNavigation() {
@@ -181,6 +208,30 @@ public class HomeActivity extends AppCompatActivity {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    private void openChatbotActivity() {
+        Intent intent = new Intent(this, ChatbotActivity.class);
+        startActivity(intent);
+    }
+
+    private void adjustChatbotAnchor(int systemInsetBottom) {
+        if (chatbotAnchor == null || bottomNavigationView == null) {
+            return;
+        }
+        int bottomOffset = bottomNavigationView.getHeight() + systemInsetBottom;
+        chatbotAnchor.setPadding(0, 0, 0, bottomOffset);
+    }
+
+    private void updateChatbotOffset() {
+        int insetBottom = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            android.view.WindowInsets insets = chatbotAnchor.getRootWindowInsets();
+            if (insets != null) {
+                insetBottom = insets.getStableInsetBottom();
+            }
+        }
+        adjustChatbotAnchor(insetBottom);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -207,5 +258,25 @@ public class HomeActivity extends AppCompatActivity {
         if (currentUser == null) {
             openMainActivity();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateChatbotOffset();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            updateChatbotOffset();
+        }
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        updateChatbotOffset();
     }
 }

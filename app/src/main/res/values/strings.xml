@@ -107,4 +107,5 @@
     <string name="error_login_failed">Falha no login</string>
     <string name="error_registration_failed">Falha no cadastro</string>
     <string name="message_registration_successful">Cadastro realizado com sucesso!</string>
+    <string name="chatbot_send">Enviar mensagem</string>
 </resources>

@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -105,6 +106,11 @@ public class EditProfileActivity extends AppCompatActivity {
                             }
                         }
 
+                        EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+                        currentUser.setName(encryptionManager.decrypt(currentUser.getName()));
+                        currentUser.setEmail(encryptionManager.decrypt(currentUser.getEmail()));
+                        currentUser.setPhone(encryptionManager.decrypt(currentUser.getPhone()));
+
                         editTextName.setText(currentUser.getName() != null ? currentUser.getName() : "");
                         editTextEmail.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
                         editTextPhone.setText(currentUser.getPhone() != null ? currentUser.getPhone() : "");
@@ -148,9 +154,10 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.error_user_not_authenticated, Toast.LENGTH_LONG).show();
             return;
         }
-        currentUser.setName(name);
-        currentUser.setPhone(TextUtils.isEmpty(phone) ? null : phone);
-        currentUser.setEmail(firebaseUser.getEmail());
+        EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+        currentUser.setName(encryptionManager.encrypt(name));
+        currentUser.setPhone(TextUtils.isEmpty(phone) ? null : encryptionManager.encrypt(phone));
+        currentUser.setEmail(encryptionManager.encrypt(firebaseUser.getEmail()));
         currentUser.setUpdatedAt(System.currentTimeMillis());
         if (TextUtils.isEmpty(currentUser.getUid())) {
             currentUser.setUid(firebaseUser.getUid());

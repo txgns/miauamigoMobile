@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -168,11 +169,13 @@ public class RegisterActivity extends AppCompatActivity {
         // Define o role baseado no tipo de registro
         String role = isVendorRegister ? "vendor" : "customer";
         
+        EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+
         User user = new User(
                 firebaseUser.getUid(),
-                name,
-                firebaseUser.getEmail(),
-                phone.isEmpty() ? null : phone,
+                encryptionManager.encrypt(name),
+                encryptionManager.encrypt(firebaseUser.getEmail()),
+                phone.isEmpty() ? null : encryptionManager.encrypt(phone),
                 role
         );
         user.setUpdatedAt(System.currentTimeMillis());

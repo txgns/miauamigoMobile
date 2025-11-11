@@ -10,9 +10,11 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,13 +22,28 @@ import java.lang.String;
 
 public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final BottomNavigationView bottomNavigationView;
 
   @NonNull
-  public final FrameLayout fragmentContainer;
+  public final FrameLayout chatbotAnchor;
+
+  @NonNull
+  public final View chatbotSpacer;
+
+  @NonNull
+  public final ExtendedFloatingActionButton fabChatbot;
+
+  @NonNull
+  public final CoordinatorLayout fragmentContainer;
+
+  @NonNull
+  public final FrameLayout fragmentContent;
+
+  @NonNull
+  public final LinearLayout homeContent;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -34,19 +51,27 @@ public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
   public final Toolbar toolbar;
 
-  private ActivityHomeBinding(@NonNull LinearLayout rootView,
-      @NonNull BottomNavigationView bottomNavigationView, @NonNull FrameLayout fragmentContainer,
-      @NonNull ProgressBar progressBar, @NonNull Toolbar toolbar) {
+  private ActivityHomeBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull BottomNavigationView bottomNavigationView, @NonNull FrameLayout chatbotAnchor,
+      @NonNull View chatbotSpacer, @NonNull ExtendedFloatingActionButton fabChatbot,
+      @NonNull CoordinatorLayout fragmentContainer, @NonNull FrameLayout fragmentContent,
+      @NonNull LinearLayout homeContent, @NonNull ProgressBar progressBar,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.bottomNavigationView = bottomNavigationView;
+    this.chatbotAnchor = chatbotAnchor;
+    this.chatbotSpacer = chatbotSpacer;
+    this.fabChatbot = fabChatbot;
     this.fragmentContainer = fragmentContainer;
+    this.fragmentContent = fragmentContent;
+    this.homeContent = homeContent;
     this.progressBar = progressBar;
     this.toolbar = toolbar;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -77,9 +102,39 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.chatbotAnchor;
+      FrameLayout chatbotAnchor = ViewBindings.findChildViewById(rootView, id);
+      if (chatbotAnchor == null) {
+        break missingId;
+      }
+
+      id = R.id.chatbotSpacer;
+      View chatbotSpacer = ViewBindings.findChildViewById(rootView, id);
+      if (chatbotSpacer == null) {
+        break missingId;
+      }
+
+      id = R.id.fabChatbot;
+      ExtendedFloatingActionButton fabChatbot = ViewBindings.findChildViewById(rootView, id);
+      if (fabChatbot == null) {
+        break missingId;
+      }
+
       id = R.id.fragmentContainer;
-      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      CoordinatorLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
       if (fragmentContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.fragmentContent;
+      FrameLayout fragmentContent = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContent == null) {
+        break missingId;
+      }
+
+      id = R.id.homeContent;
+      LinearLayout homeContent = ViewBindings.findChildViewById(rootView, id);
+      if (homeContent == null) {
         break missingId;
       }
 
@@ -95,8 +150,9 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityHomeBinding((LinearLayout) rootView, bottomNavigationView,
-          fragmentContainer, progressBar, toolbar);
+      return new ActivityHomeBinding((CoordinatorLayout) rootView, bottomNavigationView,
+          chatbotAnchor, chatbotSpacer, fabChatbot, fragmentContainer, fragmentContent, homeContent,
+          progressBar, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

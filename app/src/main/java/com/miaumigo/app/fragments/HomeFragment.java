@@ -23,6 +23,7 @@ import com.miaumigo.app.EditProfileActivity;
 import com.miaumigo.app.EditAddressActivity;
 import com.miaumigo.app.R;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class HomeFragment extends Fragment {
 
@@ -63,31 +64,33 @@ public class HomeFragment extends Fragment {
 
     private void loadUserData() {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null) {
-            // Buscar dados completos do usuário do Realtime Database
-            databaseReference.child("users").child(currentUser.getUid())
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                User user = snapshot.getValue(User.class);
-                                if (user != null && user.getName() != null && !user.getName().isEmpty()) {
+        if (currentUser == null) {
+            return;
+        }
+        databaseReference.child("users").child(currentUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            User user = snapshot.getValue(User.class);
+                            if (user != null) {
+                                EncryptionManager encryptionManager = EncryptionManager.getInstance(requireContext());
+                                user.setName(encryptionManager.decrypt(user.getName()));
+                                if (user.getName() != null && !user.getName().isEmpty()) {
                                     String welcomeText = "Bem-vindo, " + user.getName() + "!";
                                     textViewWelcome.setText(welcomeText);
-                                } else {
-                                    setDefaultWelcome(currentUser);
+                                    return;
                                 }
-                            } else {
-                                setDefaultWelcome(currentUser);
                             }
                         }
+                        setDefaultWelcome(currentUser);
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            setDefaultWelcome(currentUser);
-                        }
-                    });
-        }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        setDefaultWelcome(currentUser);
+                    }
+                });
     }
     
     private void setDefaultWelcome(FirebaseUser currentUser) {

@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.models.Address;
+import com.miaumigo.app.utils.EncryptionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +110,12 @@ public class EditAddressActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showLoading(false);
                 List<Address> addresses = new ArrayList<>();
+                EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
                 for (DataSnapshot addressSnapshot : snapshot.getChildren()) {
                     Address address = addressSnapshot.getValue(Address.class);
                     if (address != null) {
                         address.setId(addressSnapshot.getKey());
+                        decryptAddressFields(address, encryptionManager);
                         addresses.add(address);
                     }
                 }
@@ -156,6 +159,16 @@ public class EditAddressActivity extends AppCompatActivity {
         checkBoxDefault.setChecked(address.isDefault());
     }
 
+    private void decryptAddressFields(Address address, EncryptionManager encryptionManager) {
+        address.setStreet(encryptionManager.decrypt(address.getStreet()));
+        address.setNumber(encryptionManager.decrypt(address.getNumber()));
+        address.setComplement(encryptionManager.decrypt(address.getComplement()));
+        address.setNeighborhood(encryptionManager.decrypt(address.getNeighborhood()));
+        address.setCity(encryptionManager.decrypt(address.getCity()));
+        address.setState(encryptionManager.decrypt(address.getState()));
+        address.setZipCode(encryptionManager.decrypt(address.getZipCode()));
+    }
+
     private void saveAddress() {
         if (firebaseUser == null) {
             return;
@@ -182,9 +195,24 @@ public class EditAddressActivity extends AppCompatActivity {
             currentAddress.setUserId(firebaseUser.getUid());
         }
 
+        String complement = editTextComplement.getText().toString().trim();
+        EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+
+        Address addressToSave = new Address();
+        addressToSave.setId(currentAddress.getId());
+        addressToSave.setUserId(currentAddress.getUserId());
+        addressToSave.setStreet(encryptionManager.encrypt(street));
+        addressToSave.setNumber(encryptionManager.encrypt(number));
+        addressToSave.setComplement(encryptionManager.encrypt(complement));
+        addressToSave.setNeighborhood(encryptionManager.encrypt(neighborhood));
+        addressToSave.setCity(encryptionManager.encrypt(city));
+        addressToSave.setState(encryptionManager.encrypt(state));
+        addressToSave.setZipCode(encryptionManager.encrypt(zip));
+        addressToSave.setDefault(checkBoxDefault.isChecked());
+
         currentAddress.setStreet(street);
         currentAddress.setNumber(number);
-        currentAddress.setComplement(editTextComplement.getText().toString().trim());
+        currentAddress.setComplement(complement);
         currentAddress.setNeighborhood(neighborhood);
         currentAddress.setCity(city);
         currentAddress.setState(state);
@@ -201,10 +229,12 @@ public class EditAddressActivity extends AppCompatActivity {
                 return;
             }
             currentAddress.setId(addressId);
+            addressToSave.setId(addressId);
         }
         currentAddress.setUpdatedAt(System.currentTimeMillis());
+        addressToSave.setUpdatedAt(currentAddress.getUpdatedAt());
 
-        addressesRef.child(currentAddress.getId()).setValue(currentAddress)
+        addressesRef.child(currentAddress.getId()).setValue(addressToSave)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

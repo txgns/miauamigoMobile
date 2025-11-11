@@ -26,6 +26,7 @@ import com.miaumigo.app.EditAddressActivity;
 import com.miaumigo.app.MainActivity;
 import com.miaumigo.app.R;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class ProfileFragment extends Fragment {
 
@@ -87,6 +88,10 @@ public class ProfileFragment extends Fragment {
                             if (snapshot.exists()) {
                                 User user = snapshot.getValue(User.class);
                                 if (user != null) {
+                                    EncryptionManager encryptionManager = EncryptionManager.getInstance(requireContext());
+                                    user.setName(encryptionManager.decrypt(user.getName()));
+                                    user.setEmail(encryptionManager.decrypt(user.getEmail()));
+                                    user.setPhone(encryptionManager.decrypt(user.getPhone()));
                                     displayUserData(user);
                                 } else {
                                     displayBasicUserData(currentUser);

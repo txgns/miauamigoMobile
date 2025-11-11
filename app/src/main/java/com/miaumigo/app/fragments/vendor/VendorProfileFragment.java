@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.EditProfileActivity;
 import com.miaumigo.app.R;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class VendorProfileFragment extends Fragment {
 
@@ -76,6 +77,9 @@ public class VendorProfileFragment extends Fragment {
                             if (snapshot.exists()) {
                                 User user = snapshot.getValue(User.class);
                                 if (user != null) {
+                                    EncryptionManager encryptionManager = EncryptionManager.getInstance(requireContext());
+                                    user.setName(encryptionManager.decrypt(user.getName()));
+                                    user.setPhone(encryptionManager.decrypt(user.getPhone()));
                                     displayUserData(user, currentUser);
                                 }
                             }

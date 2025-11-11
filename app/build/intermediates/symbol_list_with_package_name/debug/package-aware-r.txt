@@ -2245,6 +2245,7 @@ dimen browser_actions_context_menu_min_padding
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
+dimen chatbot_fab_bottom_space
 dimen clock_face_margin_start
 dimen compat_button_inset_horizontal_material
 dimen compat_button_inset_vertical_material
@@ -3037,6 +3038,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bot_message_bg
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3045,6 +3047,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_chatbot_background
 drawable button_client_background
 drawable button_secondary_background
 drawable button_vendor_background
@@ -3088,6 +3091,7 @@ drawable ic_call_decline_low
 drawable ic_cart
 drawable ic_cat_placeholder
 drawable ic_cat_placeholder_2
+drawable ic_chatbot
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_dashboard_black_24dp
@@ -3208,6 +3212,7 @@ drawable status_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user_message_bg
 drawable vendor_background_shape
 id ALT
 id BOTTOM_END
@@ -3308,6 +3313,8 @@ id beginOnFirstDraw
 id beginning
 id bestChoice
 id blocking
+id bot_message_text
+id bot_message_time
 id bottom
 id bottomNavigationView
 id bounce
@@ -3354,6 +3361,9 @@ id center_vertical
 id chain
 id chain2
 id chains
+id chat_recycler_view
+id chatbotAnchor
+id chatbotSpacer
 id checkBoxInStock
 id checkBoxVisibleToCustomers
 id checkbox
@@ -3451,6 +3461,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fabAddProduct
+id fabChatbot
 id fabCreateAnnouncement
 id fade
 id fill
@@ -3467,6 +3478,7 @@ id flip
 id floating
 id forever
 id fragmentContainer
+id fragmentContent
 id fragment_container_view_tag
 id frost
 id fullscreen_header
@@ -3484,6 +3496,7 @@ id hide_ime_id
 id hideable
 id home
 id homeAsUp
+id homeContent
 id honorRequest
 id horizontal_only
 id icon
@@ -3552,6 +3565,7 @@ id material_timepicker_view
 id material_value_index
 id matrix
 id message
+id message_input
 id middle
 id mini
 id month_grid
@@ -3698,6 +3712,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id send_button
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3838,6 +3853,8 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id user_message_text
+id user_message_time
 id vertical_only
 id viewBackgroundShape
 id viewOnlineIndicator
@@ -3976,6 +3993,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_chat
+layout activity_chatbot
 layout activity_create_announcement
 layout activity_edit_address
 layout activity_edit_profile
@@ -4020,6 +4038,8 @@ layout ime_secondary_split_test_activity
 layout item_announcement
 layout item_cart
 layout item_chat
+layout item_chatbot_bot_message
+layout item_chatbot_user_message
 layout item_message_received
 layout item_message_sent
 layout item_order
@@ -4150,6 +4170,7 @@ string categories
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
+string chatbot_send
 string checkout
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button

@@ -2244,6 +2244,7 @@ int dimen browser_actions_context_menu_min_padding 0x7f070053
 int dimen cardview_compat_inset_shadow 0x7f070054
 int dimen cardview_default_elevation 0x7f070055
 int dimen cardview_default_radius 0x7f070056
+int dimen chatbot_fab_bottom_space 0x7f07031e
 int dimen clock_face_margin_start 0x7f070057
 int dimen compat_button_inset_horizontal_material 0x7f070058
 int dimen compat_button_inset_vertical_material 0x7f070059
@@ -3036,6 +3037,7 @@ int drawable abc_textfield_search_material 0x7f080076
 int drawable abc_vector_test 0x7f080077
 int drawable avd_hide_password 0x7f080078
 int drawable avd_show_password 0x7f080079
+int drawable bot_message_bg 0x7f080126
 int drawable btn_checkbox_checked_mtrl 0x7f08007a
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f08007b
 int drawable btn_checkbox_unchecked_mtrl 0x7f08007c
@@ -3044,6 +3046,7 @@ int drawable btn_radio_off_mtrl 0x7f08007e
 int drawable btn_radio_off_to_on_mtrl_animation 0x7f08007f
 int drawable btn_radio_on_mtrl 0x7f080080
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f080081
+int drawable button_chatbot_background 0x7f080127
 int drawable button_client_background 0x7f080082
 int drawable button_secondary_background 0x7f080083
 int drawable button_vendor_background 0x7f080084
@@ -3087,6 +3090,7 @@ int drawable ic_call_decline_low 0x7f0800a9
 int drawable ic_cart 0x7f0800aa
 int drawable ic_cat_placeholder 0x7f0800ab
 int drawable ic_cat_placeholder_2 0x7f0800ac
+int drawable ic_chatbot 0x7f080129
 int drawable ic_clear_black_24 0x7f0800ad
 int drawable ic_clock_black_24dp 0x7f0800ae
 int drawable ic_dashboard_black_24dp 0x7f0800af
@@ -3207,6 +3211,7 @@ int drawable status_background 0x7f080121
 int drawable test_level_drawable 0x7f080122
 int drawable tooltip_frame_dark 0x7f080123
 int drawable tooltip_frame_light 0x7f080124
+int drawable user_message_bg 0x7f080128
 int drawable vendor_background_shape 0x7f080125
 int id ALT 0x7f090000
 int id BOTTOM_END 0x7f090001
@@ -3307,6 +3312,8 @@ int id beginOnFirstDraw 0x7f09005f
 int id beginning 0x7f090060
 int id bestChoice 0x7f090061
 int id blocking 0x7f090062
+int id bot_message_text 0x7f09028b
+int id bot_message_time 0x7f09028c
 int id bottom 0x7f090063
 int id bottomNavigationView 0x7f090064
 int id bounce 0x7f090065
@@ -3353,6 +3360,9 @@ int id center_vertical 0x7f09008d
 int id chain 0x7f09008e
 int id chain2 0x7f09008f
 int id chains 0x7f090090
+int id chat_recycler_view 0x7f09028e
+int id chatbotAnchor 0x7f090298
+int id chatbotSpacer 0x7f090299
 int id checkBoxInStock 0x7f090091
 int id checkBoxVisibleToCustomers 0x7f090092
 int id checkbox 0x7f090093
@@ -3450,6 +3460,7 @@ int id exitUntilCollapsed 0x7f0900ee
 int id expand_activities_button 0x7f0900ef
 int id expanded_menu 0x7f0900f0
 int id fabAddProduct 0x7f0900f1
+int id fabChatbot 0x7f090296
 int id fabCreateAnnouncement 0x7f0900f2
 int id fade 0x7f0900f3
 int id fill 0x7f0900f4
@@ -3466,6 +3477,7 @@ int id flip 0x7f0900fe
 int id floating 0x7f0900ff
 int id forever 0x7f090100
 int id fragmentContainer 0x7f090101
+int id fragmentContent 0x7f09029a
 int id fragment_container_view_tag 0x7f090102
 int id frost 0x7f090103
 int id fullscreen_header 0x7f090104
@@ -3483,6 +3495,7 @@ int id hide_ime_id 0x7f09010f
 int id hideable 0x7f090110
 int id home 0x7f090111
 int id homeAsUp 0x7f090112
+int id homeContent 0x7f090297
 int id honorRequest 0x7f090113
 int id horizontal_only 0x7f090114
 int id icon 0x7f090115
@@ -3551,6 +3564,7 @@ int id material_timepicker_view 0x7f090153
 int id material_value_index 0x7f090154
 int id matrix 0x7f090155
 int id message 0x7f090156
+int id message_input 0x7f09028f
 int id middle 0x7f090157
 int id mini 0x7f090158
 int id month_grid 0x7f090159
@@ -3697,6 +3711,7 @@ int id search_voice_btn 0x7f0901e5
 int id select_dialog_listview 0x7f0901e6
 int id selected 0x7f0901e7
 int id selection_type 0x7f0901e8
+int id send_button 0x7f090290
 int id sharedValueSet 0x7f0901e9
 int id sharedValueUnset 0x7f0901ea
 int id shortcut 0x7f0901eb
@@ -3837,6 +3852,8 @@ int id uniform 0x7f090271
 int id unlabeled 0x7f090272
 int id up 0x7f090273
 int id useLogo 0x7f090274
+int id user_message_text 0x7f090291
+int id user_message_time 0x7f090292
 int id vertical_only 0x7f090275
 int id viewBackgroundShape 0x7f090276
 int id viewOnlineIndicator 0x7f090277
@@ -3975,6 +3992,7 @@ int layout abc_search_view 0x7f0c0019
 int layout abc_select_dialog_material 0x7f0c001a
 int layout abc_tooltip 0x7f0c001b
 int layout activity_chat 0x7f0c001c
+int layout activity_chatbot 0x7f0c008c
 int layout activity_create_announcement 0x7f0c001d
 int layout activity_edit_address 0x7f0c001e
 int layout activity_edit_profile 0x7f0c001f
@@ -4019,6 +4037,8 @@ int layout ime_secondary_split_test_activity 0x7f0c0045
 int layout item_announcement 0x7f0c0046
 int layout item_cart 0x7f0c0047
 int layout item_chat 0x7f0c0048
+int layout item_chatbot_bot_message 0x7f0c008d
+int layout item_chatbot_user_message 0x7f0c008e
 int layout item_message_received 0x7f0c0049
 int layout item_message_sent 0x7f0c004a
 int layout item_order 0x7f0c004b
@@ -4149,6 +4169,7 @@ int string categories 0x7f120033
 int string character_counter_content_description 0x7f120034
 int string character_counter_overflowed_content_description 0x7f120035
 int string character_counter_pattern 0x7f120036
+int string chatbot_send 0x7f120121
 int string checkout 0x7f120037
 int string clear_text_end_icon_content_description 0x7f120038
 int string common_google_play_services_enable_button 0x7f120039

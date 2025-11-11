@@ -25,6 +25,7 @@ import com.miaumigo.app.R;
 import com.miaumigo.app.models.Announcement;
 import com.miaumigo.app.models.User;
 import com.miaumigo.app.utils.AnnouncementManager;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class CreateAnnouncementActivity extends AppCompatActivity {
 
@@ -140,6 +141,10 @@ public class CreateAnnouncementActivity extends AppCompatActivity {
                 }
                 
                 // Cria anúncio
+                EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+                user.setName(encryptionManager.decrypt(user.getName()));
+                user.setPhone(encryptionManager.decrypt(user.getPhone()));
+
                 Announcement announcement = new Announcement();
                 announcement.setVendorId(currentUser.getUid());
                 announcement.setVendorName(user.getName());

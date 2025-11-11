@@ -70,6 +70,11 @@
             android:theme="@style/Theme.MiauMigo.NoActionBar" />
 
         <activity
+            android:name=".ChatbotActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MiauMigo.NoActionBar" />
+
+        <activity
             android:name=".CreateAnnouncementActivity"
             android:exported="false"
             android:theme="@style/Theme.MiauMigo.NoActionBar" />

@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.miaumigo.app.models.User;
+import com.miaumigo.app.utils.EncryptionManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -161,6 +162,10 @@ public class LoginActivity extends AppCompatActivity {
                             // Usuário existe, verifica o role
                             User userData = snapshot.getValue(User.class);
                             if (userData != null) {
+                                EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+                                userData.setName(encryptionManager.decrypt(userData.getName()));
+                                userData.setEmail(encryptionManager.decrypt(userData.getEmail()));
+                                userData.setPhone(encryptionManager.decrypt(userData.getPhone()));
                                 // Atualiza o displayName se necessário
                                 if (userData.getName() != null && !userData.getName().isEmpty()) {
                                     updateFirebaseAuthProfile(firebaseUser, userData.getName());
@@ -222,11 +227,13 @@ public class LoginActivity extends AppCompatActivity {
         // Define o role baseado no tipo de login
         String role = isVendorLogin ? "vendor" : "customer";
         
+        EncryptionManager encryptionManager = EncryptionManager.getInstance(getApplicationContext());
+
         User user = new User(
                 firebaseUser.getUid(),
-                displayName,
-                firebaseUser.getEmail(),
-                firebaseUser.getPhoneNumber(),
+                encryptionManager.encrypt(displayName),
+                encryptionManager.encrypt(firebaseUser.getEmail()),
+                firebaseUser.getPhoneNumber() != null ? encryptionManager.encrypt(firebaseUser.getPhoneNumber()) : null,
                 role
         );
         user.setUpdatedAt(System.currentTimeMillis());

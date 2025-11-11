@@ -37,6 +37,7 @@
     <color name="text_secondary">#7B4A23</color>
     <color name="warning">#E67E22</color>
     <color name="white">#FFFFFF</color>
+    <dimen name="chatbot_fab_bottom_space">120dp</dimen>
     <string name="action_back">Voltar</string>
     <string name="action_save">Salvar</string>
     <string name="add_to_cart">Adicionar ao Carrinho</string>
@@ -47,6 +48,7 @@
     <string name="cart">Carrinho</string>
     <string name="cart_empty">Seu carrinho está vazio</string>
     <string name="categories">Categorias</string>
+    <string name="chatbot_send">Enviar mensagem</string>
     <string name="checkout">Finalizar Compra</string>
     <string name="confirm_password">Confirmar Senha</string>
     <string name="default_web_client_id" translatable="false">30273334005-hk1uh3qcie3l9ru2ppk81a441i0icgsj.apps.googleusercontent.com</string>
