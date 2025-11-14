@@ -12,6 +12,7 @@ import com.miaumigo.app.R;
 import com.miaumigo.app.models.Order;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,10 +20,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     private List<Order> orderList;
     private SimpleDateFormat dateFormat;
+    private OnOrderClickListener listener;
 
-    public OrderAdapter(List<Order> orderList) {
+    public interface OnOrderClickListener {
+        void onOrderClick(Order order);
+    }
+
+    public OrderAdapter(List<Order> orderList, OnOrderClickListener listener) {
         this.orderList = orderList;
-        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        this.listener = listener;
+        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
     }
 
     @NonNull
@@ -36,6 +43,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
         holder.bind(order);
+        
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onOrderClick(order);
+            }
+        });
     }
 
     @Override
@@ -60,31 +73,45 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         }
 
         public void bind(Order order) {
-            textViewOrderId.setText("Pedido #" + order.getId());
-            textViewDate.setText(dateFormat.format(order.getDate()));
+            textViewOrderId.setText("Pedido #" + (order.getId() != null ? order.getId().substring(0, Math.min(8, order.getId().length())) : "N/A"));
+            textViewDate.setText(dateFormat.format(new Date(order.getCreatedAt())));
             textViewStatus.setText(order.getStatus());
             textViewTotal.setText(String.format("R$ %.2f", order.getTotal()));
-            textViewItemCount.setText(order.getItemCount() + " item(s)");
+            textViewItemCount.setText(order.getTotalQuantity() + " item(s)");
 
-            // Definir cor do status
-            int statusColor = getStatusColor(order.getStatus());
-            textViewStatus.setTextColor(statusColor);
+            // Definir background e cor do texto do status
+            setStatusStyle(order.getStatus());
         }
 
-        private int getStatusColor(String status) {
+        private void setStatusStyle(String status) {
+            if (status == null) {
+                textViewStatus.setBackgroundResource(R.drawable.status_default);
+                textViewStatus.setTextColor(itemView.getContext().getColor(R.color.white));
+                return;
+            }
+            
+            // Sempre usar texto branco para melhor contraste
+            textViewStatus.setTextColor(itemView.getContext().getColor(R.color.white));
+            
             switch (status.toLowerCase()) {
                 case "pendente":
-                    return itemView.getContext().getColor(R.color.warning);
+                    textViewStatus.setBackgroundResource(R.drawable.status_pendente);
+                    break;
                 case "processando":
-                    return itemView.getContext().getColor(R.color.primary);
+                    textViewStatus.setBackgroundResource(R.drawable.status_processando);
+                    break;
                 case "enviado":
-                    return itemView.getContext().getColor(R.color.info);
+                    textViewStatus.setBackgroundResource(R.drawable.status_enviado);
+                    break;
                 case "entregue":
-                    return itemView.getContext().getColor(R.color.success);
+                    textViewStatus.setBackgroundResource(R.drawable.status_entregue);
+                    break;
                 case "cancelado":
-                    return itemView.getContext().getColor(R.color.error);
+                    textViewStatus.setBackgroundResource(R.drawable.status_cancelado);
+                    break;
                 default:
-                    return itemView.getContext().getColor(R.color.text_secondary);
+                    textViewStatus.setBackgroundResource(R.drawable.status_default);
+                    break;
             }
         }
     }

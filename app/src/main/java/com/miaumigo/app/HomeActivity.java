@@ -44,7 +44,15 @@ public class HomeActivity extends AppCompatActivity {
         initViews();
         checkUserAuthentication();
         setupBottomNavigation();
-        loadHomeFragment();
+        
+        // Verificar se há um fragment específico para carregar
+        String fragmentToLoad = getIntent().getStringExtra("fragment");
+        if ("orders".equals(fragmentToLoad)) {
+            loadOrdersFragment();
+            bottomNavigationView.setSelectedItemId(R.id.navigation_orders);
+        } else {
+            loadHomeFragment();
+        }
     }
 
     private void initFirebase() {

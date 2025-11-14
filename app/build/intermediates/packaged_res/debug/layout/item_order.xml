@@ -39,9 +39,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/status_background"
-                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 tools:text="Processando" />
 

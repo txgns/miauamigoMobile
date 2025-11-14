@@ -3209,6 +3209,12 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable register_header_background
 drawable status_background
+drawable status_cancelado
+drawable status_default
+drawable status_entregue
+drawable status_enviado
+drawable status_pendente
+drawable status_processando
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3332,6 +3338,7 @@ id buttonBackAddress
 id buttonBackProfile
 id buttonCheckout
 id buttonClient
+id buttonConfirmOrder
 id buttonCreate
 id buttonDecrease
 id buttonDelete
@@ -3347,6 +3354,7 @@ id buttonRemove
 id buttonSave
 id buttonSaveAddress
 id buttonSaveProfile
+id buttonSelectAddress
 id buttonSend
 id buttonVendor
 id cache_measures
@@ -3432,6 +3440,7 @@ id edge
 id editTextCity
 id editTextComplement
 id editTextConfirmPassword
+id editTextCpf
 id editTextDescription
 id editTextEmail
 id editTextMessage
@@ -3534,6 +3543,7 @@ id light
 id line1
 id line3
 id linear
+id linearLayoutButtons
 id listMode
 id list_item
 id locale
@@ -3677,6 +3687,7 @@ id rectangles
 id recyclerViewAnnouncements
 id recyclerViewCart
 id recyclerViewChats
+id recyclerViewItems
 id recyclerViewMessages
 id recyclerViewOrders
 id recyclerViewProducts
@@ -3733,6 +3744,7 @@ id south
 id spacer
 id special_effects_controller_view_tag
 id spinnerCondition
+id spinnerPaymentMethod
 id spinnerType
 id spline
 id split_action_bar
@@ -3779,10 +3791,13 @@ id textStart
 id textTitle
 id textTitleAddress
 id textTop
+id textViewAddress
 id textViewAppName
 id textViewCondition
+id textViewCpfError
 id textViewDate
 id textViewDescription
+id textViewDiscount
 id textViewEmail
 id textViewEmpty
 id textViewForgotPassword
@@ -3794,7 +3809,10 @@ id textViewLoginSubtitle
 id textViewLoginTitle
 id textViewMessage
 id textViewName
+id textViewOrderDate
 id textViewOrderId
+id textViewOrderStatus
+id textViewPaymentMethod
 id textViewPetAge
 id textViewPetGender
 id textViewPetName
@@ -3807,12 +3825,14 @@ id textViewQuantity
 id textViewRating
 id textViewRegister
 id textViewRegisterTitle
+id textViewShipping
 id textViewStatus
 id textViewStock
 id textViewStoreDescription
 id textViewStoreName
 id textViewStoreRating
 id textViewSubtitle
+id textViewSubtotal
 id textViewTimestamp
 id textViewTotal
 id textViewTotalSales
@@ -3994,12 +4014,14 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_chat
 layout activity_chatbot
+layout activity_checkout
 layout activity_create_announcement
 layout activity_edit_address
 layout activity_edit_profile
 layout activity_home
 layout activity_login
 layout activity_main
+layout activity_order_details
 layout activity_product_detail
 layout activity_product_management
 layout activity_register
@@ -4040,9 +4062,11 @@ layout item_cart
 layout item_chat
 layout item_chatbot_bot_message
 layout item_chatbot_user_message
+layout item_checkout_product
 layout item_message_received
 layout item_message_sent
 layout item_order
+layout item_order_product
 layout item_pet
 layout item_pet_card
 layout item_product
@@ -4203,6 +4227,8 @@ string email
 string error
 string error_a11y_label
 string error_address_required_fields
+string error_cpf_invalid
+string error_cpf_required
 string error_email_required
 string error_icon_content_description
 string error_login_failed
@@ -4210,6 +4236,8 @@ string error_name_required
 string error_password_min_length
 string error_password_required
 string error_passwords_do_not_match
+string error_phone_invalid
+string error_phone_required
 string error_product_not_found
 string error_registration_failed
 string error_user_not_authenticated
@@ -4379,6 +4407,7 @@ string phone
 string price
 string processing
 string product_details
+string product_image
 string products
 string profile
 string project_id

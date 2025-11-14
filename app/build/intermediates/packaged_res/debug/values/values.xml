@@ -59,12 +59,16 @@
     <string name="email">E-mail</string>
     <string name="error">Erro</string>
     <string name="error_address_required_fields">Preencha todos os campos obrigatórios.</string>
+    <string name="error_cpf_invalid">CPF inválido</string>
+    <string name="error_cpf_required">CPF é obrigatório</string>
     <string name="error_email_required">E-mail é obrigatório</string>
     <string name="error_login_failed">Falha no login</string>
     <string name="error_name_required">Informe o nome.</string>
     <string name="error_password_min_length">Senha deve ter pelo menos 6 caracteres</string>
     <string name="error_password_required">Senha é obrigatória</string>
     <string name="error_passwords_do_not_match">As senhas não coincidem</string>
+    <string name="error_phone_invalid">Telefone inválido. Use (99) 99999-9999 ou (99) 9999-9999</string>
+    <string name="error_phone_required">Telefone é obrigatório</string>
     <string name="error_product_not_found">Produto não encontrado</string>
     <string name="error_registration_failed">Falha no cadastro</string>
     <string name="error_user_not_authenticated">Usuário não autenticado.</string>
@@ -118,6 +122,7 @@
     <string name="price">Preço</string>
     <string name="processing">Processando</string>
     <string name="product_details">Detalhes do Produto</string>
+    <string name="product_image">Imagem do produto</string>
     <string name="products">Produtos</string>
     <string name="profile">Perfil</string>
     <string name="project_id" translatable="false">miaumigo-686d4</string>

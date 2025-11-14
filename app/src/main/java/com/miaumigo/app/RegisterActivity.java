@@ -23,10 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.miaumigo.app.models.User;
 import com.miaumigo.app.utils.EncryptionManager;
+import com.miaumigo.app.utils.InputMaskHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextName;
+    private EditText editTextCpf;
     private EditText editTextEmail;
     private EditText editTextPhone;
     private EditText editTextPassword;
@@ -34,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button buttonRegister;
     private Button buttonBack;
     private TextView textViewRegisterTitle;
+    private TextView textViewCpfError;
     private ProgressBar progressBar;
 
     private FirebaseAuth firebaseAuth;
@@ -68,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initViews() {
         editTextName = findViewById(R.id.editTextName);
+        editTextCpf = findViewById(R.id.editTextCpf);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -75,7 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.buttonRegister);
         buttonBack = findViewById(R.id.buttonBack);
         textViewRegisterTitle = findViewById(R.id.textViewRegisterTitle);
+        textViewCpfError = findViewById(R.id.textViewCpfError);
         progressBar = findViewById(R.id.progressBar);
+
+        // Aplica máscaras
+        editTextCpf.addTextChangedListener(InputMaskHelper.cpfMask(editTextCpf));
+        editTextPhone.addTextChangedListener(InputMaskHelper.phoneMask(editTextPhone));
 
         buttonRegister.setOnClickListener(v -> registerUser());
         buttonBack.setOnClickListener(v -> finish());
@@ -87,13 +96,19 @@ public class RegisterActivity extends AppCompatActivity {
     private void updateUIForUserType() {
         if (isVendorRegister) {
             textViewRegisterTitle.setText("Criar Conta - Vendedor");
+            // Oculta campo CPF para vendedores
+            editTextCpf.setVisibility(View.GONE);
+            textViewCpfError.setVisibility(View.GONE);
         } else {
             textViewRegisterTitle.setText("Criar Conta - Cliente");
+            // Mostra campo CPF para clientes
+            editTextCpf.setVisibility(View.VISIBLE);
         }
     }
 
     private void registerUser() {
         String name = editTextName.getText().toString().trim();
+        String cpf = editTextCpf.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -105,9 +120,43 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // Validação de CPF apenas para clientes
+        if (!isVendorRegister) {
+            if (TextUtils.isEmpty(cpf)) {
+                editTextCpf.setError(getString(R.string.error_cpf_required));
+                textViewCpfError.setText(getString(R.string.error_cpf_required));
+                textViewCpfError.setVisibility(View.VISIBLE);
+                editTextCpf.requestFocus();
+                return;
+            }
+
+            if (!InputMaskHelper.isValidCpf(cpf)) {
+                editTextCpf.setError(getString(R.string.error_cpf_invalid));
+                textViewCpfError.setText(getString(R.string.error_cpf_invalid));
+                textViewCpfError.setVisibility(View.VISIBLE);
+                editTextCpf.requestFocus();
+                return;
+            } else {
+                textViewCpfError.setVisibility(View.GONE);
+            }
+        }
+
         if (TextUtils.isEmpty(email)) {
             editTextEmail.setError(getString(R.string.error_email_required));
             editTextEmail.requestFocus();
+            return;
+        }
+
+        // Validação de telefone
+        if (TextUtils.isEmpty(phone)) {
+            editTextPhone.setError(getString(R.string.error_phone_required));
+            editTextPhone.requestFocus();
+            return;
+        }
+
+        if (!InputMaskHelper.isValidPhone(phone)) {
+            editTextPhone.setError(getString(R.string.error_phone_invalid));
+            editTextPhone.requestFocus();
             return;
         }
 
@@ -139,7 +188,10 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             if (user != null) {
                                 // Cria o perfil do usuário no banco de dados
-                                createUserProfile(user, name, phone);
+                                String cleanCpf = !isVendorRegister && !TextUtils.isEmpty(cpf) ? 
+                                    InputMaskHelper.unmaskCpf(cpf) : null;
+                                String cleanPhone = InputMaskHelper.unmaskPhone(phone);
+                                createUserProfile(user, name, cleanPhone, cleanCpf);
                             }
                         } else {
                             showLoading(false);
@@ -151,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    private void createUserProfile(FirebaseUser firebaseUser, String name, String phone) {
+    private void createUserProfile(FirebaseUser firebaseUser, String name, String phone, String cpf) {
         // Atualiza o displayName no FirebaseAuth
         com.google.firebase.auth.UserProfileChangeRequest profileUpdates = 
             new com.google.firebase.auth.UserProfileChangeRequest.Builder()
@@ -161,11 +213,11 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseUser.updateProfile(profileUpdates)
                 .addOnCompleteListener(profileTask -> {
                     // Independente do resultado, salva no banco de dados
-                    saveUserToDatabase(firebaseUser, name, phone);
+                    saveUserToDatabase(firebaseUser, name, phone, cpf);
                 });
     }
     
-    private void saveUserToDatabase(FirebaseUser firebaseUser, String name, String phone) {
+    private void saveUserToDatabase(FirebaseUser firebaseUser, String name, String phone, String cpf) {
         // Define o role baseado no tipo de registro
         String role = isVendorRegister ? "vendor" : "customer";
         
@@ -178,6 +230,12 @@ public class RegisterActivity extends AppCompatActivity {
                 phone.isEmpty() ? null : encryptionManager.encrypt(phone),
                 role
         );
+        
+        // Adiciona CPF apenas para clientes
+        if (!isVendorRegister && cpf != null && !cpf.isEmpty()) {
+            user.setCpf(encryptionManager.encrypt(cpf));
+        }
+        
         user.setUpdatedAt(System.currentTimeMillis());
 
         databaseReference.child("users").child(firebaseUser.getUid())
@@ -224,6 +282,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setEnabled(!show);
         buttonBack.setEnabled(!show);
         editTextName.setEnabled(!show);
+        editTextCpf.setEnabled(!show);
         editTextEmail.setEnabled(!show);
         editTextPhone.setEnabled(!show);
         editTextPassword.setEnabled(!show);

@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String cpf; // CPF apenas para clientes
     private String avatarUrl;
     private String role; // "customer" or "vendor"
     private long updatedAt;
@@ -53,6 +54,14 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public long getUpdatedAt() {

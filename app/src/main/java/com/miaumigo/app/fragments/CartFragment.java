@@ -1,5 +1,6 @@
 package com.miaumigo.app.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.miaumigo.app.CheckoutActivity;
 import com.miaumigo.app.R;
 import com.miaumigo.app.adapters.CartAdapter;
 import com.miaumigo.app.models.CartItem;
@@ -114,9 +116,8 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
             return;
         }
         
-        // Implementar lógica de checkout
-        Toast.makeText(getContext(), "Redirecionando para checkout...", Toast.LENGTH_SHORT).show();
-        // Aqui você implementaria a navegação para a tela de checkout
+        Intent intent = new Intent(getContext(), CheckoutActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -108,4 +108,11 @@
     <string name="error_registration_failed">Falha no cadastro</string>
     <string name="message_registration_successful">Cadastro realizado com sucesso!</string>
     <string name="chatbot_send">Enviar mensagem</string>
+    
+    <!-- CPF validation -->
+    <string name="error_cpf_required">CPF é obrigatório</string>
+    <string name="error_cpf_invalid">CPF inválido</string>
+    <string name="error_phone_required">Telefone é obrigatório</string>
+    <string name="error_phone_invalid">Telefone inválido. Use (99) 99999-9999 ou (99) 9999-9999</string>
+    <string name="product_image">Imagem do produto</string>
 </resources>
