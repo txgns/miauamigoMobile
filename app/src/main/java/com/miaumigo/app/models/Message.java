@@ -13,7 +13,17 @@ public class Message {
     private MessageType type; // TEXT, IMAGE, PDF
 
     public enum MessageType {
-        TEXT, IMAGE, PDF
+        TEXT, IMAGE, AUDIO, FILE, PDF
+    }
+    
+    private long audioDuration; // Duração do áudio em segundos
+    
+    public long getAudioDuration() {
+        return audioDuration;
+    }
+    
+    public void setAudioDuration(long audioDuration) {
+        this.audioDuration = audioDuration;
     }
 
     public Message() {

@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,7 +20,7 @@ import java.lang.String;
 
 public final class FragmentVendorProductsBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final FloatingActionButton fabAddProduct;
@@ -30,18 +31,22 @@ public final class FragmentVendorProductsBinding implements ViewBinding {
   @NonNull
   public final RecyclerView recyclerViewProducts;
 
-  private FragmentVendorProductsBinding(@NonNull RelativeLayout rootView,
+  @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
+  private FragmentVendorProductsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull FloatingActionButton fabAddProduct, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerViewProducts) {
+      @NonNull RecyclerView recyclerViewProducts, @NonNull SwipeRefreshLayout swipeRefresh) {
     this.rootView = rootView;
     this.fabAddProduct = fabAddProduct;
     this.progressBar = progressBar;
     this.recyclerViewProducts = recyclerViewProducts;
+    this.swipeRefresh = swipeRefresh;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -84,8 +89,14 @@ public final class FragmentVendorProductsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentVendorProductsBinding((RelativeLayout) rootView, fabAddProduct,
-          progressBar, recyclerViewProducts);
+      id = R.id.swipeRefresh;
+      SwipeRefreshLayout swipeRefresh = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefresh == null) {
+        break missingId;
+      }
+
+      return new FragmentVendorProductsBinding((CoordinatorLayout) rootView, fabAddProduct,
+          progressBar, recyclerViewProducts, swipeRefresh);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.miaumigo.app.R;
@@ -27,13 +29,31 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final Button buttonEditProfile;
 
   @NonNull
+  public final Button buttonViewAllProducts;
+
+  @NonNull
+  public final ProgressBar progressBarFeatured;
+
+  @NonNull
+  public final RecyclerView recyclerViewFeaturedProducts;
+
+  @NonNull
+  public final TextView textViewEmptyFeatured;
+
+  @NonNull
   public final TextView textViewWelcome;
 
   private FragmentHomeBinding(@NonNull ScrollView rootView, @NonNull Button buttonEditAddress,
-      @NonNull Button buttonEditProfile, @NonNull TextView textViewWelcome) {
+      @NonNull Button buttonEditProfile, @NonNull Button buttonViewAllProducts,
+      @NonNull ProgressBar progressBarFeatured, @NonNull RecyclerView recyclerViewFeaturedProducts,
+      @NonNull TextView textViewEmptyFeatured, @NonNull TextView textViewWelcome) {
     this.rootView = rootView;
     this.buttonEditAddress = buttonEditAddress;
     this.buttonEditProfile = buttonEditProfile;
+    this.buttonViewAllProducts = buttonViewAllProducts;
+    this.progressBarFeatured = progressBarFeatured;
+    this.recyclerViewFeaturedProducts = recyclerViewFeaturedProducts;
+    this.textViewEmptyFeatured = textViewEmptyFeatured;
     this.textViewWelcome = textViewWelcome;
   }
 
@@ -76,6 +96,30 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.buttonViewAllProducts;
+      Button buttonViewAllProducts = ViewBindings.findChildViewById(rootView, id);
+      if (buttonViewAllProducts == null) {
+        break missingId;
+      }
+
+      id = R.id.progressBarFeatured;
+      ProgressBar progressBarFeatured = ViewBindings.findChildViewById(rootView, id);
+      if (progressBarFeatured == null) {
+        break missingId;
+      }
+
+      id = R.id.recyclerViewFeaturedProducts;
+      RecyclerView recyclerViewFeaturedProducts = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewFeaturedProducts == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewEmptyFeatured;
+      TextView textViewEmptyFeatured = ViewBindings.findChildViewById(rootView, id);
+      if (textViewEmptyFeatured == null) {
+        break missingId;
+      }
+
       id = R.id.textViewWelcome;
       TextView textViewWelcome = ViewBindings.findChildViewById(rootView, id);
       if (textViewWelcome == null) {
@@ -83,7 +127,8 @@ public final class FragmentHomeBinding implements ViewBinding {
       }
 
       return new FragmentHomeBinding((ScrollView) rootView, buttonEditAddress, buttonEditProfile,
-          textViewWelcome);
+          buttonViewAllProducts, progressBarFeatured, recyclerViewFeaturedProducts,
+          textViewEmptyFeatured, textViewWelcome);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

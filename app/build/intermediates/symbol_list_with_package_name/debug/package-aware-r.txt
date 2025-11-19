@@ -87,6 +87,7 @@ animator nav_default_pop_enter_anim
 animator nav_default_pop_exit_anim
 array announcement_types
 array product_conditions
+array product_sort_options
 attr SharedValue
 attr SharedValueId
 attr action
@@ -1156,6 +1157,7 @@ attr suffixText
 attr suffixTextAppearance
 attr suffixTextColor
 attr suggestionRowLayout
+attr swipeRefreshLayoutProgressSpinnerBackgroundColor
 attr switchMinWidth
 attr switchPadding
 attr switchStyle
@@ -2138,6 +2140,7 @@ color primary_text_disabled_material_light
 color primary_vendor
 color ripple_material_dark
 color ripple_material_light
+color secondary
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -2948,7 +2951,18 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen product_card_corner_radius
+dimen product_card_elevation
+dimen product_card_margin
+dimen product_card_padding
+dimen product_grid_spacing
+dimen product_image_height
 dimen sliding_pane_detail_pane_width
+dimen spacing_12
+dimen spacing_16
+dimen spacing_24
+dimen spacing_4
+dimen spacing_8
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -3038,7 +3052,9 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_quantity_button
 drawable bot_message_bg
+drawable bottom_sheet_handle
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3078,16 +3094,19 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable edit_text_background
+drawable file_name_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_arrow_back
 drawable ic_arrow_back_black_24
+drawable ic_attachment
 drawable ic_call_answer
 drawable ic_call_answer_low
 drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_camera
 drawable ic_cart
 drawable ic_cat_placeholder
 drawable ic_cat_placeholder_2
@@ -3102,6 +3121,8 @@ drawable ic_email
 drawable ic_favorite_border
 drawable ic_favorite_filled
 drawable ic_female
+drawable ic_filter_list
+drawable ic_gallery
 drawable ic_home
 drawable ic_home_black_24dp
 drawable ic_keyboard_black_24dp
@@ -3118,6 +3139,8 @@ drawable ic_miaumigo_log
 drawable ic_miaumigo_logo
 drawable ic_miaumigo_logo_complete
 drawable ic_miaumigo_logo_simple
+drawable ic_mic
+drawable ic_minus
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -3126,12 +3149,15 @@ drawable ic_notifications_black_24dp
 drawable ic_orders
 drawable ic_person
 drawable ic_phone
+drawable ic_plus
 drawable ic_product_placeholder
 drawable ic_products
 drawable ic_profile
 drawable ic_profile_placeholder
 drawable ic_search
 drawable ic_search_black_24
+drawable ic_send
+drawable ic_sort
 drawable input_field_background
 drawable m3_appbar_background
 drawable m3_avd_hide_password
@@ -3209,6 +3235,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable register_header_background
 drawable status_background
+drawable status_badge_background
 drawable status_cancelado
 drawable status_default
 drawable status_entregue
@@ -3311,8 +3338,11 @@ id asConfigured
 id async
 id auto
 id autoComplete
+id autoCompleteBrand
+id autoCompleteCategory
 id autoCompleteToEnd
 id autoCompleteToStart
+id autoCompleteVendor
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3333,22 +3363,35 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id buttonAddToCart
+id buttonApplyFilters
+id buttonAttach
+id buttonAudio
 id buttonBack
 id buttonBackAddress
 id buttonBackProfile
+id buttonCamera
 id buttonCheckout
+id buttonChoosePhoto
+id buttonClearFilters
 id buttonClient
 id buttonConfirmOrder
+id buttonContact
 id buttonCreate
 id buttonDecrease
 id buttonDelete
+id buttonEdit
 id buttonEditAddress
 id buttonEditProfile
+id buttonFilters
+id buttonGallery
 id buttonIncrease
 id buttonLogin
 id buttonLogout
 id buttonManageStore
+id buttonMarkReserved
+id buttonMarkSold
 id buttonPanel
+id buttonPlayAudio
 id buttonRegister
 id buttonRemove
 id buttonSave
@@ -3356,10 +3399,16 @@ id buttonSaveAddress
 id buttonSaveProfile
 id buttonSelectAddress
 id buttonSend
+id buttonSort
+id buttonStopAudio
+id buttonTakePhoto
 id buttonVendor
+id buttonViewAllProducts
+id buttonViewStore
 id cache_measures
 id callMeasure
 id cancel_button
+id cardStore
 id carryVelocity
 id center
 id centerCrop
@@ -3378,6 +3427,15 @@ id checkbox
 id checkboxDefaultAddress
 id checked
 id checkoutSection
+id chipAvailabilityInStock
+id chipAvailabilityOutOfStock
+id chipGroupAvailability
+id chipGroupQuickFilters
+id chipGroupRating
+id chipRating2
+id chipRating3
+id chipRating4
+id chipRatingAll
 id chronometer
 id circle_center
 id clear_text
@@ -3515,8 +3573,8 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageViewAttachment
 id imageViewAvatar
-id imageViewFavorite
 id imageViewLogo
 id imageViewPet
 id imageViewPetGender
@@ -3536,6 +3594,14 @@ id jumpToEnd
 id jumpToStart
 id labeled
 id layout
+id layoutAudio
+id layoutAudioRecording
+id layoutContent
+id layoutFilterActions
+id layoutPriceStock
+id layoutQuantity
+id layoutRating
+id layoutTotals
 id left
 id leftToRight
 id legacy
@@ -3679,14 +3745,17 @@ id position
 id postLayout
 id pressed
 id progressBar
+id progressBarFeatured
 id progress_circular
 id progress_horizontal
 id radio
+id ratingBar
 id ratio
 id rectangles
 id recyclerViewAnnouncements
 id recyclerViewCart
 id recyclerViewChats
+id recyclerViewFeaturedProducts
 id recyclerViewItems
 id recyclerViewMessages
 id recyclerViewOrders
@@ -3734,6 +3803,7 @@ id sin
 id skipCollapsed
 id skipped
 id slide
+id sliderPrice
 id sliding_pane_detail_container
 id sliding_pane_layout
 id snackbar_action
@@ -3767,6 +3837,8 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id swipeRefresh
+id switchInStock
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3784,15 +3856,22 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textInputBrand
+id textInputCategory
 id textInputLayoutSearch
+id textInputVendor
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTitle
 id textTitleAddress
 id textTop
+id textViewActiveFilters
 id textViewAddress
 id textViewAppName
+id textViewAudioDuration
+id textViewBottomSheetTitle
+id textViewBrand
 id textViewCondition
 id textViewCpfError
 id textViewDate
@@ -3800,6 +3879,8 @@ id textViewDescription
 id textViewDiscount
 id textViewEmail
 id textViewEmpty
+id textViewEmptyFeatured
+id textViewFileName
 id textViewForgotPassword
 id textViewInStock
 id textViewItemCount
@@ -3818,6 +3899,8 @@ id textViewPetGender
 id textViewPetName
 id textViewPhone
 id textViewPrice
+id textViewPriceLabel
+id textViewPriceRange
 id textViewProductDescription
 id textViewProductName
 id textViewProductPrice
@@ -3838,6 +3921,7 @@ id textViewTotal
 id textViewTotalSales
 id textViewTotalTrades
 id textViewType
+id textViewVendor
 id textViewVendorEmail
 id textViewVendorName
 id textViewVendorPhone
@@ -4012,6 +4096,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_announcement_detail
 layout activity_chat
 layout activity_chatbot
 layout activity_checkout
@@ -4025,8 +4110,10 @@ layout activity_order_details
 layout activity_product_detail
 layout activity_product_management
 layout activity_register
+layout activity_store
 layout activity_store_management
 layout activity_vendor_home
+layout bottom_sheet_product_filters
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -4052,6 +4139,7 @@ layout fragment_products
 layout fragment_profile
 layout fragment_vendor_announcements
 layout fragment_vendor_chat
+layout fragment_vendor_my_announcements
 layout fragment_vendor_products
 layout fragment_vendor_profile
 layout fragment_vendor_store
@@ -4168,11 +4256,13 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string action_back
 string action_save
+string active_filters_count
 string add_to_cart
 string add_to_cart_success
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string apply_filters
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
 string bottomsheet_action_expand
@@ -4196,6 +4286,7 @@ string character_counter_overflowed_content_description
 string character_counter_pattern
 string chatbot_send
 string checkout
+string clear_filters
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
@@ -4217,6 +4308,7 @@ string common_signin_button_text
 string common_signin_button_text_long
 string confirm_password
 string copy_toast_msg
+string decrease_quantity
 string default_web_client_id
 string delete
 string delivered
@@ -4231,6 +4323,7 @@ string error_cpf_invalid
 string error_cpf_required
 string error_email_required
 string error_icon_content_description
+string error_loading_products
 string error_login_failed
 string error_name_required
 string error_password_min_length
@@ -4247,7 +4340,20 @@ string fab_transformation_sheet_behavior
 string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
+string favorite
 string featured_products
+string filter
+string filter_any_rating
+string filter_availability
+string filter_brand
+string filter_category
+string filter_price_range
+string filter_products
+string filter_rating
+string filter_rating_2
+string filter_rating_3
+string filter_rating_4
+string filter_vendor
 string firebase_database_url
 string forgot_password
 string gcm_defaultSenderId
@@ -4260,11 +4366,15 @@ string hide_bottom_view_on_scroll_behavior
 string home
 string icon_content_description
 string in_stock
+string in_stock_only
+string increase_quantity
 string item_view_role_description
 string label_city
 string label_complement
 string label_default_address
 string label_email
+string label_generic_brand
+string label_generic_vendor
 string label_name
 string label_neighborhood
 string label_number
@@ -4386,6 +4496,7 @@ string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
 string network_error
 string no_account
+string no_filters_applied
 string no_products_found
 string ok
 string order_date
@@ -4408,6 +4519,7 @@ string price
 string processing
 string product_details
 string product_image
+string product_out_of_stock
 string products
 string profile
 string project_id
@@ -4415,6 +4527,7 @@ string quantity
 string register
 string register_error
 string register_success
+string remove
 string remove_item
 string save
 string search_hint
@@ -4425,6 +4538,8 @@ string searchview_navigation_content_description
 string shipped
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
+string sort
+string sort_products
 string status_bar_notification_info_overflow
 string success
 string title_dashboard
@@ -4761,6 +4876,7 @@ style Platform_V21_AppCompat_Light
 style Platform_V25_AppCompat
 style Platform_V25_AppCompat_Light
 style Platform_Widget_AppCompat_Spinner
+style RatingBarAccent
 style RtlOverlay_DialogWindowTitle_AppCompat
 style RtlOverlay_Widget_AppCompat_ActionBar_TitleItem
 style RtlOverlay_Widget_AppCompat_DialogTitle_Icon
@@ -5455,6 +5571,8 @@ style Widget_MaterialComponents_BottomNavigationView_PrimarySurface
 style Widget_MaterialComponents_BottomSheet
 style Widget_MaterialComponents_BottomSheet_Modal
 style Widget_MaterialComponents_Button
+style Widget_MaterialComponents_Button_FilledButton
+style Widget_MaterialComponents_Button_FilledTonalButton
 style Widget_MaterialComponents_Button_Icon
 style Widget_MaterialComponents_Button_OutlinedButton
 style Widget_MaterialComponents_Button_OutlinedButton_Icon
@@ -5523,6 +5641,8 @@ style Widget_MaterialComponents_PopupMenu_ContextMenu
 style Widget_MaterialComponents_PopupMenu_ListPopupWindow
 style Widget_MaterialComponents_PopupMenu_Overflow
 style Widget_MaterialComponents_ProgressIndicator
+style Widget_MaterialComponents_RatingBar
+style Widget_MaterialComponents_RatingBar_Indicator
 style Widget_MaterialComponents_ShapeableImageView
 style Widget_MaterialComponents_Slider
 style Widget_MaterialComponents_Snackbar
@@ -5711,6 +5831,7 @@ styleable State android_id constraints
 styleable StateListDrawable android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable StateListDrawableItem android_drawable
 styleable StateSet defaultState
+styleable SwipeRefreshLayout swipeRefreshLayoutProgressSpinnerBackgroundColor
 styleable SwitchCompat android_textOn android_textOff android_thumb showText splitTrack switchMinWidth switchPadding switchTextAppearance thumbTextPadding thumbTint thumbTintMode track trackTint trackTintMode
 styleable SwitchMaterial useMaterialThemeColors
 styleable TabItem android_icon android_layout android_text
@@ -5733,6 +5854,7 @@ styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration
 styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
+xml file_paths
 xml ga_ad_services_config
 xml image_share_filepaths
 xml network_security_config

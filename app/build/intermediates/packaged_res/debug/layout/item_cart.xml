@@ -8,130 +8,125 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:minHeight="96dp"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageViewProduct"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="Product Image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="@string/product_image"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_product_placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_foreground" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textViewName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/layoutTotals"
+            app:layout_constraintStart_toEndOf="@id/imageViewProduct"
+            app:layout_constraintTop_toTopOf="@id/imageViewProduct"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            tools:text="Ração Premium para Cães" />
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/textViewName"
+            app:layout_constraintTop_toBottomOf="@id/textViewName"
+            tools:text="R$ 89,90" />
+
+        <LinearLayout
+            android:id="@+id/layoutQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/textViewName"
+            app:layout_constraintTop_toBottomOf="@id/textViewPrice">
+
+            <ImageButton
+                android:id="@+id/buttonDecrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_quantity_button"
+                android:contentDescription="@string/decrease_quantity"
+                android:padding="8dp"
+                android:src="@drawable/ic_minus"
+                android:tint="@color/white" />
 
             <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:ellipsize="end"
-                android:maxLines="2"
+                android:id="@+id/textViewQuantity"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Ração Premium para Cães" />
+                tools:text="1" />
 
-            <TextView
-                android:id="@+id/textViewPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/primary"
-                android:textSize="14sp"
-                tools:text="R$ 89,90" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Quantidade:"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/buttonDecrease"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_background"
-                    android:gravity="center"
-                    android:text="-"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewQuantity"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="1" />
-
-                <TextView
-                    android:id="@+id/buttonIncrease"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/circle_background"
-                    android:gravity="center"
-                    android:text="+"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/buttonIncrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_quantity_button"
+                android:contentDescription="@string/increase_quantity"
+                android:padding="8dp"
+                android:src="@drawable/ic_plus"
+                android:tint="@color/white" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutTotals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:orientation="vertical"
-            android:gravity="center">
+            app:layout_constraintBaseline_toBaselineOf="@+id/layoutQuantity"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:id="@+id/textViewTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:textColor="@color/primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="R$ 89,90" />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonRemove"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_secondary_background"
-                android:padding="8dp"
-                android:text="Remover"
+                android:minHeight="32dp"
+                android:text="@string/remove"
+                android:textAllCaps="false"
                 android:textColor="@color/error"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

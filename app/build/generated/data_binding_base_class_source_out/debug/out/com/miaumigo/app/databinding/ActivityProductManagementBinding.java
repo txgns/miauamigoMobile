@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -23,10 +25,16 @@ public final class ActivityProductManagementBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
+  public final MaterialButton buttonChoosePhoto;
+
+  @NonNull
   public final Button buttonDelete;
 
   @NonNull
   public final Button buttonSave;
+
+  @NonNull
+  public final MaterialButton buttonTakePhoto;
 
   @NonNull
   public final CheckBox checkBoxInStock;
@@ -47,22 +55,30 @@ public final class ActivityProductManagementBinding implements ViewBinding {
   public final TextInputEditText editTextQuantity;
 
   @NonNull
+  public final ImageView imageViewProduct;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   private ActivityProductManagementBinding(@NonNull ScrollView rootView,
-      @NonNull Button buttonDelete, @NonNull Button buttonSave, @NonNull CheckBox checkBoxInStock,
-      @NonNull CheckBox checkBoxVisibleToCustomers, @NonNull TextInputEditText editTextDescription,
-      @NonNull TextInputEditText editTextPrice, @NonNull TextInputEditText editTextProductName,
-      @NonNull TextInputEditText editTextQuantity, @NonNull ProgressBar progressBar) {
+      @NonNull MaterialButton buttonChoosePhoto, @NonNull Button buttonDelete,
+      @NonNull Button buttonSave, @NonNull MaterialButton buttonTakePhoto,
+      @NonNull CheckBox checkBoxInStock, @NonNull CheckBox checkBoxVisibleToCustomers,
+      @NonNull TextInputEditText editTextDescription, @NonNull TextInputEditText editTextPrice,
+      @NonNull TextInputEditText editTextProductName, @NonNull TextInputEditText editTextQuantity,
+      @NonNull ImageView imageViewProduct, @NonNull ProgressBar progressBar) {
     this.rootView = rootView;
+    this.buttonChoosePhoto = buttonChoosePhoto;
     this.buttonDelete = buttonDelete;
     this.buttonSave = buttonSave;
+    this.buttonTakePhoto = buttonTakePhoto;
     this.checkBoxInStock = checkBoxInStock;
     this.checkBoxVisibleToCustomers = checkBoxVisibleToCustomers;
     this.editTextDescription = editTextDescription;
     this.editTextPrice = editTextPrice;
     this.editTextProductName = editTextProductName;
     this.editTextQuantity = editTextQuantity;
+    this.imageViewProduct = imageViewProduct;
     this.progressBar = progressBar;
   }
 
@@ -93,6 +109,12 @@ public final class ActivityProductManagementBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonChoosePhoto;
+      MaterialButton buttonChoosePhoto = ViewBindings.findChildViewById(rootView, id);
+      if (buttonChoosePhoto == null) {
+        break missingId;
+      }
+
       id = R.id.buttonDelete;
       Button buttonDelete = ViewBindings.findChildViewById(rootView, id);
       if (buttonDelete == null) {
@@ -102,6 +124,12 @@ public final class ActivityProductManagementBinding implements ViewBinding {
       id = R.id.buttonSave;
       Button buttonSave = ViewBindings.findChildViewById(rootView, id);
       if (buttonSave == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonTakePhoto;
+      MaterialButton buttonTakePhoto = ViewBindings.findChildViewById(rootView, id);
+      if (buttonTakePhoto == null) {
         break missingId;
       }
 
@@ -141,15 +169,22 @@ public final class ActivityProductManagementBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.imageViewProduct;
+      ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewProduct == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
         break missingId;
       }
 
-      return new ActivityProductManagementBinding((ScrollView) rootView, buttonDelete, buttonSave,
-          checkBoxInStock, checkBoxVisibleToCustomers, editTextDescription, editTextPrice,
-          editTextProductName, editTextQuantity, progressBar);
+      return new ActivityProductManagementBinding((ScrollView) rootView, buttonChoosePhoto,
+          buttonDelete, buttonSave, buttonTakePhoto, checkBoxInStock, checkBoxVisibleToCustomers,
+          editTextDescription, editTextPrice, editTextProductName, editTextQuantity,
+          imageViewProduct, progressBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

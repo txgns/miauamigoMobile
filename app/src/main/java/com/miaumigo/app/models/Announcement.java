@@ -13,11 +13,16 @@ public class Announcement {
     private String imageUrl;
     private boolean inStock;
     private String category;
+    private AnnouncementStatus status; // SOLD, RESERVED, AVAILABLE
     private long createdAt;
     private long updatedAt;
 
     public enum AnnouncementType {
         SALE, TRADE, REQUEST
+    }
+
+    public enum AnnouncementStatus {
+        AVAILABLE, RESERVED, SOLD
     }
 
     public Announcement() {
@@ -26,6 +31,7 @@ public class Announcement {
         this.updatedAt = System.currentTimeMillis();
         this.inStock = true;
         this.type = AnnouncementType.SALE;
+        this.status = AnnouncementStatus.AVAILABLE;
     }
 
     public Announcement(String id, String vendorId, String productName, String description, AnnouncementType type) {
@@ -150,6 +156,14 @@ public class Announcement {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public AnnouncementStatus getStatus() {
+        return status != null ? status : AnnouncementStatus.AVAILABLE;
+    }
+
+    public void setStatus(AnnouncementStatus status) {
+        this.status = status != null ? status : AnnouncementStatus.AVAILABLE;
     }
 }
 

@@ -89,38 +89,68 @@ public class VendorHomeActivity extends AppCompatActivity {
     }
 
     private void loadStoreFragment() {
-        Fragment fragment = new VendorStoreFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new VendorStoreFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("VendorHomeActivity", "Erro ao carregar VendorStoreFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar loja", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadProductsFragment() {
-        Fragment fragment = new VendorProductsFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new VendorProductsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("VendorHomeActivity", "Erro ao carregar VendorProductsFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadChatFragment() {
-        Fragment fragment = new VendorChatFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new VendorChatFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("VendorHomeActivity", "Erro ao carregar VendorChatFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar chat", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadAnnouncementsFragment() {
-        Fragment fragment = new VendorAnnouncementsFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new VendorAnnouncementsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("VendorHomeActivity", "Erro ao carregar VendorAnnouncementsFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar anúncios", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadProfileFragment() {
-        Fragment fragment = new VendorProfileFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new VendorProfileFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("VendorHomeActivity", "Erro ao carregar VendorProfileFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar perfil", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void checkUserAuthentication() {

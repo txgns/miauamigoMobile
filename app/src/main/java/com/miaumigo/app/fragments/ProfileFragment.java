@@ -44,14 +44,21 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        
-        initViews(view);
-        initFirebase();
-        setupClickListeners();
-        loadUserData();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_profile, container, false);
+            
+            initViews(view);
+            initFirebase();
+            setupClickListeners();
+            loadUserData();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("ProfileFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            // Retorna uma view vazia em caso de erro
+            return new View(getContext());
+        }
     }
 
     private void initViews(View view) {

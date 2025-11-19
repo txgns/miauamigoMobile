@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.miaumigo.app-mergeDebugResources-56:/values-mr/values-mr.xml",
+            "outputFile": "com.miaumigo.app-mergeDebugResources-57:/values-mr/values-mr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\c38fb170d25b1aee7e2d820e608c6fcd\\transformed\\jetified-play-services-basement-18.3.0\\res\\values-mr\\values.xml",

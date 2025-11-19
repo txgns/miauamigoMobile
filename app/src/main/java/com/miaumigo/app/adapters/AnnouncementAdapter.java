@@ -103,13 +103,37 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             textViewCondition.setText(announcement.getCondition() != null ? 
                 announcement.getCondition() : "Não especificado");
             
-            // Estoque
-            if (announcement.isInStock()) {
-                textViewInStock.setText("Em estoque");
-                textViewInStock.setTextColor(itemView.getContext().getColor(R.color.success));
-            } else {
-                textViewInStock.setText("Fora de estoque");
-                textViewInStock.setTextColor(itemView.getContext().getColor(R.color.error));
+            // Status do anúncio (vendido/reservado/disponível)
+            Announcement.AnnouncementStatus status = announcement.getStatus() != null ?
+                announcement.getStatus() : Announcement.AnnouncementStatus.AVAILABLE;
+            
+            if (textViewInStock != null) {
+                String statusText = "";
+                int statusColor = itemView.getContext().getColor(R.color.success);
+                
+                switch (status) {
+                    case SOLD:
+                        statusText = "Vendido";
+                        statusColor = itemView.getContext().getColor(R.color.error);
+                        break;
+                    case RESERVED:
+                        statusText = "Reservado";
+                        statusColor = itemView.getContext().getColor(R.color.warning);
+                        break;
+                    case AVAILABLE:
+                    default:
+                        if (announcement.isInStock()) {
+                            statusText = "Em estoque";
+                            statusColor = itemView.getContext().getColor(R.color.success);
+                        } else {
+                            statusText = "Fora de estoque";
+                            statusColor = itemView.getContext().getColor(R.color.error);
+                        }
+                        break;
+                }
+                
+                textViewInStock.setText(statusText);
+                textViewInStock.setTextColor(statusColor);
             }
             
             // Carrega imagem

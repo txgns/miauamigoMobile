@@ -41,14 +41,21 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        
-        initViews(view);
-        setupRecyclerView();
-        setupClickListeners();
-        loadCartItems();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_cart, container, false);
+            
+            initViews(view);
+            setupRecyclerView();
+            setupClickListeners();
+            loadCartItems();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("CartFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            // Retorna uma view vazia em caso de erro
+            return new View(getContext());
+        }
     }
 
     private void initViews(View view) {
@@ -123,13 +130,28 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemClic
     @Override
     public void onRemoveItem(CartItem item) {
         cartManager.removeFromCart(item.getId());
-        loadCartItems(); // Recarregar itens do carrinho
+        int index = cartItems.indexOf(item);
+        if (index >= 0) {
+            cartItems.remove(index);
+            cartAdapter.notifyItemRemoved(index);
+        } else {
+            loadCartItems();
+        }
+        calculateTotal();
+        updateEmptyState();
         Toast.makeText(getContext(), "Item removido do carrinho", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUpdateQuantity(CartItem item, int newQuantity) {
         cartManager.updateQuantity(item.getId(), newQuantity);
-        loadCartItems(); // Recarregar itens do carrinho
+        int index = cartItems.indexOf(item);
+        if (index >= 0) {
+            cartItems.get(index).setQuantity(newQuantity);
+            cartAdapter.notifyItemChanged(index);
+        } else {
+            loadCartItems();
+        }
+        calculateTotal();
     }
 }

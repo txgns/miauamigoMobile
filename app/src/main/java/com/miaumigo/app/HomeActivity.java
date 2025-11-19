@@ -125,38 +125,76 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void loadHomeFragment() {
-        Fragment fragment = new HomeFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContent, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("HomeActivity", "Erro ao carregar HomeFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar página inicial", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadProductsFragment() {
-        Fragment fragment = new ProductsFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new ProductsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContent, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("HomeActivity", "Erro ao carregar ProductsFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    public void navigateToProducts() {
+        loadProductsFragment();
+        // Atualiza o item selecionado na navegação inferior
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setSelectedItemId(R.id.navigation_products);
+        }
     }
 
     private void loadCartFragment() {
-        Fragment fragment = new CartFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new CartFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContent, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("HomeActivity", "Erro ao carregar CartFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar carrinho", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadOrdersFragment() {
-        Fragment fragment = new OrdersFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new OrdersFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContent, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("HomeActivity", "Erro ao carregar OrdersFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar pedidos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadProfileFragment() {
-        Fragment fragment = new ProfileFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        try {
+            Fragment fragment = new ProfileFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContent, fragment)
+                    .commitNowAllowingStateLoss();
+        } catch (Exception e) {
+            android.util.Log.e("HomeActivity", "Erro ao carregar ProfileFragment", e);
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao carregar perfil", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void checkUserAuthentication() {

@@ -1,162 +1,174 @@
 [
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_login.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_login.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_product.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_product.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_chatbot.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_chatbot.xml"
+        "merged": "com.miaumigo.app-mergeDebugResources-58:/layout/fragment_home.xml",
+        "source": "com.miaumigo.app-main-61:/layout/fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_orders.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_orders.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_products.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_products.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_message_received.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_message_received.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_cart.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_cart.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_edit_address.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_edit_address.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_chat.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_chat.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_home.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_home.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_pet_card.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_pet_card.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_order_details.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_order_details.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_order.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_order.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_edit_profile.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_edit_profile.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_checkout.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_checkout.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_vendor_store.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_vendor_store.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_home.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_home.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_chat.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_chat.xml"
     },
     {
-        "merged": "com.miaumigo.app-mergeDebugResources-57:/layout/item_order.xml",
-        "source": "com.miaumigo.app-main-60:/layout/item_order.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_cart.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_cart.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_create_announcement.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_create_announcement.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_message_sent.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_message_sent.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_products.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_products.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_create_announcement.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_create_announcement.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_checkout.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_checkout.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_pet_card.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_pet_card.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_chat.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_chat.xml"
     },
     {
-        "merged": "com.miaumigo.app-mergeDebugResources-57:/layout/activity_order_details.xml",
-        "source": "com.miaumigo.app-main-60:/layout/activity_order_details.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_profile.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_vendor_announcements.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_vendor_announcements.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_checkout_product.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_checkout_product.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_home.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_home.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_my_announcements.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_my_announcements.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_order.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_order.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_message_received.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_message_received.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_chat.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_chat.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_edit_address.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_edit_address.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_product_detail.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_product_detail.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_chat.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_chat.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_store.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_store.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_vendor_home.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_vendor_home.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_store.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_store.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_product_management.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_product_management.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_edit_profile.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_edit_profile.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_pet.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_pet.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_chatbot.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_chatbot.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_announcement.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_announcement.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_order_product.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_order_product.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_cart.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_cart.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_product_management.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_product_management.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_vendor_chat.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_vendor_chat.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_profile.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_profile.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_product.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_product.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_announcements.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_announcements.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_order_product.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_order_product.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_vendor_home.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_vendor_home.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_chatbot_bot_message.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_chatbot_bot_message.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\bottom_sheet_product_filters.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\bottom_sheet_product_filters.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_store_management.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_store_management.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_announcement.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_announcement.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_cart.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_cart.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_order_details.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_order_details.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_profile.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_profile.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_chatbot_bot_message.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_chatbot_bot_message.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_vendor_profile.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_vendor_profile.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_store_management.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_store_management.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\fragment_vendor_products.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\fragment_vendor_products.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_announcement_detail.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_announcement_detail.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\activity_register.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\activity_register.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_orders.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_orders.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_chatbot_user_message.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_chatbot_user_message.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\fragment_vendor_products.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\fragment_vendor_products.xml"
     },
     {
-        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-57:\\layout\\item_message_sent.xml",
-        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-60:\\layout\\item_message_sent.xml"
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_checkout_product.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_checkout_product.xml"
+    },
+    {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_chatbot_user_message.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_chatbot_user_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\activity_product_detail.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\activity_product_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-mergeDebugResources-58:\\layout\\item_pet.xml",
+        "source": "C:\\Users\\txgns\\.gradle\\daemon\\8.5\\com.miaumigo.app-main-61:\\layout\\item_pet.xml"
     }
 ]

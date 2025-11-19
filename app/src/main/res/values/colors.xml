@@ -28,10 +28,13 @@
     <color name="info">#005F83</color>
 
     <!-- Text colors -->
-    <color name="text_primary">#522A0F</color>
-    <color name="text_secondary">#7B4A23</color>
+    <color name="text_primary">#2C1810</color>
+    <color name="text_secondary">#5C3A1F</color>
     <color name="text_on_primary">#FFFFFF</color>
 
+    <!-- Secondary color -->
+    <color name="secondary">@color/accent</color>
+    
     <!-- For compatibility with previous files -->
     <color name="primary_client">@color/primary</color>
     <color name="primary_vendor">@color/marrom</color>

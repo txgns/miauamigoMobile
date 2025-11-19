@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -21,10 +24,25 @@ public final class ItemProductBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final ImageView imageViewFavorite;
+  public final MaterialButton buttonAddToCart;
 
   @NonNull
   public final ImageView imageViewProduct;
+
+  @NonNull
+  public final LinearLayout layoutContent;
+
+  @NonNull
+  public final LinearLayout layoutPriceStock;
+
+  @NonNull
+  public final LinearLayout layoutRating;
+
+  @NonNull
+  public final RatingBar ratingBar;
+
+  @NonNull
+  public final TextView textViewBrand;
 
   @NonNull
   public final TextView textViewName;
@@ -38,17 +56,29 @@ public final class ItemProductBinding implements ViewBinding {
   @NonNull
   public final TextView textViewStock;
 
+  @NonNull
+  public final TextView textViewVendor;
+
   private ItemProductBinding(@NonNull MaterialCardView rootView,
-      @NonNull ImageView imageViewFavorite, @NonNull ImageView imageViewProduct,
-      @NonNull TextView textViewName, @NonNull TextView textViewPrice,
-      @NonNull TextView textViewRating, @NonNull TextView textViewStock) {
+      @NonNull MaterialButton buttonAddToCart, @NonNull ImageView imageViewProduct,
+      @NonNull LinearLayout layoutContent, @NonNull LinearLayout layoutPriceStock,
+      @NonNull LinearLayout layoutRating, @NonNull RatingBar ratingBar,
+      @NonNull TextView textViewBrand, @NonNull TextView textViewName,
+      @NonNull TextView textViewPrice, @NonNull TextView textViewRating,
+      @NonNull TextView textViewStock, @NonNull TextView textViewVendor) {
     this.rootView = rootView;
-    this.imageViewFavorite = imageViewFavorite;
+    this.buttonAddToCart = buttonAddToCart;
     this.imageViewProduct = imageViewProduct;
+    this.layoutContent = layoutContent;
+    this.layoutPriceStock = layoutPriceStock;
+    this.layoutRating = layoutRating;
+    this.ratingBar = ratingBar;
+    this.textViewBrand = textViewBrand;
     this.textViewName = textViewName;
     this.textViewPrice = textViewPrice;
     this.textViewRating = textViewRating;
     this.textViewStock = textViewStock;
+    this.textViewVendor = textViewVendor;
   }
 
   @Override
@@ -78,15 +108,45 @@ public final class ItemProductBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.imageViewFavorite;
-      ImageView imageViewFavorite = ViewBindings.findChildViewById(rootView, id);
-      if (imageViewFavorite == null) {
+      id = R.id.buttonAddToCart;
+      MaterialButton buttonAddToCart = ViewBindings.findChildViewById(rootView, id);
+      if (buttonAddToCart == null) {
         break missingId;
       }
 
       id = R.id.imageViewProduct;
       ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
       if (imageViewProduct == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutContent;
+      LinearLayout layoutContent = ViewBindings.findChildViewById(rootView, id);
+      if (layoutContent == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutPriceStock;
+      LinearLayout layoutPriceStock = ViewBindings.findChildViewById(rootView, id);
+      if (layoutPriceStock == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutRating;
+      LinearLayout layoutRating = ViewBindings.findChildViewById(rootView, id);
+      if (layoutRating == null) {
+        break missingId;
+      }
+
+      id = R.id.ratingBar;
+      RatingBar ratingBar = ViewBindings.findChildViewById(rootView, id);
+      if (ratingBar == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewBrand;
+      TextView textViewBrand = ViewBindings.findChildViewById(rootView, id);
+      if (textViewBrand == null) {
         break missingId;
       }
 
@@ -114,8 +174,15 @@ public final class ItemProductBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemProductBinding((MaterialCardView) rootView, imageViewFavorite,
-          imageViewProduct, textViewName, textViewPrice, textViewRating, textViewStock);
+      id = R.id.textViewVendor;
+      TextView textViewVendor = ViewBindings.findChildViewById(rootView, id);
+      if (textViewVendor == null) {
+        break missingId;
+      }
+
+      return new ItemProductBinding((MaterialCardView) rootView, buttonAddToCart, imageViewProduct,
+          layoutContent, layoutPriceStock, layoutRating, ratingBar, textViewBrand, textViewName,
+          textViewPrice, textViewRating, textViewStock, textViewVendor);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

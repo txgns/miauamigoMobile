@@ -52,15 +52,21 @@ public class VendorChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vendor_chat, container, false);
-        
-        recyclerViewChats = view.findViewById(R.id.recyclerViewChats);
-        progressBar = view.findViewById(R.id.progressBar);
-        
-        setupRecyclerView();
-        loadChats();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_vendor_chat, container, false);
+            
+            recyclerViewChats = view.findViewById(R.id.recyclerViewChats);
+            progressBar = view.findViewById(R.id.progressBar);
+            
+            setupRecyclerView();
+            loadChats();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("VendorChatFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            return new View(getContext());
+        }
     }
 
     private void setupRecyclerView() {
@@ -133,7 +139,7 @@ public class VendorChatFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Query listeners are automatically removed when fragment is destroyed
+        
     }
 }
 

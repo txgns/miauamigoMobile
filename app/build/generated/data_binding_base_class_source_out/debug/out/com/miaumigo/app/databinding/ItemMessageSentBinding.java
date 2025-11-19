@@ -4,12 +4,15 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,14 +23,41 @@ public final class ItemMessageSentBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final MaterialButton buttonPlayAudio;
+
+  @NonNull
+  public final ImageView imageViewAttachment;
+
+  @NonNull
+  public final LinearLayout layoutAudio;
+
+  @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
+  public final TextView textViewAudioDuration;
+
+  @NonNull
+  public final TextView textViewFileName;
+
+  @NonNull
   public final TextView textViewMessage;
 
   @NonNull
   public final TextView textViewTimestamp;
 
-  private ItemMessageSentBinding(@NonNull LinearLayout rootView, @NonNull TextView textViewMessage,
-      @NonNull TextView textViewTimestamp) {
+  private ItemMessageSentBinding(@NonNull LinearLayout rootView,
+      @NonNull MaterialButton buttonPlayAudio, @NonNull ImageView imageViewAttachment,
+      @NonNull LinearLayout layoutAudio, @NonNull ProgressBar progressBar,
+      @NonNull TextView textViewAudioDuration, @NonNull TextView textViewFileName,
+      @NonNull TextView textViewMessage, @NonNull TextView textViewTimestamp) {
     this.rootView = rootView;
+    this.buttonPlayAudio = buttonPlayAudio;
+    this.imageViewAttachment = imageViewAttachment;
+    this.layoutAudio = layoutAudio;
+    this.progressBar = progressBar;
+    this.textViewAudioDuration = textViewAudioDuration;
+    this.textViewFileName = textViewFileName;
     this.textViewMessage = textViewMessage;
     this.textViewTimestamp = textViewTimestamp;
   }
@@ -59,6 +89,42 @@ public final class ItemMessageSentBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonPlayAudio;
+      MaterialButton buttonPlayAudio = ViewBindings.findChildViewById(rootView, id);
+      if (buttonPlayAudio == null) {
+        break missingId;
+      }
+
+      id = R.id.imageViewAttachment;
+      ImageView imageViewAttachment = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewAttachment == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutAudio;
+      LinearLayout layoutAudio = ViewBindings.findChildViewById(rootView, id);
+      if (layoutAudio == null) {
+        break missingId;
+      }
+
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewAudioDuration;
+      TextView textViewAudioDuration = ViewBindings.findChildViewById(rootView, id);
+      if (textViewAudioDuration == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewFileName;
+      TextView textViewFileName = ViewBindings.findChildViewById(rootView, id);
+      if (textViewFileName == null) {
+        break missingId;
+      }
+
       id = R.id.textViewMessage;
       TextView textViewMessage = ViewBindings.findChildViewById(rootView, id);
       if (textViewMessage == null) {
@@ -71,8 +137,9 @@ public final class ItemMessageSentBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemMessageSentBinding((LinearLayout) rootView, textViewMessage,
-          textViewTimestamp);
+      return new ItemMessageSentBinding((LinearLayout) rootView, buttonPlayAudio,
+          imageViewAttachment, layoutAudio, progressBar, textViewAudioDuration, textViewFileName,
+          textViewMessage, textViewTimestamp);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -11,8 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,7 @@ public class VendorProductsFragment extends Fragment {
     private RecyclerView recyclerViewProducts;
     private ProgressBar progressBar;
     private FloatingActionButton fabAddProduct;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private FirebaseUser currentUser;
@@ -49,32 +51,71 @@ public class VendorProductsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vendor_products, container, false);
-        
-        recyclerViewProducts = view.findViewById(R.id.recyclerViewProducts);
-        progressBar = view.findViewById(R.id.progressBar);
-        fabAddProduct = view.findViewById(R.id.fabAddProduct);
-        
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        
-        setupRecyclerView();
-        setupFab();
-        loadProducts();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_vendor_products, container, false);
+            
+            recyclerViewProducts = view.findViewById(R.id.recyclerViewProducts);
+            progressBar = view.findViewById(R.id.progressBar);
+            fabAddProduct = view.findViewById(R.id.fabAddProduct);
+            swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+            
+            currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setOnRefreshListener(this::loadProducts);
+            }
+            
+            setupRecyclerView();
+            setupFab();
+            loadProducts();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("VendorProductsFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            return new View(getContext());
+        }
     }
 
     private void setupRecyclerView() {
-        productAdapter = new ProductAdapter(productList, product -> {
-            // Abre tela de edição do produto
-            Intent intent = new Intent(getContext(), ProductManagementActivity.class);
-            intent.putExtra("product_id", product.getId());
-            intent.putExtra("edit_mode", true);
-            startActivity(intent);
-        });
+        productAdapter = new ProductAdapter(productList, new ProductAdapter.OnProductActionListener() {
+            @Override
+            public void onProductClick(Product product) {
+                // Abre tela de edição do produto
+                Intent intent = new Intent(getContext(), ProductManagementActivity.class);
+                intent.putExtra("product_id", product.getId());
+                intent.putExtra("edit_mode", true);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAddToCart(Product product) {
+                // Não aplicável para vendedores
+            }
+        }, true); // true = esconde botão de adicionar ao carrinho
         
-        recyclerViewProducts.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Usa GridLayoutManager para melhor visualização
+        int spanCount = calculateSpanCount();
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
+        recyclerViewProducts.setLayoutManager(layoutManager);
+        
+        // Adiciona espaçamento entre cards
+        try {
+            int spacing = getResources().getDimensionPixelSize(com.miaumigo.app.R.dimen.product_grid_spacing);
+            recyclerViewProducts.addItemDecoration(new com.miaumigo.app.utils.GridSpacingItemDecoration(spanCount, spacing, true));
+        } catch (Exception e) {
+            int spacing = (int) (8 * getResources().getDisplayMetrics().density);
+            recyclerViewProducts.addItemDecoration(new com.miaumigo.app.utils.GridSpacingItemDecoration(spanCount, spacing, true));
+        }
+        
         recyclerViewProducts.setAdapter(productAdapter);
+    }
+
+    private int calculateSpanCount() {
+        android.util.DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float screenWidthDp = metrics.widthPixels / metrics.density;
+        int span = (int) Math.floor(screenWidthDp / 160f);
+        return Math.max(2, Math.min(span, 4));
     }
 
     private void setupFab() {
@@ -117,6 +158,9 @@ public class VendorProductsFragment extends Fragment {
                 
                 productAdapter.notifyDataSetChanged();
                 showLoading(false);
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -132,12 +176,15 @@ public class VendorProductsFragment extends Fragment {
         if (progressBar != null) {
             progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         }
+        if (swipeRefreshLayout != null && !show) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Query listeners are automatically removed when fragment is destroyed
+    
     }
 }
 

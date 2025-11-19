@@ -93,6 +93,9 @@ dependencies {
     
     // CardView
     implementation 'androidx.cardview:cardview:1.0.0'
+    
+    // SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // Encryption
     implementation 'com.google.crypto.tink:tink-android:1.8.0'

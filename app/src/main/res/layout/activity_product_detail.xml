@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/app_background"
+    android:background="@color/background"
     tools:context=".ProductDetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Detalhes do Produto"
-        app:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/ic_arrow_back" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-    <ScrollView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:title="@string/product_details"
+            app:titleTextColor="@color/white"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- Product Image -->
             <ImageView
                 android:id="@+id/imageViewProduct"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_marginBottom="16dp"
-                android:contentDescription="Product Image"
+                android:contentDescription="@string/product_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_product_placeholder" />
+                android:src="@drawable/ic_product_placeholder"
+                tools:src="@drawable/ic_launcher_foreground" />
 
+            <!-- Product Name -->
             <TextView
                 android:id="@+id/textViewProductName"
                 android:layout_width="match_parent"
@@ -47,21 +57,89 @@
                 android:textStyle="bold"
                 tools:text="Ração Premium para Cães" />
 
+            <!-- Product Price -->
             <TextView
                 android:id="@+id/textViewProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/primary"
+                android:textColor="@color/primary_dark"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 tools:text="R$ 89,90" />
 
+            <!-- Store Information Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardStore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewStoreLogo"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="Logo da loja"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_product_placeholder" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vendido por"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/textViewStoreName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="PetShop Vila Mariana" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonViewStore"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Ver loja"
+                        android:textSize="12sp"
+                        app:cornerRadius="8dp"
+                        app:strokeColor="@color/primary" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Description Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Descrição"
+                android:text="@string/description"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -70,24 +148,31 @@
                 android:id="@+id/textViewProductDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="4dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="16sp"
                 tools:text="Ração premium desenvolvida especialmente para cães adultos de todas as raças. Contém ingredientes naturais e balanceados para garantir a saúde e vitalidade do seu pet." />
 
-            <Button
+            <!-- Add to Cart Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonAddToCart"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:backgroundTint="@color/primary"
                 android:text="@string/add_to_cart"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                style="@style/ButtonPrimary" />
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_cart"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -97,5 +182,4 @@
         android:indeterminateTint="@color/primary"
         android:visibility="gone" />
 
-</LinearLayout>
-
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -44,13 +44,20 @@ public class OrdersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_orders, container, false);
-        
-        initViews(view);
-        setupRecyclerView();
-        loadOrders();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_orders, container, false);
+            
+            initViews(view);
+            setupRecyclerView();
+            loadOrders();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("OrdersFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            // Retorna uma view vazia em caso de erro
+            return new View(getContext());
+        }
     }
 
     private void initViews(View view) {

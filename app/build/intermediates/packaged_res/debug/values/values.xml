@@ -10,6 +10,13 @@
         <item>Usado</item>
         <item>Recondicionado</item>
     </array>
+    <array name="product_sort_options">
+        <item>Mais vendidos</item>
+        <item>Menor preço</item>
+        <item>Maior preço</item>
+        <item>Novidades</item>
+        <item>Relevância</item>
+    </array>
     <color name="accent">#FA7268</color>
     <color name="accent_dark">#C9554E</color>
     <color name="app_background">#FFF8E1</color>
@@ -29,20 +36,34 @@
     <color name="primary_dark">#D9A441</color>
     <color name="primary_light">#FFE88D</color>
     <color name="primary_vendor">@color/marrom</color>
+    <color name="secondary">@color/accent</color>
     <color name="success">#27AE60</color>
     <color name="surface">#FFFFFF</color>
     <color name="surface_variant">#FFE9A8</color>
     <color name="text_on_primary">#FFFFFF</color>
-    <color name="text_primary">#522A0F</color>
-    <color name="text_secondary">#7B4A23</color>
+    <color name="text_primary">#2C1810</color>
+    <color name="text_secondary">#5C3A1F</color>
     <color name="warning">#E67E22</color>
     <color name="white">#FFFFFF</color>
     <dimen name="chatbot_fab_bottom_space">120dp</dimen>
+    <dimen name="product_card_corner_radius">16dp</dimen>
+    <dimen name="product_card_elevation">2dp</dimen>
+    <dimen name="product_card_margin">4dp</dimen>
+    <dimen name="product_card_padding">12dp</dimen>
+    <dimen name="product_grid_spacing">8dp</dimen>
+    <dimen name="product_image_height">140dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
     <string name="action_back">Voltar</string>
     <string name="action_save">Salvar</string>
+    <string name="active_filters_count">%1$d filtros ativos</string>
     <string name="add_to_cart">Adicionar ao Carrinho</string>
     <string name="add_to_cart_success">Produto adicionado ao carrinho!</string>
     <string name="app_name">MiauMigo</string>
+    <string name="apply_filters">Aplicar filtros</string>
     <string name="cancel">Cancelar</string>
     <string name="cancelled">Cancelado</string>
     <string name="cart">Carrinho</string>
@@ -50,7 +71,9 @@
     <string name="categories">Categorias</string>
     <string name="chatbot_send">Enviar mensagem</string>
     <string name="checkout">Finalizar Compra</string>
+    <string name="clear_filters">Limpar</string>
     <string name="confirm_password">Confirmar Senha</string>
+    <string name="decrease_quantity">Diminuir quantidade</string>
     <string name="default_web_client_id" translatable="false">30273334005-hk1uh3qcie3l9ru2ppk81a441i0icgsj.apps.googleusercontent.com</string>
     <string name="delete">Excluir</string>
     <string name="delivered">Entregue</string>
@@ -62,6 +85,7 @@
     <string name="error_cpf_invalid">CPF inválido</string>
     <string name="error_cpf_required">CPF é obrigatório</string>
     <string name="error_email_required">E-mail é obrigatório</string>
+    <string name="error_loading_products">Erro ao carregar produtos: %1$s</string>
     <string name="error_login_failed">Falha no login</string>
     <string name="error_name_required">Informe o nome.</string>
     <string name="error_password_min_length">Senha deve ter pelo menos 6 caracteres</string>
@@ -72,7 +96,20 @@
     <string name="error_product_not_found">Produto não encontrado</string>
     <string name="error_registration_failed">Falha no cadastro</string>
     <string name="error_user_not_authenticated">Usuário não autenticado.</string>
+    <string name="favorite">Favoritar produto</string>
     <string name="featured_products">Produtos em Destaque</string>
+    <string name="filter">Filtrar</string>
+    <string name="filter_any_rating">Qualquer avaliação</string>
+    <string name="filter_availability">Disponibilidade</string>
+    <string name="filter_brand">Marca</string>
+    <string name="filter_category">Categoria</string>
+    <string name="filter_price_range">Faixa de preço</string>
+    <string name="filter_products">Filtros avançados</string>
+    <string name="filter_rating">Avaliação mínima</string>
+    <string name="filter_rating_2">2+ estrelas</string>
+    <string name="filter_rating_3">3+ estrelas</string>
+    <string name="filter_rating_4">4+ estrelas</string>
+    <string name="filter_vendor">Marca / Vendedor</string>
     <string name="firebase_database_url" translatable="false">https://miaumigo-686d4-default-rtdb.firebaseio.com</string>
     <string name="forgot_password">Esqueci minha senha</string>
     <string name="gcm_defaultSenderId" translatable="false">30273334005</string>
@@ -83,10 +120,14 @@
     <string name="has_account">Já tem uma conta? Entre</string>
     <string name="home">Início</string>
     <string name="in_stock">Em estoque</string>
+    <string name="in_stock_only">Somente em estoque</string>
+    <string name="increase_quantity">Aumentar quantidade</string>
     <string name="label_city">Cidade</string>
     <string name="label_complement">Complemento</string>
     <string name="label_default_address">Endereço principal</string>
     <string name="label_email">E-mail</string>
+    <string name="label_generic_brand">Marca indisponível</string>
+    <string name="label_generic_vendor">Vendedor parceiro</string>
     <string name="label_name">Nome</string>
     <string name="label_neighborhood">Bairro</string>
     <string name="label_number">Número</string>
@@ -106,6 +147,7 @@
     <string name="name">Nome</string>
     <string name="network_error">Erro de conexão. Verifique sua internet.</string>
     <string name="no_account">Não tem uma conta? Cadastre-se</string>
+    <string name="no_filters_applied">Nenhum filtro aplicado</string>
     <string name="no_products_found">Nenhum produto encontrado</string>
     <string name="ok">OK</string>
     <string name="order_date">Data do pedido</string>
@@ -123,6 +165,7 @@
     <string name="processing">Processando</string>
     <string name="product_details">Detalhes do Produto</string>
     <string name="product_image">Imagem do produto</string>
+    <string name="product_out_of_stock">Produto indisponível no momento</string>
     <string name="products">Produtos</string>
     <string name="profile">Perfil</string>
     <string name="project_id" translatable="false">miaumigo-686d4</string>
@@ -130,10 +173,13 @@
     <string name="register">Cadastrar</string>
     <string name="register_error">Erro ao cadastrar. Tente novamente.</string>
     <string name="register_success">Cadastro realizado com sucesso!</string>
+    <string name="remove">Remover</string>
     <string name="remove_item">Remover item</string>
     <string name="save">Salvar</string>
     <string name="search_hint">Buscar produtos...</string>
     <string name="shipped">Enviado</string>
+    <string name="sort">Ordenar</string>
+    <string name="sort_products">Ordenar produtos</string>
     <string name="success">Sucesso</string>
     <string name="title_dashboard">Painel</string>
     <string name="title_edit_address">Editar Endereço</string>
@@ -157,6 +203,10 @@
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:textColorHint">@color/text_secondary</item>
         <item name="android:padding">12dp</item>
+    </style>
+    <style name="RatingBarAccent" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/text_secondary</item>
+        <item name="colorControlActivated">@color/accent</item>
     </style>
     <style name="TextBody" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">16sp</item>
@@ -201,4 +251,18 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.MiauMigo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="Widget.MaterialComponents.Button.FilledButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="Widget.MaterialComponents.Button.FilledTonalButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/surface_variant</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="Widget.MaterialComponents.RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:isIndicator">false</item>
+    </style>
+    <style name="Widget.MaterialComponents.RatingBar.Indicator" parent="Widget.AppCompat.RatingBar">
+        <item name="android:isIndicator">true</item>
+    </style>
 </resources>

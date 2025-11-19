@@ -4,16 +4,17 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,13 +22,22 @@ import java.lang.String;
 
 public final class ActivityProductDetailBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
-  public final Button buttonAddToCart;
+  public final MaterialButton buttonAddToCart;
+
+  @NonNull
+  public final MaterialButton buttonViewStore;
+
+  @NonNull
+  public final MaterialCardView cardStore;
 
   @NonNull
   public final ImageView imageViewProduct;
+
+  @NonNull
+  public final ImageView imageViewStoreLogo;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -42,26 +52,35 @@ public final class ActivityProductDetailBinding implements ViewBinding {
   public final TextView textViewProductPrice;
 
   @NonNull
-  public final Toolbar toolbar;
+  public final TextView textViewStoreName;
 
-  private ActivityProductDetailBinding(@NonNull LinearLayout rootView,
-      @NonNull Button buttonAddToCart, @NonNull ImageView imageViewProduct,
-      @NonNull ProgressBar progressBar, @NonNull TextView textViewProductDescription,
-      @NonNull TextView textViewProductName, @NonNull TextView textViewProductPrice,
-      @NonNull Toolbar toolbar) {
+  @NonNull
+  public final MaterialToolbar toolbar;
+
+  private ActivityProductDetailBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull MaterialButton buttonAddToCart, @NonNull MaterialButton buttonViewStore,
+      @NonNull MaterialCardView cardStore, @NonNull ImageView imageViewProduct,
+      @NonNull ImageView imageViewStoreLogo, @NonNull ProgressBar progressBar,
+      @NonNull TextView textViewProductDescription, @NonNull TextView textViewProductName,
+      @NonNull TextView textViewProductPrice, @NonNull TextView textViewStoreName,
+      @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
     this.buttonAddToCart = buttonAddToCart;
+    this.buttonViewStore = buttonViewStore;
+    this.cardStore = cardStore;
     this.imageViewProduct = imageViewProduct;
+    this.imageViewStoreLogo = imageViewStoreLogo;
     this.progressBar = progressBar;
     this.textViewProductDescription = textViewProductDescription;
     this.textViewProductName = textViewProductName;
     this.textViewProductPrice = textViewProductPrice;
+    this.textViewStoreName = textViewStoreName;
     this.toolbar = toolbar;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -87,14 +106,32 @@ public final class ActivityProductDetailBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.buttonAddToCart;
-      Button buttonAddToCart = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton buttonAddToCart = ViewBindings.findChildViewById(rootView, id);
       if (buttonAddToCart == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonViewStore;
+      MaterialButton buttonViewStore = ViewBindings.findChildViewById(rootView, id);
+      if (buttonViewStore == null) {
+        break missingId;
+      }
+
+      id = R.id.cardStore;
+      MaterialCardView cardStore = ViewBindings.findChildViewById(rootView, id);
+      if (cardStore == null) {
         break missingId;
       }
 
       id = R.id.imageViewProduct;
       ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
       if (imageViewProduct == null) {
+        break missingId;
+      }
+
+      id = R.id.imageViewStoreLogo;
+      ImageView imageViewStoreLogo = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewStoreLogo == null) {
         break missingId;
       }
 
@@ -122,15 +159,22 @@ public final class ActivityProductDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewStoreName;
+      TextView textViewStoreName = ViewBindings.findChildViewById(rootView, id);
+      if (textViewStoreName == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
-      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityProductDetailBinding((LinearLayout) rootView, buttonAddToCart,
-          imageViewProduct, progressBar, textViewProductDescription, textViewProductName,
-          textViewProductPrice, toolbar);
+      return new ActivityProductDetailBinding((CoordinatorLayout) rootView, buttonAddToCart,
+          buttonViewStore, cardStore, imageViewProduct, imageViewStoreLogo, progressBar,
+          textViewProductDescription, textViewProductName, textViewProductPrice, textViewStoreName,
+          toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

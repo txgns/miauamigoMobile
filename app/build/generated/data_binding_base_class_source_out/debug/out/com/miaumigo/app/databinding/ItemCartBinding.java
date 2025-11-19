@@ -4,12 +4,15 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -21,16 +24,22 @@ public final class ItemCartBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final TextView buttonDecrease;
+  public final ImageButton buttonDecrease;
 
   @NonNull
-  public final TextView buttonIncrease;
+  public final ImageButton buttonIncrease;
 
   @NonNull
-  public final TextView buttonRemove;
+  public final MaterialButton buttonRemove;
 
   @NonNull
   public final ImageView imageViewProduct;
+
+  @NonNull
+  public final LinearLayout layoutQuantity;
+
+  @NonNull
+  public final LinearLayout layoutTotals;
 
   @NonNull
   public final TextView textViewName;
@@ -44,9 +53,10 @@ public final class ItemCartBinding implements ViewBinding {
   @NonNull
   public final TextView textViewTotal;
 
-  private ItemCartBinding(@NonNull MaterialCardView rootView, @NonNull TextView buttonDecrease,
-      @NonNull TextView buttonIncrease, @NonNull TextView buttonRemove,
-      @NonNull ImageView imageViewProduct, @NonNull TextView textViewName,
+  private ItemCartBinding(@NonNull MaterialCardView rootView, @NonNull ImageButton buttonDecrease,
+      @NonNull ImageButton buttonIncrease, @NonNull MaterialButton buttonRemove,
+      @NonNull ImageView imageViewProduct, @NonNull LinearLayout layoutQuantity,
+      @NonNull LinearLayout layoutTotals, @NonNull TextView textViewName,
       @NonNull TextView textViewPrice, @NonNull TextView textViewQuantity,
       @NonNull TextView textViewTotal) {
     this.rootView = rootView;
@@ -54,6 +64,8 @@ public final class ItemCartBinding implements ViewBinding {
     this.buttonIncrease = buttonIncrease;
     this.buttonRemove = buttonRemove;
     this.imageViewProduct = imageViewProduct;
+    this.layoutQuantity = layoutQuantity;
+    this.layoutTotals = layoutTotals;
     this.textViewName = textViewName;
     this.textViewPrice = textViewPrice;
     this.textViewQuantity = textViewQuantity;
@@ -88,19 +100,19 @@ public final class ItemCartBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.buttonDecrease;
-      TextView buttonDecrease = ViewBindings.findChildViewById(rootView, id);
+      ImageButton buttonDecrease = ViewBindings.findChildViewById(rootView, id);
       if (buttonDecrease == null) {
         break missingId;
       }
 
       id = R.id.buttonIncrease;
-      TextView buttonIncrease = ViewBindings.findChildViewById(rootView, id);
+      ImageButton buttonIncrease = ViewBindings.findChildViewById(rootView, id);
       if (buttonIncrease == null) {
         break missingId;
       }
 
       id = R.id.buttonRemove;
-      TextView buttonRemove = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton buttonRemove = ViewBindings.findChildViewById(rootView, id);
       if (buttonRemove == null) {
         break missingId;
       }
@@ -108,6 +120,18 @@ public final class ItemCartBinding implements ViewBinding {
       id = R.id.imageViewProduct;
       ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
       if (imageViewProduct == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutQuantity;
+      LinearLayout layoutQuantity = ViewBindings.findChildViewById(rootView, id);
+      if (layoutQuantity == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutTotals;
+      LinearLayout layoutTotals = ViewBindings.findChildViewById(rootView, id);
+      if (layoutTotals == null) {
         break missingId;
       }
 
@@ -136,8 +160,8 @@ public final class ItemCartBinding implements ViewBinding {
       }
 
       return new ItemCartBinding((MaterialCardView) rootView, buttonDecrease, buttonIncrease,
-          buttonRemove, imageViewProduct, textViewName, textViewPrice, textViewQuantity,
-          textViewTotal);
+          buttonRemove, imageViewProduct, layoutQuantity, layoutTotals, textViewName, textViewPrice,
+          textViewQuantity, textViewTotal);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

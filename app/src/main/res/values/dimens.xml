@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Spacing -->
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    
+    <!-- Product Grid -->
+    <dimen name="product_grid_spacing">8dp</dimen>
+    <dimen name="product_card_margin">4dp</dimen>
+    <dimen name="product_card_padding">12dp</dimen>
+    <dimen name="product_card_corner_radius">16dp</dimen>
+    <dimen name="product_card_elevation">2dp</dimen>
+    
+    <!-- Legacy -->
     <dimen name="chatbot_fab_bottom_space">120dp</dimen>
+    <dimen name="product_image_height">140dp</dimen>
 </resources>
 

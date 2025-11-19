@@ -47,32 +47,33 @@ public class VendorAnnouncementsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vendor_announcements, container, false);
-        
-        recyclerViewAnnouncements = view.findViewById(R.id.recyclerViewAnnouncements);
-        progressBar = view.findViewById(R.id.progressBar);
-        fabCreateAnnouncement = view.findViewById(R.id.fabCreateAnnouncement);
-        
-        setupRecyclerView();
-        setupFab();
-        loadAnnouncements();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_vendor_announcements, container, false);
+            
+            recyclerViewAnnouncements = view.findViewById(R.id.recyclerViewAnnouncements);
+            progressBar = view.findViewById(R.id.progressBar);
+            fabCreateAnnouncement = view.findViewById(R.id.fabCreateAnnouncement);
+            
+            setupRecyclerView();
+            setupFab();
+            loadAnnouncements();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("VendorAnnouncementsFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            return new View(getContext());
+        }
     }
 
     private void setupRecyclerView() {
         announcementAdapter = new AnnouncementAdapter(announcementList, announcement -> {
-            // Abre chat com o anunciante ou mostra detalhes
-            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (currentUser != null && !currentUser.getUid().equals(announcement.getVendorId())) {
-                // Abre chat para negociar
+            // Abre detalhes do anúncio (se for de outro vendedor, pode entrar em contato)
+            if (announcement != null) {
                 android.content.Intent intent = new android.content.Intent(getContext(), 
-                    com.miaumigo.app.ChatActivity.class);
-                String chatId = com.miaumigo.app.utils.ChatManager.getInstance()
-                    .getOrCreateChatId(currentUser.getUid(), announcement.getVendorId());
-                intent.putExtra("chat_id", chatId);
-                intent.putExtra("other_vendor_id", announcement.getVendorId());
-                intent.putExtra("other_vendor_name", announcement.getVendorName());
+                    com.miaumigo.app.AnnouncementDetailActivity.class);
+                intent.putExtra("announcement_id", announcement.getId());
+                intent.putExtra("is_owner", false);
                 startActivity(intent);
             }
         });
@@ -92,6 +93,13 @@ public class VendorAnnouncementsFragment extends Fragment {
     private void loadAnnouncements() {
         showLoading(true);
         
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            showLoading(false);
+            return;
+        }
+        
+        // Carrega apenas anúncios de outros vendedores (não os próprios)
         com.google.firebase.database.Query announcementsQuery = FirebaseDatabase.getInstance()
             .getReference("announcements")
             .orderByChild("createdAt");
@@ -100,11 +108,17 @@ public class VendorAnnouncementsFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     announcementList.clear();
+                    String currentUserId = currentUser.getUid();
                     
                     for (DataSnapshot announcementSnapshot : snapshot.getChildren()) {
                         Announcement announcement = announcementSnapshot.getValue(Announcement.class);
-                        if (announcement != null) {
-                            announcementList.add(announcement);
+                        if (announcement != null && !currentUserId.equals(announcement.getVendorId())) {
+                            // Mostra apenas anúncios disponíveis ou reservados (não vendidos)
+                            if (announcement.getStatus() == null || 
+                                announcement.getStatus() == Announcement.AnnouncementStatus.AVAILABLE ||
+                                announcement.getStatus() == Announcement.AnnouncementStatus.RESERVED) {
+                                announcementList.add(announcement);
+                            }
                         }
                     }
                     
@@ -134,7 +148,7 @@ public class VendorAnnouncementsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Query listeners are automatically removed when fragment is destroyed
+        
     }
 }
 

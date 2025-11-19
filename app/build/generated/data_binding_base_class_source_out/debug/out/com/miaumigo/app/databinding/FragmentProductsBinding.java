@@ -4,15 +4,20 @@ package com.miaumigo.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -24,7 +29,19 @@ public final class FragmentProductsBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final TextInputEditText editTextSearch;
+  public final MaterialButton buttonFilters;
+
+  @NonNull
+  public final MaterialButton buttonSort;
+
+  @NonNull
+  public final ChipGroup chipGroupQuickFilters;
+
+  @NonNull
+  public final MaterialAutoCompleteTextView editTextSearch;
+
+  @NonNull
+  public final LinearLayout layoutFilterActions;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -33,20 +50,40 @@ public final class FragmentProductsBinding implements ViewBinding {
   public final RecyclerView recyclerViewProducts;
 
   @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
+  @NonNull
+  public final Switch switchInStock;
+
+  @NonNull
   public final TextInputLayout textInputLayoutSearch;
 
   @NonNull
-  public final TextView textViewEmpty;
+  public final TextView textViewActiveFilters;
+
+  @NonNull
+  public final LinearLayout textViewEmpty;
 
   private FragmentProductsBinding(@NonNull ConstraintLayout rootView,
-      @NonNull TextInputEditText editTextSearch, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerViewProducts, @NonNull TextInputLayout textInputLayoutSearch,
-      @NonNull TextView textViewEmpty) {
+      @NonNull MaterialButton buttonFilters, @NonNull MaterialButton buttonSort,
+      @NonNull ChipGroup chipGroupQuickFilters,
+      @NonNull MaterialAutoCompleteTextView editTextSearch,
+      @NonNull LinearLayout layoutFilterActions, @NonNull ProgressBar progressBar,
+      @NonNull RecyclerView recyclerViewProducts, @NonNull SwipeRefreshLayout swipeRefresh,
+      @NonNull Switch switchInStock, @NonNull TextInputLayout textInputLayoutSearch,
+      @NonNull TextView textViewActiveFilters, @NonNull LinearLayout textViewEmpty) {
     this.rootView = rootView;
+    this.buttonFilters = buttonFilters;
+    this.buttonSort = buttonSort;
+    this.chipGroupQuickFilters = chipGroupQuickFilters;
     this.editTextSearch = editTextSearch;
+    this.layoutFilterActions = layoutFilterActions;
     this.progressBar = progressBar;
     this.recyclerViewProducts = recyclerViewProducts;
+    this.swipeRefresh = swipeRefresh;
+    this.switchInStock = switchInStock;
     this.textInputLayoutSearch = textInputLayoutSearch;
+    this.textViewActiveFilters = textViewActiveFilters;
     this.textViewEmpty = textViewEmpty;
   }
 
@@ -77,9 +114,33 @@ public final class FragmentProductsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonFilters;
+      MaterialButton buttonFilters = ViewBindings.findChildViewById(rootView, id);
+      if (buttonFilters == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonSort;
+      MaterialButton buttonSort = ViewBindings.findChildViewById(rootView, id);
+      if (buttonSort == null) {
+        break missingId;
+      }
+
+      id = R.id.chipGroupQuickFilters;
+      ChipGroup chipGroupQuickFilters = ViewBindings.findChildViewById(rootView, id);
+      if (chipGroupQuickFilters == null) {
+        break missingId;
+      }
+
       id = R.id.editTextSearch;
-      TextInputEditText editTextSearch = ViewBindings.findChildViewById(rootView, id);
+      MaterialAutoCompleteTextView editTextSearch = ViewBindings.findChildViewById(rootView, id);
       if (editTextSearch == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutFilterActions;
+      LinearLayout layoutFilterActions = ViewBindings.findChildViewById(rootView, id);
+      if (layoutFilterActions == null) {
         break missingId;
       }
 
@@ -95,20 +156,40 @@ public final class FragmentProductsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.swipeRefresh;
+      SwipeRefreshLayout swipeRefresh = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefresh == null) {
+        break missingId;
+      }
+
+      id = R.id.switchInStock;
+      Switch switchInStock = ViewBindings.findChildViewById(rootView, id);
+      if (switchInStock == null) {
+        break missingId;
+      }
+
       id = R.id.textInputLayoutSearch;
       TextInputLayout textInputLayoutSearch = ViewBindings.findChildViewById(rootView, id);
       if (textInputLayoutSearch == null) {
         break missingId;
       }
 
+      id = R.id.textViewActiveFilters;
+      TextView textViewActiveFilters = ViewBindings.findChildViewById(rootView, id);
+      if (textViewActiveFilters == null) {
+        break missingId;
+      }
+
       id = R.id.textViewEmpty;
-      TextView textViewEmpty = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout textViewEmpty = ViewBindings.findChildViewById(rootView, id);
       if (textViewEmpty == null) {
         break missingId;
       }
 
-      return new FragmentProductsBinding((ConstraintLayout) rootView, editTextSearch, progressBar,
-          recyclerViewProducts, textInputLayoutSearch, textViewEmpty);
+      return new FragmentProductsBinding((ConstraintLayout) rootView, buttonFilters, buttonSort,
+          chipGroupQuickFilters, editTextSearch, layoutFilterActions, progressBar,
+          recyclerViewProducts, swipeRefresh, switchInStock, textInputLayoutSearch,
+          textViewActiveFilters, textViewEmpty);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -36,12 +36,39 @@
     <string name="quantity">Quantidade</string>
     <string name="in_stock">Em estoque</string>
     <string name="out_of_stock">Fora de estoque</string>
+    <string name="filter">Filtrar</string>
+    <string name="sort">Ordenar</string>
+    <string name="in_stock_only">Somente em estoque</string>
+    <string name="filter_products">Filtros avançados</string>
+    <string name="filter_price_range">Faixa de preço</string>
+    <string name="filter_category">Categoria</string>
+    <string name="filter_brand">Marca</string>
+    <string name="filter_vendor">Marca / Vendedor</string>
+    <string name="filter_rating">Avaliação mínima</string>
+    <string name="filter_any_rating">Qualquer avaliação</string>
+    <string name="filter_rating_4">4+ estrelas</string>
+    <string name="filter_rating_3">3+ estrelas</string>
+    <string name="filter_rating_2">2+ estrelas</string>
+    <string name="filter_availability">Disponibilidade</string>
+    <string name="clear_filters">Limpar</string>
+    <string name="apply_filters">Aplicar filtros</string>
+    <string name="sort_products">Ordenar produtos</string>
+    <string name="no_filters_applied">Nenhum filtro aplicado</string>
+    <string name="active_filters_count">%1$d filtros ativos</string>
+    <string name="product_out_of_stock">Produto indisponível no momento</string>
+    <string name="error_loading_products">Erro ao carregar produtos: %1$s</string>
+    <string name="label_generic_brand">Marca indisponível</string>
+    <string name="label_generic_vendor">Vendedor parceiro</string>
+    <string name="favorite">Favoritar produto</string>
     
     <!-- Cart -->
     <string name="cart_empty">Seu carrinho está vazio</string>
     <string name="total">Total</string>
     <string name="checkout">Finalizar Compra</string>
     <string name="remove_item">Remover item</string>
+    <string name="remove">Remover</string>
+    <string name="increase_quantity">Aumentar quantidade</string>
+    <string name="decrease_quantity">Diminuir quantidade</string>
     <string name="update_quantity">Atualizar quantidade</string>
     
     <!-- Orders -->

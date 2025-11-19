@@ -6,7 +6,8 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    private String imageUrl;
+    private String imageUrl; // URL da imagem principal (para compatibilidade)
+    private java.util.List<String> imageUrls; // Lista de URLs de imagens
     private double rating;
     private boolean inStock;
     private boolean visibleToCustomers; // Se o produto aparece na vitrine pública
@@ -15,6 +16,9 @@ public class Product {
     private String condition; // "new", "used", "refurbished"
     private long createdAt;
     private long updatedAt;
+    private String brand;
+    private String vendorName;
+    private long salesCount;
 
     public Product() {
         // Construtor vazio necessário para Firebase
@@ -23,6 +27,9 @@ public class Product {
         this.quantity = 0;
         this.createdAt = System.currentTimeMillis();
         this.updatedAt = System.currentTimeMillis();
+        this.brand = "";
+        this.vendorName = "";
+        this.salesCount = 0L;
     }
 
     public Product(String id, String name, String description, double price, String imageUrl, double rating, boolean inStock) {
@@ -37,6 +44,9 @@ public class Product {
         this.quantity = 0;
         this.createdAt = System.currentTimeMillis();
         this.updatedAt = System.currentTimeMillis();
+        this.brand = "";
+        this.vendorName = "";
+        this.salesCount = 0L;
     }
 
     // Getters e Setters
@@ -78,6 +88,65 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        // Se não houver lista de imagens, cria uma com a imagem principal
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            imageUrls = new java.util.ArrayList<>();
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                imageUrls.add(imageUrl);
+            }
+        }
+    }
+    
+    public java.util.List<String> getImageUrls() {
+        if (imageUrls == null) {
+            imageUrls = new java.util.ArrayList<>();
+            // Se houver imageUrl antiga, adiciona à lista
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                imageUrls.add(imageUrl);
+            }
+        }
+        return imageUrls;
+    }
+    
+    public void setImageUrls(java.util.List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+        // Atualiza imageUrl principal se a lista não estiver vazia
+        if (imageUrls != null && !imageUrls.isEmpty()) {
+            this.imageUrl = imageUrls.get(0);
+        }
+    }
+    
+    public void addImageUrl(String url) {
+        if (imageUrls == null) {
+            imageUrls = new java.util.ArrayList<>();
+        }
+        if (!imageUrls.contains(url)) {
+            imageUrls.add(url);
+            // Se for a primeira imagem, define como principal
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                imageUrl = url;
+            }
+        }
+    }
+    
+    public void removeImageUrl(String url) {
+        if (imageUrls != null) {
+            imageUrls.remove(url);
+            // Se a imagem removida for a principal, atualiza
+            if (url.equals(imageUrl) && !imageUrls.isEmpty()) {
+                imageUrl = imageUrls.get(0);
+            }
+        }
+    }
+    
+    public void setMainImage(int index) {
+        if (imageUrls != null && index >= 0 && index < imageUrls.size()) {
+            String mainImage = imageUrls.get(index);
+            // Move para o início da lista
+            imageUrls.remove(index);
+            imageUrls.add(0, mainImage);
+            imageUrl = mainImage;
+        }
     }
 
     public double getRating() {
@@ -150,5 +219,29 @@ public class Product {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public long getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(long salesCount) {
+        this.salesCount = salesCount;
     }
 }

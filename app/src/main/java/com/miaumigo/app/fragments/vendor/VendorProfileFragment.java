@@ -38,14 +38,20 @@ public class VendorProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vendor_profile, container, false);
-        
-        initViews(view);
-        initFirebase();
-        setupClickListeners();
-        loadUserData();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_vendor_profile, container, false);
+            
+            initViews(view);
+            initFirebase();
+            setupClickListeners();
+            loadUserData();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("VendorProfileFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            return new View(getContext());
+        }
     }
 
     private void initViews(View view) {

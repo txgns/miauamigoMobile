@@ -27,31 +27,121 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="8dp"
         android:background="@color/surface">
 
-        <EditText
-            android:id="@+id/editTextMessage"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:hint="Digite sua mensagem..."
-            android:maxLines="5"
-            android:minHeight="48dp"
-            android:background="@drawable/edit_text_background"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_secondary"
-            android:padding="12dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <ImageButton
-            android:id="@+id/buttonSend"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_send"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/primary_vendor" />
+            <!-- Botões de anexo -->
+            <ImageButton
+                android:id="@+id/buttonAttach"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_attachment"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Anexar arquivo"
+                app:tint="@color/primary_vendor" />
+
+            <ImageButton
+                android:id="@+id/buttonCamera"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_camera"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Tirar foto"
+                app:tint="@color/primary_vendor" />
+
+            <ImageButton
+                android:id="@+id/buttonGallery"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_gallery"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Escolher da galeria"
+                app:tint="@color/primary_vendor" />
+
+            <EditText
+                android:id="@+id/editTextMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:hint="Digite sua mensagem..."
+                android:maxLines="5"
+                android:minHeight="48dp"
+                android:background="@drawable/edit_text_background"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:padding="12dp" />
+
+            <!-- Botão de áudio -->
+            <ImageButton
+                android:id="@+id/buttonAudio"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_mic"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Gravar áudio"
+                app:tint="@color/primary_vendor" />
+
+            <ImageButton
+                android:id="@+id/buttonSend"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_send"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Enviar"
+                app:tint="@color/primary_vendor" />
+
+        </LinearLayout>
+
+        <!-- Indicador de gravação de áudio -->
+        <LinearLayout
+            android:id="@+id/layoutAudioRecording"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@color/warning"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gravando áudio..."
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewAudioDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonStopAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parar"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

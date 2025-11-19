@@ -40,18 +40,68 @@ public class ChatManager {
     }
 
     /**
-     * Envia uma mensagem
+     * Envia uma mensagem de texto
      */
     public void sendMessage(String chatId, String senderId, String receiverId, String content) {
         String messageId = UUID.randomUUID().toString();
         Message message = new Message(messageId, chatId, senderId, receiverId, content);
+        message.setType(Message.MessageType.TEXT);
         
+        saveMessage(chatId, messageId, message, content);
+    }
+    
+    /**
+     * Envia uma mensagem com anexo (imagem, áudio, arquivo)
+     */
+    public void sendMessageWithAttachment(String chatId, String senderId, String receiverId, 
+                                         String attachmentUrl, String attachmentType, 
+                                         Message.MessageType messageType, String content) {
+        String messageId = UUID.randomUUID().toString();
+        Message message = new Message(messageId, chatId, senderId, receiverId, content != null ? content : "");
+        message.setType(messageType);
+        message.setAttachmentUrl(attachmentUrl);
+        message.setAttachmentType(attachmentType);
+        
+        String previewText = getPreviewText(messageType, content);
+        saveMessage(chatId, messageId, message, previewText);
+    }
+    
+    /**
+     * Envia mensagem de áudio
+     */
+    public void sendAudioMessage(String chatId, String senderId, String receiverId, 
+                                String audioUrl, long durationInSeconds) {
+        String messageId = UUID.randomUUID().toString();
+        Message message = new Message(messageId, chatId, senderId, receiverId, "Áudio");
+        message.setType(Message.MessageType.AUDIO);
+        message.setAttachmentUrl(audioUrl);
+        message.setAttachmentType("audio");
+        message.setAudioDuration(durationInSeconds);
+        
+        saveMessage(chatId, messageId, message, "🎤 Áudio");
+    }
+    
+    private String getPreviewText(Message.MessageType type, String content) {
+        switch (type) {
+            case IMAGE:
+                return "📷 Foto" + (content != null && !content.isEmpty() ? ": " + content : "");
+            case AUDIO:
+                return "🎤 Áudio";
+            case FILE:
+            case PDF:
+                return "📎 Arquivo" + (content != null && !content.isEmpty() ? ": " + content : "");
+            default:
+                return content != null ? content : "";
+        }
+    }
+    
+    private void saveMessage(String chatId, String messageId, Message message, String previewText) {
         // Salva a mensagem
         databaseReference.child("chats").child(chatId).child("messages").child(messageId)
                 .setValue(message);
         
         // Atualiza informações do chat
-        databaseReference.child("chats").child(chatId).child("lastMessage").setValue(content);
+        databaseReference.child("chats").child(chatId).child("lastMessage").setValue(previewText);
         databaseReference.child("chats").child(chatId).child("lastMessageTimestamp")
                 .setValue(System.currentTimeMillis());
         databaseReference.child("chats").child(chatId).child("updatedAt")

@@ -3,6 +3,7 @@ package com.miaumigo.app.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.miaumigo.app.R;
 import com.miaumigo.app.models.CartItem;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -53,9 +55,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView textViewPrice;
         private TextView textViewQuantity;
         private TextView textViewTotal;
-        private TextView buttonRemove;
-        private TextView buttonIncrease;
-        private TextView buttonDecrease;
+        private MaterialButton buttonRemove;
+        private ImageButton buttonIncrease;
+        private ImageButton buttonDecrease;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,20 +71,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
 
             buttonRemove.setOnClickListener(v -> {
-                if (listener != null) {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
                     listener.onRemoveItem(cartItems.get(getAdapterPosition()));
                 }
             });
 
             buttonIncrease.setOnClickListener(v -> {
-                if (listener != null) {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
                     CartItem item = cartItems.get(getAdapterPosition());
                     listener.onUpdateQuantity(item, item.getQuantity() + 1);
                 }
             });
 
             buttonDecrease.setOnClickListener(v -> {
-                if (listener != null) {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
                     CartItem item = cartItems.get(getAdapterPosition());
                     if (item.getQuantity() > 1) {
                         listener.onUpdateQuantity(item, item.getQuantity() - 1);

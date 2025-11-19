@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.miaumigo.app-mergeDebugResources-56:/values-fi/values-fi.xml",
+            "outputFile": "com.miaumigo.app-mergeDebugResources-57:/values-fi/values-fi.xml",
             "map": [
                 {
                     "source": "C:\\Users\\txgns\\.gradle\\caches\\transforms-3\\03654afc9ddd6683017591b0b65f7d2e\\transformed\\browser-1.4.0\\res\\values-fi\\values-fi.xml",

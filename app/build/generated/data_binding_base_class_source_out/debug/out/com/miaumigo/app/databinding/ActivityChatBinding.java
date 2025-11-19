@@ -8,12 +8,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,10 +26,28 @@ public final class ActivityChatBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final ImageButton buttonAttach;
+
+  @NonNull
+  public final ImageButton buttonAudio;
+
+  @NonNull
+  public final ImageButton buttonCamera;
+
+  @NonNull
+  public final ImageButton buttonGallery;
+
+  @NonNull
   public final ImageButton buttonSend;
 
   @NonNull
+  public final MaterialButton buttonStopAudio;
+
+  @NonNull
   public final EditText editTextMessage;
+
+  @NonNull
+  public final LinearLayout layoutAudioRecording;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -36,16 +56,30 @@ public final class ActivityChatBinding implements ViewBinding {
   public final RecyclerView recyclerViewMessages;
 
   @NonNull
+  public final TextView textViewAudioDuration;
+
+  @NonNull
   public final Toolbar toolbar;
 
-  private ActivityChatBinding(@NonNull LinearLayout rootView, @NonNull ImageButton buttonSend,
-      @NonNull EditText editTextMessage, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerViewMessages, @NonNull Toolbar toolbar) {
+  private ActivityChatBinding(@NonNull LinearLayout rootView, @NonNull ImageButton buttonAttach,
+      @NonNull ImageButton buttonAudio, @NonNull ImageButton buttonCamera,
+      @NonNull ImageButton buttonGallery, @NonNull ImageButton buttonSend,
+      @NonNull MaterialButton buttonStopAudio, @NonNull EditText editTextMessage,
+      @NonNull LinearLayout layoutAudioRecording, @NonNull ProgressBar progressBar,
+      @NonNull RecyclerView recyclerViewMessages, @NonNull TextView textViewAudioDuration,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.buttonAttach = buttonAttach;
+    this.buttonAudio = buttonAudio;
+    this.buttonCamera = buttonCamera;
+    this.buttonGallery = buttonGallery;
     this.buttonSend = buttonSend;
+    this.buttonStopAudio = buttonStopAudio;
     this.editTextMessage = editTextMessage;
+    this.layoutAudioRecording = layoutAudioRecording;
     this.progressBar = progressBar;
     this.recyclerViewMessages = recyclerViewMessages;
+    this.textViewAudioDuration = textViewAudioDuration;
     this.toolbar = toolbar;
   }
 
@@ -76,15 +110,51 @@ public final class ActivityChatBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonAttach;
+      ImageButton buttonAttach = ViewBindings.findChildViewById(rootView, id);
+      if (buttonAttach == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonAudio;
+      ImageButton buttonAudio = ViewBindings.findChildViewById(rootView, id);
+      if (buttonAudio == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonCamera;
+      ImageButton buttonCamera = ViewBindings.findChildViewById(rootView, id);
+      if (buttonCamera == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonGallery;
+      ImageButton buttonGallery = ViewBindings.findChildViewById(rootView, id);
+      if (buttonGallery == null) {
+        break missingId;
+      }
+
       id = R.id.buttonSend;
       ImageButton buttonSend = ViewBindings.findChildViewById(rootView, id);
       if (buttonSend == null) {
         break missingId;
       }
 
+      id = R.id.buttonStopAudio;
+      MaterialButton buttonStopAudio = ViewBindings.findChildViewById(rootView, id);
+      if (buttonStopAudio == null) {
+        break missingId;
+      }
+
       id = R.id.editTextMessage;
       EditText editTextMessage = ViewBindings.findChildViewById(rootView, id);
       if (editTextMessage == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutAudioRecording;
+      LinearLayout layoutAudioRecording = ViewBindings.findChildViewById(rootView, id);
+      if (layoutAudioRecording == null) {
         break missingId;
       }
 
@@ -100,14 +170,21 @@ public final class ActivityChatBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewAudioDuration;
+      TextView textViewAudioDuration = ViewBindings.findChildViewById(rootView, id);
+      if (textViewAudioDuration == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityChatBinding((LinearLayout) rootView, buttonSend, editTextMessage,
-          progressBar, recyclerViewMessages, toolbar);
+      return new ActivityChatBinding((LinearLayout) rootView, buttonAttach, buttonAudio,
+          buttonCamera, buttonGallery, buttonSend, buttonStopAudio, editTextMessage,
+          layoutAudioRecording, progressBar, recyclerViewMessages, textViewAudioDuration, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

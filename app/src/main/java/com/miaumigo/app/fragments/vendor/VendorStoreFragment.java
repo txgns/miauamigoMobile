@@ -44,13 +44,19 @@ public class VendorStoreFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_vendor_store, container, false);
-        
-        initViews(view);
-        setupClickListeners();
-        loadStoreData();
-        
-        return view;
+        try {
+            View view = inflater.inflate(R.layout.fragment_vendor_store, container, false);
+            
+            initViews(view);
+            setupClickListeners();
+            loadStoreData();
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("VendorStoreFragment", "Erro ao criar view", e);
+            e.printStackTrace();
+            return new View(getContext());
+        }
     }
 
     private void initViews(View view) {

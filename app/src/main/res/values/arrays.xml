@@ -11,5 +11,13 @@
         <item>Usado</item>
         <item>Recondicionado</item>
     </array>
+
+    <array name="product_sort_options">
+        <item>Mais vendidos</item>
+        <item>Menor preço</item>
+        <item>Maior preço</item>
+        <item>Novidades</item>
+        <item>Relevância</item>
+    </array>
 </resources>
 

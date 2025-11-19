@@ -1,5 +1,6 @@
 package com.miaumigo.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +18,16 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.miaumigo.app.models.CartItem;
+import com.miaumigo.app.models.User;
 import com.miaumigo.app.utils.CartManager;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -26,8 +35,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView textViewProductName;
     private TextView textViewProductDescription;
     private TextView textViewProductPrice;
-    private Button buttonAddToCart;
+    private MaterialButton buttonAddToCart;
     private ProgressBar progressBar;
+    private MaterialCardView cardStore;
+    private ImageView imageViewStoreLogo;
+    private TextView textViewStoreName;
+    private MaterialButton buttonViewStore;
 
     private FirebaseAuth firebaseAuth;
     private String productId;
@@ -35,6 +48,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     private String productDescription;
     private String productPrice;
     private String productImageUrl;
+    private String vendorId;
+    private String vendorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +86,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         textViewProductPrice = findViewById(R.id.textViewProductPrice);
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
         progressBar = findViewById(R.id.progressBar);
+        cardStore = findViewById(R.id.cardStore);
+        imageViewStoreLogo = findViewById(R.id.imageViewStoreLogo);
+        textViewStoreName = findViewById(R.id.textViewStoreName);
+        buttonViewStore = findViewById(R.id.buttonViewStore);
 
         buttonAddToCart.setOnClickListener(v -> addToCart());
+        buttonViewStore.setOnClickListener(v -> openStorePage());
     }
 
     private void loadProductData() {
@@ -88,8 +108,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             productPrice = String.format("%.2f", price);
             
             productImageUrl = extras.getString("product_image");
+            vendorId = extras.getString("vendor_id");
+            vendorName = extras.getString("vendor_name");
 
             displayProductData();
+            loadStoreInfo();
         } else {
             Toast.makeText(this, R.string.error_product_not_found, Toast.LENGTH_LONG).show();
             finish();
@@ -166,6 +189,60 @@ public class ProductDetailActivity extends AppCompatActivity {
             showLoading(false);
             Toast.makeText(this, "Erro ao adicionar produto ao carrinho: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void loadStoreInfo() {
+        if (vendorId == null || vendorId.isEmpty()) {
+            if (cardStore != null) {
+                cardStore.setVisibility(View.GONE);
+            }
+            return;
+        }
+
+        if (textViewStoreName != null && vendorName != null && !vendorName.isEmpty()) {
+            textViewStoreName.setText(vendorName);
+        } else {
+            // Busca nome da loja do Firebase
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                .getReference("users").child(vendorId);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        User user = snapshot.getValue(User.class);
+                        if (user != null && textViewStoreName != null) {
+                            String name = user.getName();
+                            if (name != null && !name.isEmpty()) {
+                                textViewStoreName.setText(name);
+                            }
+                        }
+                        if (user != null && user.getAvatarUrl() != null && 
+                            !user.getAvatarUrl().isEmpty() && imageViewStoreLogo != null) {
+                            Glide.with(ProductDetailActivity.this)
+                                .load(user.getAvatarUrl())
+                                .placeholder(R.drawable.ic_product_placeholder)
+                                .into(imageViewStoreLogo);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Ignora erro silenciosamente
+                }
+            });
+        }
+    }
+
+    private void openStorePage() {
+        if (vendorId == null || vendorId.isEmpty()) {
+            Toast.makeText(this, "Informações da loja não disponíveis", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, StoreActivity.class);
+        intent.putExtra("vendor_id", vendorId);
+        intent.putExtra("vendor_name", vendorName);
+        startActivity(intent);
     }
 
     private void showLoading(boolean show) {

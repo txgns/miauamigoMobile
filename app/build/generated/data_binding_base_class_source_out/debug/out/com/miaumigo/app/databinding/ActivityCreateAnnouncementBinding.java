@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.miaumigo.app.R;
 import java.lang.NullPointerException;
@@ -23,7 +25,13 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
+  public final MaterialButton buttonChoosePhoto;
+
+  @NonNull
   public final Button buttonCreate;
+
+  @NonNull
+  public final MaterialButton buttonTakePhoto;
 
   @NonNull
   public final TextInputEditText editTextDescription;
@@ -35,6 +43,9 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
   public final TextInputEditText editTextProductName;
 
   @NonNull
+  public final ImageView imageViewProduct;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
@@ -44,15 +55,19 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
   public final Spinner spinnerType;
 
   private ActivityCreateAnnouncementBinding(@NonNull ScrollView rootView,
-      @NonNull Button buttonCreate, @NonNull TextInputEditText editTextDescription,
+      @NonNull MaterialButton buttonChoosePhoto, @NonNull Button buttonCreate,
+      @NonNull MaterialButton buttonTakePhoto, @NonNull TextInputEditText editTextDescription,
       @NonNull TextInputEditText editTextPrice, @NonNull TextInputEditText editTextProductName,
-      @NonNull ProgressBar progressBar, @NonNull Spinner spinnerCondition,
-      @NonNull Spinner spinnerType) {
+      @NonNull ImageView imageViewProduct, @NonNull ProgressBar progressBar,
+      @NonNull Spinner spinnerCondition, @NonNull Spinner spinnerType) {
     this.rootView = rootView;
+    this.buttonChoosePhoto = buttonChoosePhoto;
     this.buttonCreate = buttonCreate;
+    this.buttonTakePhoto = buttonTakePhoto;
     this.editTextDescription = editTextDescription;
     this.editTextPrice = editTextPrice;
     this.editTextProductName = editTextProductName;
+    this.imageViewProduct = imageViewProduct;
     this.progressBar = progressBar;
     this.spinnerCondition = spinnerCondition;
     this.spinnerType = spinnerType;
@@ -85,9 +100,21 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonChoosePhoto;
+      MaterialButton buttonChoosePhoto = ViewBindings.findChildViewById(rootView, id);
+      if (buttonChoosePhoto == null) {
+        break missingId;
+      }
+
       id = R.id.buttonCreate;
       Button buttonCreate = ViewBindings.findChildViewById(rootView, id);
       if (buttonCreate == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonTakePhoto;
+      MaterialButton buttonTakePhoto = ViewBindings.findChildViewById(rootView, id);
+      if (buttonTakePhoto == null) {
         break missingId;
       }
 
@@ -109,6 +136,12 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.imageViewProduct;
+      ImageView imageViewProduct = ViewBindings.findChildViewById(rootView, id);
+      if (imageViewProduct == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -127,9 +160,9 @@ public final class ActivityCreateAnnouncementBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityCreateAnnouncementBinding((ScrollView) rootView, buttonCreate,
-          editTextDescription, editTextPrice, editTextProductName, progressBar, spinnerCondition,
-          spinnerType);
+      return new ActivityCreateAnnouncementBinding((ScrollView) rootView, buttonChoosePhoto,
+          buttonCreate, buttonTakePhoto, editTextDescription, editTextPrice, editTextProductName,
+          imageViewProduct, progressBar, spinnerCondition, spinnerType);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

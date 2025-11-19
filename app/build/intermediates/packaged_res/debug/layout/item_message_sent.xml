@@ -19,6 +19,7 @@
             android:orientation="vertical"
             android:padding="12dp">
 
+            <!-- Mensagem de texto -->
             <TextView
                 android:id="@+id/textViewMessage"
                 android:layout_width="wrap_content"
@@ -26,7 +27,77 @@
                 android:maxWidth="300dp"
                 android:text="Mensagem"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <!-- Imagem -->
+            <ImageView
+                android:id="@+id/imageViewAttachment"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Imagem anexada"
+                android:visibility="gone"
+                android:background="@color/surface_variant" />
+
+            <!-- Áudio -->
+            <LinearLayout
+                android:id="@+id/layoutAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonPlayAudio"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="▶"
+                    android:textSize="16sp"
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:backgroundTint="@color/white"
+                    app:icon="@android:drawable/ic_btn_speak_now"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/primary_vendor" />
+
+                <TextView
+                    android:id="@+id/textViewAudioDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="00:00"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <!-- Arquivo/PDF -->
+            <TextView
+                android:id="@+id/textViewFileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxWidth="250dp"
+                android:text="📎 arquivo.pdf"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:background="@drawable/file_name_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewTimestamp"

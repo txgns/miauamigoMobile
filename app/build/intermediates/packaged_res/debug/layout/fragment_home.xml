@@ -118,7 +118,36 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="16dp" />
 
+                <!-- RecyclerView para produtos em destaque -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewFeaturedProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_product" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarFeatured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textViewEmptyFeatured"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Nenhum produto em destaque no momento"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
                 <Button
+                    android:id="@+id/buttonViewAllProducts"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Ver Todos os Produtos"
